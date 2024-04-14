@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\GameTeam\\TeamPle\\",
+  "WorkspaceRootPath": "C:\\Users\\one\\Desktop\\GameTeam\\TeamPle\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{634461CD-2C5A-449D-9B82-76E79CCEDF9E}|TeamPle.vcxproj|C:\\GameTeam\\TeamPle\\main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{634461CD-2C5A-449D-9B82-76E79CCEDF9E}|TeamPle.vcxproj|C:\\Users\\one\\Desktop\\GameTeam\\TeamPle\\main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{634461CD-2C5A-449D-9B82-76E79CCEDF9E}|TeamPle.vcxproj|solutionrelative:main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
@@ -32,11 +32,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "main.c",
-              "DocumentMoniker": "C:\\GameTeam\\TeamPle\\main.c",
+              "DocumentMoniker": "C:\\Users\\one\\Desktop\\GameTeam\\TeamPle\\main.c",
               "RelativeDocumentMoniker": "main.c",
-              "ToolTip": "C:\\GameTeam\\TeamPle\\main.c",
+              "ToolTip": "C:\\Users\\one\\Desktop\\GameTeam\\TeamPle\\main.c",
               "RelativeToolTip": "main.c",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvwkAAAAdAAAA",
+              "ViewState": "AQIAABgCAAAAAAAAAAAAABcCAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2024-04-03T14:03:15.368Z",
               "EditorCaption": ""

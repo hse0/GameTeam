@@ -1,15 +1,13 @@
 ﻿  main.c
-C:\GameTeam\TeamPle\main.c(179,47): warning C4474: 'printf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  C:\GameTeam\TeamPle\main.c(179,47):
-  자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-  
-C:\GameTeam\TeamPle\main.c(180,40): warning C4474: 'printf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  C:\GameTeam\TeamPle\main.c(180,40):
-  자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-  
-C:\GameTeam\TeamPle\main.c(181,42): warning C4474: 'printf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  C:\GameTeam\TeamPle\main.c(181,42):
-  자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-  
-C:\GameTeam\TeamPle\main.c(202,17): warning C4101: 'i' :참조되지 않은 지역 변수입니다.
-  TeamPle.vcxproj -> C:\GameTeam\TeamPle\x64\Debug\TeamPle.exe
+C:\Users\one\Desktop\GameTeam\TeamPle\main.c(228,21): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeam\TeamPle\main.c(250,13): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeam\TeamPle\main.c(267,21): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeam\TeamPle\main.c(289,13): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeam\TeamPle\main.c(306,21): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeam\TeamPle\main.c(328,13): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeam\TeamPle\main.c(345,21): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeam\TeamPle\main.c(367,13): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeam\TeamPle\main.c(384,21): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeam\TeamPle\main.c(406,13): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeam\TeamPle\main.c(458,17): warning C4101: 'i' :참조되지 않은 지역 변수입니다.
+  TeamPle.vcxproj -> C:\Users\one\Desktop\GameTeam\TeamPle\x64\Debug\TeamPle.exe
