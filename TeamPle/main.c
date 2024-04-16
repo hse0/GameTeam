@@ -1,87 +1,83 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
 #include <stdbool.h>
 #include <Windows.h>
-
 #define MAX_ENHANCEMENTStage1 20
 #define WAIT_TIME 0.5
 #define INITIAL_MONEY 2000000
 #define ENHANCEMENT_THRESHOLD 10
 #define REVIEW_TICKET_COST 200000
 #define BOSSLEVEL 5
-//¼öÁ¤»çÇ× ÀÛ¼º¹ý : 
-// [³¯Â¥]
-//    (¼öÁ¤³»¿ë) - (Ãß°¡ ¾÷µ¥ÀÌÆ® ³»¿ë)
-
+//ìˆ˜ì •ì‚¬í•­ ìž‘ì„±ë²• : 
+// [ë‚ ì§œ]
+//    (ìˆ˜ì •ë‚´ìš©) - (ì¶”ê°€ ì—…ë°ì´íŠ¸ ë‚´ìš©)
 /// <summary>
-/// * ¼öÁ¤»çÇ× *
+/// * ìˆ˜ì •ì‚¬í•­ *
 /// [04-14]
-///     ´øÀü °³¼³(5°³ÀÇ ´øÀü ½ºÅ×ÀÌÁö Á¦ÀÛ ¿Ï·á) - µðÀÚÀÎ ÇÊ¿ä
+///     ë˜ì „ ê°œì„¤(5ê°œì˜ ë˜ì „ ìŠ¤í…Œì´ì§€ ì œìž‘ ì™„ë£Œ) - ë””ìžì¸ í•„ìš”
 /// 
 /// </summary>
 char* enhancementMessages1[] = {
-    "º´¾Æ¸® ½ÅÀÔ»ý(¼¼»óÀÇ ¶§°¡ ¹¯Áö ¾ÊÀº ±Í¿©¿î ½ÅÀÔ»ýÀÌ µîÀåÇß´Ù!)",
-    "C¾ð¾î¸¦ ¹è¿î 1ÇÐ³â(±è¿µÃ¶ ±³¼ö´Ô²² ÄªÂùÀ» ¹ÞÀº ±Í¿©¿î 1ÇÐ³âÀÌ´Ù.)",
-    "HTML5¸¦ ¹è¿î 1ÇÐ³â(ÀÌÀ±ÀÓ ±³¼ö´ÔÀÇ »ç¶ûÀ» ¹Þ´Â 1ÇÐ³âÀÌ´Ù.)",
-    "Æ÷Åä¼¥À» ¹è¿î 1ÇÐ³â(³ëÀº¼® ±³¼ö´Ô²²¼­ ¸Å¿ì ¸¸Á·ÇÏ½Å´Ù.)",
-    "ÆÄÀÌ½ãÀ» ¹è¿î 1ÇÐ³â(ÀÌÀº¼® ±³¼ö´Ô²² ¿åÀ» ¸¹ÀÌ ¸Ô¾ú´Ù. ½½½½ »ç¶÷ÀÌ ÀÌ»óÇØÁø´Ù.)",
-    "JavaScript¸¦ ¹è¿î 1ÇÐ³â(ÀÌÀ±ÀÓ ±³¼ö´Ô²²¼± Å« ½Å·Ú¸¦ °É°í °è½Å´Ù.)",
-    "C¾ð¾îÀÀ¿ëÀ» ¹è¿î 1ÇÐ³â(±è¿µÃ¶ ±³¼ö´Ô²² È¥³µ´Ù. ºÐ¸í C¾ð¾î¸¦ ¹è¿ü´Âµ¥...??)",
-    "À¯´ÏÆ¼¸¦ ¹è¿î 2ÇÐ³â(ÀÌ¼ºÇö ±³¼ö´Ô²²¼­ °ÆÁ¤ÇÏ½Å´Ù. ¿ø·¡ ÂøÇß´ø ¾Ö°¡ ÀÌ»óÇØÁö°í ÀÖ´Ù...)",
-    "C# ÇÁ·Î±×·¡¹ÖÀ» ¹è¿î 2ÇÐ³â(À±¼ö¹Ì ±³¼ö´Ô²²¼­ ÁÁ¾ÆÇÏ½Å´Ù. ´ÙÇàÈ÷ ¾ÆÁ÷ ÃÊ¹ÝÀÌ¶ó...)",
-    "¾Û±âÈ¹À» ¹è¿î 2ÇÐ³â(±è¿µÃ¶ ±³¼ö´Ô²² ¸Â±â Á÷Àü±îÁö °¬´Ù. ÇÑ°­¹°ÀÇ ¿Âµµ°¡ ±Ã±ÝÇÏ´Ù...)",
-    "ÇöÅ¸°¡ ¿Â ´ëÇÐ»ý(±³¼ö´Ô²² È¥³ª°í, °úÁ¦¿¡ Ä¡ÀÌ°í... ÇÐ»ýÀÇ ´«¾Õ¿¡ ´«¹°ÀÌ ±Û½éÀÎ´Ù.)",
-    "¹ÝÀÀÇüÀ¥À» ¹è¿î 2ÇÐ³â(ÀÌÀº¼® ±³¼ö´Ô²²¼­ ÁÁ¾ÆÇÏ½Å´Ù. ÀáÀ» ÀÚÁö ¾Ê°í °úÁ¦¸¦ ³¡³Â´Ù.)",
-    "C++À» ¹è¿î 2ÇÐ³â(ÀÌÁ¦ C°è¾ó ¾ð¾î¸¦ ´Ù ¹è¿ü´Ù. ±Ùµ¥ Æ÷ÀÎÅÍ´Â µµÀúÈ÷ ÀÌÇØ°¡ ¾ÈµÈ´Ù...)",
-    "À¯´ÏÆ¼·Î °ÔÀÓÀ» °³¹ßÇÑ 3ÇÐ³â(ÄÚÇÇ¸¦ Èê·Á°¡¸ç °ÔÀÓÀ» ¸¸µé¾ú´Ù. ÀÌ¼ºÇö ±³¼ö´Ô²²¼­ \"ÀÌ°Ô °ÔÀÓÀÌ ¸Â³ª\"¶ó°í ÇÏ¼Ì´Ù.)",
-    "HTML°ú CSS·Î À¥À» ¸¸µé¾î º» 3ÇÐ³â(ÀÌÀ±ÀÓ ±³¼ö´Ô²² ÀÜ¼Ò¸®¸¦ ¸¹ÀÌ µé¾ú´Ù. ±×·¡µµ ³»½É ±³¼ö´Ô²²¼­ ±âÆ¯ÇØÇÏ½Å´Ù.)",
-    "Àü°øµ¿¾Æ¸® ¸àÅä¸¦ ÇÏ´Â 3ÇÐ³â(ÈÄ¹èµéÀÇ Á¸°æÀ» ¹Þ°í ÀÖ´Ù. ÀÌÀº¼® ±³¼ö´Ô°ú ÀÌ¼ºÇö ±³¼ö´Ôµµ ±×·¸°Ô »ý°¢ÇÏ½Ç±î?)",
-    "3D¸ðµ¨¸µÀ» ¹è¿î 3ÇÐ³â(³ëÀº¼® ±³¼ö´Ô°ú 1´ë1 ¸é´ãÀ» Çß´Ù. ¾ÆÆ®µµ ±¦ÂúÀº °Í °°Àºµ¥... ¾îµð·Î °¥Áö ¸ð¸£°Ú´Ù.)",
-    "Ã¢¾÷µ¿¾Æ¸®¸¦ ÇÏ´Â 3ÇÐ³â(¸ÅÀÏ ÇÐ±³¿¡ 21½Ã±îÁö ÈÄ¹è, µ¿±âµé°ú °°ÀÌ ÀÛ¾÷À» ÇÑ´Ù. ÀÌÁ¤µµ¸é ±Í½ÅÀÌ´Ù.)",
-    "±âÈ¹¼­ ÀÛ¼ºÀ» ¸¶½ºÅÍÇÑ 3ÇÐ³â(º»ÀÎÀº Á¤¸» ÀßÇÑ´Ù°í »ý°¢ÇÑ´Ù. ÀÌÀº¼® ±³¼ö´Ô°ú ÀÌ¼ºÇö ±³¼ö´Ôµµ ±×·¸°Ô »ý°¢ÇÏ½Ç±î?)",
-    "ÇöÀå ½Ç½ÀÀ» ´Ù³à¿Â 3ÇÐ³â(È¸»ç¿¡¼± ¿À·£¸¸¿¡ ÀÎÀç°¡ µé¾î¿Ô´Ù°í ÇÑ´Ù. ÇÏÁö¸¸ º»ÀÎÀº È¸»ç°¡ º°·Î´Ù.)",
-    "Á¹¾÷ °¡¿îÀ» ÀÔ°í ÀÖ´Â ´ëÇÐ»ý(¸ðµç ´É·ÂÀ» Å¾ÀçÇß´Ù. ÀÌÁ¦ ÁøÂ¥ Áö¿ÁÀ» ÇâÇØ °É¾î°£´Ù.)"
+    "ë³‘ì•„ë¦¬ ì‹ ìž…ìƒ(ì„¸ìƒì˜ ë•Œê°€ ë¬»ì§€ ì•Šì€ ê·€ì—¬ìš´ ì‹ ìž…ìƒì´ ë“±ìž¥í–ˆë‹¤!)",
+    "Cì–¸ì–´ë¥¼ ë°°ìš´ 1í•™ë…„(ê¹€ì˜ì²  êµìˆ˜ë‹˜ê»˜ ì¹­ì°¬ì„ ë°›ì€ ê·€ì—¬ìš´ 1í•™ë…„ì´ë‹¤.)",
+    "HTML5ë¥¼ ë°°ìš´ 1í•™ë…„(ì´ìœ¤ìž„ êµìˆ˜ë‹˜ì˜ ì‚¬ëž‘ì„ ë°›ëŠ” 1í•™ë…„ì´ë‹¤.)",
+    "í¬í† ìƒµì„ ë°°ìš´ 1í•™ë…„(ë…¸ì€ì„ êµìˆ˜ë‹˜ê»˜ì„œ ë§¤ìš° ë§Œì¡±í•˜ì‹ ë‹¤.)",
+    "íŒŒì´ì¬ì„ ë°°ìš´ 1í•™ë…„(ì´ì€ì„ êµìˆ˜ë‹˜ê»˜ ìš•ì„ ë§Žì´ ë¨¹ì—ˆë‹¤. ìŠ¬ìŠ¬ ì‚¬ëžŒì´ ì´ìƒí•´ì§„ë‹¤.)",
+    "JavaScriptë¥¼ ë°°ìš´ 1í•™ë…„(ì´ìœ¤ìž„ êµìˆ˜ë‹˜ê»˜ì„  í° ì‹ ë¢°ë¥¼ ê±¸ê³  ê³„ì‹ ë‹¤.)",
+    "Cì–¸ì–´ì‘ìš©ì„ ë°°ìš´ 1í•™ë…„(ê¹€ì˜ì²  êµìˆ˜ë‹˜ê»˜ í˜¼ë‚¬ë‹¤. ë¶„ëª… Cì–¸ì–´ë¥¼ ë°°ì› ëŠ”ë°...??)",
+    "ìœ ë‹ˆí‹°ë¥¼ ë°°ìš´ 2í•™ë…„(ì´ì„±í˜„ êµìˆ˜ë‹˜ê»˜ì„œ ê±±ì •í•˜ì‹ ë‹¤. ì›ëž˜ ì°©í–ˆë˜ ì• ê°€ ì´ìƒí•´ì§€ê³  ìžˆë‹¤...)",
+    "C# í”„ë¡œê·¸ëž˜ë°ì„ ë°°ìš´ 2í•™ë…„(ìœ¤ìˆ˜ë¯¸ êµìˆ˜ë‹˜ê»˜ì„œ ì¢‹ì•„í•˜ì‹ ë‹¤. ë‹¤í–‰ížˆ ì•„ì§ ì´ˆë°˜ì´ë¼...)",
+    "ì•±ê¸°íšì„ ë°°ìš´ 2í•™ë…„(ê¹€ì˜ì²  êµìˆ˜ë‹˜ê»˜ ë§žê¸° ì§ì „ê¹Œì§€ ê°”ë‹¤. í•œê°•ë¬¼ì˜ ì˜¨ë„ê°€ ê¶ê¸ˆí•˜ë‹¤...)",
+    "í˜„íƒ€ê°€ ì˜¨ ëŒ€í•™ìƒ(êµìˆ˜ë‹˜ê»˜ í˜¼ë‚˜ê³ , ê³¼ì œì— ì¹˜ì´ê³ ... í•™ìƒì˜ ëˆˆì•žì— ëˆˆë¬¼ì´ ê¸€ì½ì¸ë‹¤.)",
+    "ë°˜ì‘í˜•ì›¹ì„ ë°°ìš´ 2í•™ë…„(ì´ì€ì„ êµìˆ˜ë‹˜ê»˜ì„œ ì¢‹ì•„í•˜ì‹ ë‹¤. ìž ì„ ìžì§€ ì•Šê³  ê³¼ì œë¥¼ ëëƒˆë‹¤.)",
+    "C++ì„ ë°°ìš´ 2í•™ë…„(ì´ì œ Cê³„ì–¼ ì–¸ì–´ë¥¼ ë‹¤ ë°°ì› ë‹¤. ê·¼ë° í¬ì¸í„°ëŠ” ë„ì €ížˆ ì´í•´ê°€ ì•ˆëœë‹¤...)",
+    "ìœ ë‹ˆí‹°ë¡œ ê²Œìž„ì„ ê°œë°œí•œ 3í•™ë…„(ì½”í”¼ë¥¼ í˜ë ¤ê°€ë©° ê²Œìž„ì„ ë§Œë“¤ì—ˆë‹¤. ì´ì„±í˜„ êµìˆ˜ë‹˜ê»˜ì„œ \"ì´ê²Œ ê²Œìž„ì´ ë§žë‚˜\"ë¼ê³  í•˜ì…¨ë‹¤.)",
+    "HTMLê³¼ CSSë¡œ ì›¹ì„ ë§Œë“¤ì–´ ë³¸ 3í•™ë…„(ì´ìœ¤ìž„ êµìˆ˜ë‹˜ê»˜ ìž”ì†Œë¦¬ë¥¼ ë§Žì´ ë“¤ì—ˆë‹¤. ê·¸ëž˜ë„ ë‚´ì‹¬ êµìˆ˜ë‹˜ê»˜ì„œ ê¸°íŠ¹í•´í•˜ì‹ ë‹¤.)",
+    "ì „ê³µë™ì•„ë¦¬ ë©˜í† ë¥¼ í•˜ëŠ” 3í•™ë…„(í›„ë°°ë“¤ì˜ ì¡´ê²½ì„ ë°›ê³  ìžˆë‹¤. ì´ì€ì„ êµìˆ˜ë‹˜ê³¼ ì´ì„±í˜„ êµìˆ˜ë‹˜ë„ ê·¸ë ‡ê²Œ ìƒê°í•˜ì‹¤ê¹Œ?)",
+    "3Dëª¨ë¸ë§ì„ ë°°ìš´ 3í•™ë…„(ë…¸ì€ì„ êµìˆ˜ë‹˜ê³¼ 1ëŒ€1 ë©´ë‹´ì„ í–ˆë‹¤. ì•„íŠ¸ë„ ê´œì°®ì€ ê²ƒ ê°™ì€ë°... ì–´ë””ë¡œ ê°ˆì§€ ëª¨ë¥´ê² ë‹¤.)",
+    "ì°½ì—…ë™ì•„ë¦¬ë¥¼ í•˜ëŠ” 3í•™ë…„(ë§¤ì¼ í•™êµì— 21ì‹œê¹Œì§€ í›„ë°°, ë™ê¸°ë“¤ê³¼ ê°™ì´ ìž‘ì—…ì„ í•œë‹¤. ì´ì •ë„ë©´ ê·€ì‹ ì´ë‹¤.)",
+    "ê¸°íšì„œ ìž‘ì„±ì„ ë§ˆìŠ¤í„°í•œ 3í•™ë…„(ë³¸ì¸ì€ ì •ë§ ìž˜í•œë‹¤ê³  ìƒê°í•œë‹¤. ì´ì€ì„ êµìˆ˜ë‹˜ê³¼ ì´ì„±í˜„ êµìˆ˜ë‹˜ë„ ê·¸ë ‡ê²Œ ìƒê°í•˜ì‹¤ê¹Œ?)",
+    "í˜„ìž¥ ì‹¤ìŠµì„ ë‹¤ë…€ì˜¨ 3í•™ë…„(íšŒì‚¬ì—ì„  ì˜¤ëžœë§Œì— ì¸ìž¬ê°€ ë“¤ì–´ì™”ë‹¤ê³  í•œë‹¤. í•˜ì§€ë§Œ ë³¸ì¸ì€ íšŒì‚¬ê°€ ë³„ë¡œë‹¤.)",
+    "ì¡¸ì—… ê°€ìš´ì„ ìž…ê³  ìžˆëŠ” ëŒ€í•™ìƒ(ëª¨ë“  ëŠ¥ë ¥ì„ íƒ‘ìž¬í–ˆë‹¤. ì´ì œ ì§„ì§œ ì§€ì˜¥ì„ í–¥í•´ ê±¸ì–´ê°„ë‹¤.)"
 };
-
-// 2½ºÅ×ÀÌÁö 
+// 2ìŠ¤í…Œì´ì§€ 
 char* enhancementMessages2[] = {
-"Å©·¡ÇÁÅæ ¸éÁ¢À» º¸°í¿Ô´Ù.. °á°ú°¡ ¾î¶»°Ô ³ª¿ÔÀ»±î??"
-"²Þ¿¡ ±×¸®´ø Å©·¡ÇÁÅæÀ» ºÙ¾ú´Ù.. Èñ¸ÁÀ¸·Î °¡µæÂù ³ªÀÇ ¾Õ³¯ÀÌ ¾î¶»°Ô µÉ±î??"
-"Ã¹ Ãâ±Ù ¾ÆÄ§ .. 9½Ã±îÁö Ãâ±ÙÀÌ¿©¼­ 8½Ã¿¡ Áý¿¡¼­ Ãâ¹ßÇß´Ù.. 9½Ã µÇ±â 20ºÐÀü.. È¸»ç¾ÕÀÌ´Ù..."
-"´ÙÇàÀÌµµ 9½Ã 10ºÐÀü¿¡ µµÂøÇÏ¿´´Ù.. Ã¹ Ãâ±ÙÀÎµ¥ ´ÊÀ»¼ö´Â ¾øÁö?!"
-"Ã¹³¯¿¡´Â ¾î¶»°Ô ÇØ¾ßÇÏ´Â°ÇÁö ¼±ÀÓºÐÀÌ ¾Ë·ÁÁÖ½Ç°Å¸¦ ¾Ë·ÁÁÖ½Ã°í °è½Ã´Ù.."
-"6½Ã¿¡ Åð±Ù½Ã°£¿¡ ¸ÂÃç ÁýÀ» °¡·Á°í Çß¾ú´Âµ¥.. ½ÅÀÔ È¸½ÄÀ» ÇÑ´Ù°í??"
-"È¸½ÄÀ» ³¡³»°í Áý¿¡ µé¾î¿Ô´Âµ¥ ¸÷½Ã ÈûÀÌ µé¾î ±âÀýÀ» ÇØ¹ö·È´Ù.. ÀÏ¾î³ª´Ï? 7½Ã¹Ý??"
-"ºñ½Áºñ½ÁÇÑ ÀÏ»óÀ» º¸³»´Ù... °è¾àÁ÷¿¡¼­ Á¤±ÔÁ÷À¸·Î ¼º°øÀ» Çß´Ù!"
-"Á¡Á¡..È¸»ç¿¡ ³ì¾Æµå´Â °³¹ßÀÚÀÌ´Ù.. ±Ùµ¥ ³Ê¹« Èûµçµ¥??"
-"½ºÆåÀ» ½×À»¸¸Å­ ½×Àº °³¹ßÀÚ. µý Á÷Á¾À¸·Î ÀÌÁ÷À» ¿øÇÏ´Âµ¥..."
+"í¬ëž˜í”„í†¤ ë©´ì ‘ì„ ë³´ê³ ì™”ë‹¤.. ê²°ê³¼ê°€ ì–´ë–»ê²Œ ë‚˜ì™”ì„ê¹Œ??"
+"ê¿ˆì— ê·¸ë¦¬ë˜ í¬ëž˜í”„í†¤ì„ ë¶™ì—ˆë‹¤.. í¬ë§ìœ¼ë¡œ ê°€ë“ì°¬ ë‚˜ì˜ ì•žë‚ ì´ ì–´ë–»ê²Œ ë ê¹Œ??"
+"ì²« ì¶œê·¼ ì•„ì¹¨ .. 9ì‹œê¹Œì§€ ì¶œê·¼ì´ì—¬ì„œ 8ì‹œì— ì§‘ì—ì„œ ì¶œë°œí–ˆë‹¤.. 9ì‹œ ë˜ê¸° 20ë¶„ì „.. íšŒì‚¬ì•žì´ë‹¤..."
+"ë‹¤í–‰ì´ë„ 9ì‹œ 10ë¶„ì „ì— ë„ì°©í•˜ì˜€ë‹¤.. ì²« ì¶œê·¼ì¸ë° ëŠ¦ì„ìˆ˜ëŠ” ì—†ì§€?!"
+"ì²«ë‚ ì—ëŠ” ì–´ë–»ê²Œ í•´ì•¼í•˜ëŠ”ê±´ì§€ ì„ ìž„ë¶„ì´ ì•Œë ¤ì£¼ì‹¤ê±°ë¥¼ ì•Œë ¤ì£¼ì‹œê³  ê³„ì‹œë‹¤.."
+"6ì‹œì— í‡´ê·¼ì‹œê°„ì— ë§žì¶° ì§‘ì„ ê°€ë ¤ê³  í–ˆì—ˆëŠ”ë°.. ì‹ ìž… íšŒì‹ì„ í•œë‹¤ê³ ??"
+"íšŒì‹ì„ ëë‚´ê³  ì§‘ì— ë“¤ì–´ì™”ëŠ”ë° ëª¹ì‹œ íž˜ì´ ë“¤ì–´ ê¸°ì ˆì„ í•´ë²„ë ¸ë‹¤.. ì¼ì–´ë‚˜ë‹ˆ? 7ì‹œë°˜??"
+"ë¹„ìŠ·ë¹„ìŠ·í•œ ì¼ìƒì„ ë³´ë‚´ë‹¤... ê³„ì•½ì§ì—ì„œ ì •ê·œì§ìœ¼ë¡œ ì„±ê³µì„ í–ˆë‹¤!"
+"ì ì ..íšŒì‚¬ì— ë…¹ì•„ë“œëŠ” ê°œë°œìžì´ë‹¤.. ê·¼ë° ë„ˆë¬´ íž˜ë“ ë°??"
+"ìŠ¤íŽ™ì„ ìŒ“ì„ë§Œí¼ ìŒ“ì€ ê°œë°œìž. ë”´ ì§ì¢…ìœ¼ë¡œ ì´ì§ì„ ì›í•˜ëŠ”ë°..."
 };
-
-int isTry = 0;                  // °­È­ ½Ãµµ ¿©ºÎ ¼±ÅÃ º¯¼ö
-int level = 0;                  // ÇöÀç ¹«±âÀÇ °­È­ ¼öÄ¡
-int money = INITIAL_MONEY;      // ÇöÀç ¼ÒÁö±Ý 
+int isTry = 0;                  // ê°•í™” ì‹œë„ ì—¬ë¶€ ì„ íƒ ë³€ìˆ˜
+int level = 0;                  // í˜„ìž¬ ë¬´ê¸°ì˜ ê°•í™” ìˆ˜ì¹˜
+int money = INITIAL_MONEY;      // í˜„ìž¬ ì†Œì§€ê¸ˆ 
 int choice;
-bool isGameOver = false;        // °ÔÀÓ Á¾·á ¿©ºÎ º¯¼ö
+bool isGameOver = false;        // ê²Œìž„ ì¢…ë£Œ ì—¬ë¶€ ë³€ìˆ˜
 int tickets = 0;
 int dungeonSelect = 0;
-
-// °­È­ ¼º°ø È®·ü ¹è¿­
+// ê°•í™” ì„±ê³µ í™•ë¥  ë°°ì—´
 float enhancementProbabilitiesStage1[MAX_ENHANCEMENTStage1 + 1] = {
-    100.0f,100.0f,100.0f,100.0f,100.0f,100.0f,100.0f,100.0f,100.0f,100.0f,100.0f,100.0f,100.0f,100.0f,100.0f,100.0f,100.0f,100.0f,100.0f,100.0f
+    100.0f,100.0f,100.0f,100.0f,
+    100.0f,100.0f,100.0f,100.0f,
+    100.0f,100.0f,100.0f,100.0f,
+    100.0f,100.0f,100.0f,100.0f,
+    100.0f,100.0f,100.0f,100.0f
 };
-
-
-// °­È­ ½Ãµµ ºñ¿ë ¹è¿­
+// ê°•í™” ì‹œë„ ë¹„ìš© ë°°ì—´
 int enhancementCosts[MAX_ENHANCEMENTStage1 + 1] = {
-    10000, 15000, 20000, 25000, 30000,
-    35000, 40000, 45000, 50000, 55000,
+    20000, 30000, 40000, 50000, 60000,
+    70000, 80000, 90000, 50000, 55000,
     60000, 65000, 70000, 75000, 80000,
     85000, 90000, 95000, 100000, 105000,
 };
-
-// ÇÐ»ý ±Þ¿© ¹è¿­
+// í•™ìƒ ê¸‰ì—¬ ë°°ì—´
 int studentSalaries[MAX_ENHANCEMENTStage1 + 1] = {
     0, 50000, 60000, 65000, 70000,
     75000, 80000, 85000, 90000, 95000,
@@ -92,14 +88,13 @@ int studentSalaries[MAX_ENHANCEMENTStage1 + 1] = {
 int BossMobHP[BOSSLEVEL + 1] = {
     5000,100000,500000,3000000,10000000
 };
-
 int JihoPower[MAX_ENHANCEMENTStage1 + 1] = {
     0,10,50,100,150,250,
     300,400,500,600,800,
     1000,1200,1400,1500,5000,
     7000,10000,30000,65000,150000
 };
-// °­È­ À¯Áö ºñ¿ë ¹è¿­
+// ê°•í™” ìœ ì§€ ë¹„ìš© ë°°ì—´
 //int maintainCosts[MAX_ENHANCEMENT + 1] = {
 //    0, 0, 0, 0, 0,
 //    0, 0, 0, 0, 0,
@@ -107,42 +102,39 @@ int JihoPower[MAX_ENHANCEMENTStage1 + 1] = {
 //    10000, 11000, 12000, 13000, 14000,
 //    15000
 //};
-
-// ÇÐ»ý ÆÇ¸Å ÇÔ¼ö
+// í•™ìƒ íŒë§¤ í•¨ìˆ˜
 void sellStudent(int* level, int* money) {
     if (*level == 0) {
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
-        printf("\n ¾ÆÁ÷ ÀÌÁöÈ£ ÇÐ»ýÀ» °­È­ÇÏÁö ¾Ê¾Ò½À´Ï´Ù.\n");
+        printf("\n ì•„ì§ ì´ì§€í˜¸ í•™ìƒì„ ê°•í™”í•˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.\n");
     }
     else {
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-        printf("ÀÌÁöÈ£ ÇÐ»ýÀ» Ãë¾÷ ½ÃÄ×½À´Ï´Ù. ÀÌÁöÈ£ ÇÐ»ýÀÌ Å« ÀýÀ» ÇÏ¸ç ¶°³ª°©´Ï´Ù.\n");
+        printf("ì´ì§€í˜¸ í•™ìƒì„ ì·¨ì—… ì‹œì¼°ìŠµë‹ˆë‹¤. ì´ì§€í˜¸ í•™ìƒì´ í° ì ˆì„ í•˜ë©° ë– ë‚˜ê°‘ë‹ˆë‹¤.\n");
         *money += studentSalaries[*level];
-        printf("ÇöÀç ¼ÒÁö±Ý¿¡ %d¿øÀÌ Ãß°¡µÇ¾ú½À´Ï´Ù.\n", studentSalaries[*level]);
-        *level = 0; // ÇÐ»ýÀ» ÆÇ¸ÅÇÏ¸é ·¹º§ ÃÊ±âÈ­
+        printf("í˜„ìž¬ ì†Œì§€ê¸ˆì— %dì›ì´ ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤.\n", studentSalaries[*level]);
+        *level = 0; // í•™ìƒì„ íŒë§¤í•˜ë©´ ë ˆë²¨ ì´ˆê¸°í™”
     }
 }
 void GoStore() {
-    printf("\n *** »óÁ¡À¸·Î ÀÌµ¿ ***\n\n");
+    printf("\n *** ìƒì ìœ¼ë¡œ ì´ë™ ***\n\n");
     Sleep(2000);
     while (1) {
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 5);
-        printf(" * ÇÐ½À ÀçÈ­¸¦ »ç¿ëÇÏ¿© ¾ÆÀÌÅÛÀ» ±¸¸ÅÇÒ ¼ö ÀÖ½À´Ï´Ù *\n\n");
-        printf(" * 1. ÇÐ»ý ÆÇ¸Å (ÇÐ»ý °¡Ä¡ : %d¿ø)\n", studentSalaries[level]);
-        printf(" * 2. º¹½À±Ç ±¸¸Å\n");
-        printf(" * 3. ¸ÞÀÎÈ­¸é ÀÌµ¿\n");
+        printf(" * í•™ìŠµ ìž¬í™”ë¥¼ ì‚¬ìš©í•˜ì—¬ ì•„ì´í…œì„ êµ¬ë§¤í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤ *\n\n");
+        printf(" * 1. í•™ìƒ íŒë§¤ (í•™ìƒ ê°€ì¹˜ : %dì›)\n", studentSalaries[level]);
+        printf(" * 2. ë³µìŠµê¶Œ êµ¬ë§¤\n");
+        printf(" * 3. ë©”ì¸í™”ë©´ ì´ë™\n");
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 
-        printf("\n * ¾ÆÀÌÅÛÀ» ¼±ÅÃÇÏ¼¼¿ä : ");
+        printf("\n * ì•„ì´í…œì„ ì„ íƒí•˜ì„¸ìš” : ");
         int shopChoice;
         if (scanf_s("%d", &shopChoice) != 1) {
-            printf("¼ýÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.\n");
-            while (getchar() != '\n'); // ÀÔ·Â ¹öÆÛ ºñ¿ì±â
-            continue; // ´Ù½Ã ÀÔ·Â ¹Þ±â
+            printf("ìˆ«ìžë¥¼ ìž…ë ¥í•˜ì„¸ìš”.\n");
+            while (getchar() != '\n'); // ìž…ë ¥ ë²„í¼ ë¹„ìš°ê¸°
+            continue; // ë‹¤ì‹œ ìž…ë ¥ ë°›ê¸°
         }
-        while (getchar() != '\n'); // ÀÔ·Â ¹öÆÛ ºñ¿ì±â
-
-
+        while (getchar() != '\n'); // ìž…ë ¥ ë²„í¼ ë¹„ìš°ê¸°
 
         switch (shopChoice) {
         case 1:
@@ -150,81 +142,149 @@ void GoStore() {
                 if (money < 0) {
                     money = 0;
                 }
-                printf("\n °­È­ÇÑ ·¹º§: + %d\n", level);
-                printf("\n ÆÇ¸Å ±Ý¾×: %d¿ø\n\n", studentSalaries[level]);
+                printf("\n ê°•í™”í•œ ë ˆë²¨: + %d\n", level);
+                printf("\n íŒë§¤ ê¸ˆì•¡: %dì›\n\n", studentSalaries[level]);
                 money += studentSalaries[level];
-                enhancementCosts; //ÇöÀç °­È­ ºñ¿ë
+                enhancementCosts; //í˜„ìž¬ ê°•í™” ë¹„ìš©
                 level = 0;
             }
             else {
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-                printf(" \n ÇÐ»ý ·¹º§ÀÌ 0ÀÌ¹Ç·Î ÇÐ»ý ÆÇ¸Å ¿É¼ÇÀ» »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù.\n\n");
+                printf(" \n í•™ìƒ ë ˆë²¨ì´ 0ì´ë¯€ë¡œ í•™ìƒ íŒë§¤ ì˜µì…˜ì„ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n\n");
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
             }
             break;
         case 2:
             if (money < REVIEW_TICKET_COST) {
-                printf(" \n ÀçÈ­°¡ ºÎÁ·ÇÏ¿© º¹½À±ÇÀ» ±¸¸ÅÇÒ ¼ö ¾ø½À´Ï´Ù.\n\n");
+                printf(" \n ìž¬í™”ê°€ ë¶€ì¡±í•˜ì—¬ ë³µìŠµê¶Œì„ êµ¬ë§¤í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n\n");
                 break;
             }
             else {
                 money -= REVIEW_TICKET_COST;
                 tickets++;
-                printf(" \n º¹½À±ÇÀ» ±¸¸ÅÇÏ¿´½À´Ï´Ù.\n");
-                printf("\n º¸À¯ º¹½À±Ç °¹¼ö : %d°³\n", tickets);
-                printf(" \n ÇöÀç ¼ÒÁö±Ý: %d¿ø\n\n", money);
+                printf(" \n ë³µìŠµê¶Œì„ êµ¬ë§¤í•˜ì˜€ìŠµë‹ˆë‹¤.\n");
+                printf("\n ë³´ìœ  ë³µìŠµê¶Œ ê°¯ìˆ˜ : %dê°œ\n", tickets);
+                printf(" \n í˜„ìž¬ ì†Œì§€ê¸ˆ: %dì›\n\n", money);
                 break;
             }
         case 3:
             isTry = 0;
-            return;// »óÁ¡ ¸Þ´º¿¡¼­ ºüÁ®³ª°¨
+            return;// ìƒì  ë©”ë‰´ì—ì„œ ë¹ ì ¸ë‚˜ê°
         default:
-            printf(" Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù.\n");
+            printf(" ìž˜ëª»ëœ ìž…ë ¥ìž…ë‹ˆë‹¤.\n");
             break;
         }
     }
     if (level == MAX_ENHANCEMENTStage1) {
-        printf("\nÃàÇÏÇÕ´Ï´Ù! 20´Ü°è±îÁö ¸ðµÎ Å¬¸®¾îÇÏ¼Ì½À´Ï´Ù!\n");
-        printf("´ÙÀ½ ½ºÅ×ÀÌÁö·Î ÁøÇàÇÏ½Ã°Ú½À´Ï±î? (YES: 1 / NO: 2) : ");
+        printf("\nì¶•í•˜í•©ë‹ˆë‹¤! 20ë‹¨ê³„ê¹Œì§€ ëª¨ë‘ í´ë¦¬ì–´í•˜ì…¨ìŠµë‹ˆë‹¤!\n");
+        printf("ë‹¤ìŒ ìŠ¤í…Œì´ì§€ë¡œ ì§„í–‰í•˜ì‹œê² ìŠµë‹ˆê¹Œ? (YES: 1 / NO: 2) : ");
         scanf_s("%d", &choice);
         if (choice == 1) {
-            // ´ÙÀ½ ½ºÅ×ÀÌÁö·Î ÁøÇà
-            // ¿©±â¿¡ ´ÙÀ½ ½ºÅ×ÀÌÁö¸¦ ÃÊ±âÈ­ÇÏ°Å³ª ÀüÈ¯ ¸Þ½ÃÁö¸¦ Ç¥½ÃÇÏ´Â ÄÚµå¸¦ Ãß°¡ÇÒ ¼ö ÀÖ½À´Ï´Ù.
-            printf("\n´ÙÀ½ ½ºÅ×ÀÌÁö·Î ÀÌµ¿ÇÕ´Ï´Ù!\n");
-            // ´ÙÀ½ ½ºÅ×ÀÌÁö·Î ÀÌµ¿ÇÏ±â À§ÇÑ Ãß°¡ ÄÚµå
-            level = 21; // ´ÙÀ½ ½ºÅ×ÀÌÁö¸¦ À§ÇØ ·¹º§À» 0À¸·Î ÃÊ±âÈ­
-            money = INITIAL_MONEY; // ´ÙÀ½ ½ºÅ×ÀÌÁö¸¦ À§ÇØ µ· ÃÊ±âÈ­
-            // ´ÙÀ½ ½ºÅ×ÀÌÁö¸¦ À§ÇÑ ÇÊ¿äÇÑ ÃÊ±âÈ­¸¦ Ãß°¡ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+            // ë‹¤ìŒ ìŠ¤í…Œì´ì§€ë¡œ ì§„í–‰
+            // ì—¬ê¸°ì— ë‹¤ìŒ ìŠ¤í…Œì´ì§€ë¥¼ ì´ˆê¸°í™”í•˜ê±°ë‚˜ ì „í™˜ ë©”ì‹œì§€ë¥¼ í‘œì‹œí•˜ëŠ” ì½”ë“œë¥¼ ì¶”ê°€í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
+            printf("\në‹¤ìŒ ìŠ¤í…Œì´ì§€ë¡œ ì´ë™í•©ë‹ˆë‹¤!\n");
+            // ë‹¤ìŒ ìŠ¤í…Œì´ì§€ë¡œ ì´ë™í•˜ê¸° ìœ„í•œ ì¶”ê°€ ì½”ë“œ
+            level = 21; // ë‹¤ìŒ ìŠ¤í…Œì´ì§€ë¥¼ ìœ„í•´ ë ˆë²¨ì„ 0ìœ¼ë¡œ ì´ˆê¸°í™”
+            money = INITIAL_MONEY; // ë‹¤ìŒ ìŠ¤í…Œì´ì§€ë¥¼ ìœ„í•´ ëˆ ì´ˆê¸°í™”
+            // ë‹¤ìŒ ìŠ¤í…Œì´ì§€ë¥¼ ìœ„í•œ í•„ìš”í•œ ì´ˆê¸°í™”ë¥¼ ì¶”ê°€í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
         }
         else if (choice == 2) {
-            // °ÔÀÓ Á¾·á
-            printf("\n°ÔÀÓÀ» Á¾·áÇÕ´Ï´Ù. ¼ö°íÇÏ¼Ì½À´Ï´Ù!\n");
-            isGameOver = true; 
+            // ê²Œìž„ ì¢…ë£Œ
+            printf("\nê²Œìž„ì„ ì¢…ë£Œí•©ë‹ˆë‹¤. ìˆ˜ê³ í•˜ì…¨ìŠµë‹ˆë‹¤!\n");
+            isGameOver = true;
         }
         else {
-            printf("\nÀß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½Ã ¼±ÅÃÇÏ¼¼¿ä.\n");
+            printf("\nìž˜ëª»ëœ ìž…ë ¥ìž…ë‹ˆë‹¤. ë‹¤ì‹œ ì„ íƒí•˜ì„¸ìš”.\n");
         }
     }
     else {
-        
+
     }
 }
-
 void Dungeon1() {
-    printf(" ³ª ÀÌ»óÇö!\n");
-    printf(" HP : %d\n", BossMobHP[0]);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    printf("\n ì´ìƒí˜„ êµìˆ˜ë‹˜ : ì•„íŠ¸ëŠ” ë¬´ìŠ¨ ì•„íŠ¸ì•¼... ê°œë°œë„ ëª»í•˜ëŠ” ê²ƒë“¤ì´..\n");
+    printf("\n");
+    printf("                         ..=~                     \n");
+    printf("                       *=$#$$$=,                  \n");
+    printf("                      ==$###*##$;                 \n");
+    printf("                     !==$$*=*$$#$:                \n");
+    printf("                    -=$*==!;!==$#*                \n");
+    printf("                    !=*!=::~:!=$$=,               \n");
+    printf("                    $**!;-,,~:=$$=:               \n");
+    printf("                    ;!::-,.,~~!===~               \n");
+    printf("                    ~:~::,,:!;~;*!*               \n");
+    printf("                    ,~.:!-=-=~.-;;~               \n");
+    printf("                    ,..~-.:-:--~;-                \n");
+    printf("                       .. ,-,,,-:,                \n");
+    printf("                       ,. -~,,,-,,                \n");
+    printf("                      .,.,--~--,,                 \n");
+    printf("                      .,..,~~,-,-                 \n");
+    printf("                      .. .--,---                  \n");
+    printf("                       .. .--~~,-                 \n");
+    printf("                       ,,-~;;:-*;.                \n");
+    printf("                        ,~:;:,$==!                \n");
+    printf("                        .,  :***=!!               \n");
+    printf("                      !    ~;*****!;:             \n");
+    printf("                   ;!**.. ,::!*;!!;!=;            \n");
+    printf("                 :**;!; ,!!*=*!**;$=*=!           \n");
+    printf("                !;=!!*;.;!;*!***===!===,          \n");
+    printf("               -!**!*!!.*!!$=!;!!;*==$=!          \n");
+    printf("               !!*!*!!.**!!$=!;!!=$$$=;           \n");
+    printf("              ,***;;;*-*;==!!!!;!!=$$=;           \n");
+    printf("              !!;;!;!:;!;;:=*!!;=*$*==**          \n");
+    printf("             .=!!;!;!**:@***;;!*=!$$*==!          \n");
+    printf("             !!=:;*;:***;=::*!!!*=*==#=*          \n");
+    printf("            :!*!:***!**!=;*!:!**!=*$$***          \n");
+    printf("            !!**!;*;!!*!~=$;=;=*=***!==!          \n");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+    printf(" \n                  [ HP : %d ]\n", BossMobHP[0]);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
     int messageDisplayed = 0;
     int numberDisplayed = 1;
     while (BossMobHP[0] > 0) {
         char input = getchar();
         if (!numberDisplayed) {
-            printf(" HP : %d\n", BossMobHP[0]);
-            printf("{ ³ª°¡±â : 0 }\n");
+            printf("                         ..=~                     \n");
+            printf("                       *=$#$$$=,                  \n");
+            printf("                      ==$###*##$;                 \n");
+            printf("                     !==$$*=*$$#$:                \n");
+            printf("                    -=$*==!;!==$#*                \n");
+            printf("                    !=*!=::~:!=$$=,               \n");
+            printf("                    $**!;-,,~:=$$=:               \n");
+            printf("                    ;!::-,.,~~!===~               \n");
+            printf("                    ~:~::,,:!;~;*!*               \n");
+            printf("                    ,~.:!-=-=~.-;;~               \n");
+            printf("                    ,..~-.:-:--~;-                \n");
+            printf("                       .. ,-,,,-:,                \n");
+            printf("                       ,. -~,,,-,,                \n");
+            printf("                      .,.,--~--,,                 \n");
+            printf("                      .,..,~~,-,-                 \n");
+            printf("                      .. .--,---                  \n");
+            printf("                       .. .--~~,-                 \n");
+            printf("                       ,,-~;;:-*;.                \n");
+            printf("                        ,~:;:,$==!                \n");
+            printf("                        .,  :***=!!               \n");
+            printf("                      !    ~;*****!;:             \n");
+            printf("                   ;!**.. ,::!*;!!;!=;            \n");
+            printf("                 :**;!; ,!!*=*!**;$=*=!           \n");
+            printf("                !;=!!*;.;!;*!***===!===,          \n");
+            printf("               -!**!*!!.*!!$=!;!!;*==$=!          \n");
+            printf("               !!*!*!!.**!!$=!;!!=$$$=;           \n");
+            printf("              ,***;;;*-*;==!!!!;!!=$$=;           \n");
+            printf("              !!;;!;!:;!;;:=*!!;=*$*==**          \n");
+            printf("             .=!!;!;!**:@***;;!*=!$$*==!          \n");
+            printf("             !!=:;*;:***;=::*!!!*=*==#=*          \n");
+            printf("            :!*!:***!**!=;*!:!**!=*$$***          \n");
+            printf("            !!**!;*;!!*!~=$;=;=*=***!==!          \n");
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+            printf(" \n                  [ HP : %d ]\n", BossMobHP[0]);
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            printf(" \n { ë‚˜ê°€ê¸° : 0 }\n");
             numberDisplayed = 1;
         }
-
         if (input == '0') {
-            printf(" ´øÀüÀ» ³ª°©´Ï´Ù.\n");
+            printf(" \n ë˜ì „ì„ ë‚˜ê°‘ë‹ˆë‹¤.\n");
             return 0;
         }
         else if (input == '\n') {
@@ -238,32 +298,123 @@ void Dungeon1() {
         }
         else {
             if (!messageDisplayed) {
-                printf(" ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n");
-                printf("{ ³ª°¡±â : 0 }\n");
+                printf("\n ë‹¤ì‹œ ìž…ë ¥í•´ì£¼ì„¸ìš”.\n");
+                printf("{ ë‚˜ê°€ê¸° : 0 }\n");
                 messageDisplayed = 1;
             }
         }
     }
-    printf(" À¸¾î¾ï...³»°¡ Áö´Ù´Ï...\n");
+    printf(" ìœ¼ì–´ì–µ...ë‚´ê°€ ì§€ë‹¤ë‹ˆ...\n");
     Sleep(1000);
-    printf(" ´øÀü 1 ¿Ï·á!\n");
+    printf(" ë˜ì „ 1 ì™„ë£Œ!\n");
     return 0;
 }
 void Dungeon2() {
-    printf(" ³ª À±¼Ò¹Ì!");
-    printf(" HP : %d\n", BossMobHP[1]);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    printf("\n ìœ¤ì†Œë¯¸ êµìˆ˜ë‹˜ : í•˜... ìž ì‹œë§Œìš”...\n");
+    printf("\n");
+    printf("                    .,,,,. .,,                     \n");
+    printf("                   :=####*!*$$*-                   \n");
+    printf("                  ###########=##!                  \n");
+    printf("                -=#####@@@@##$###;                 \n");
+    printf("               ~*########@########*                \n");
+    printf("              ,!$#######@###$#####$:               \n");
+    printf("             :!==$$####$!:~--:*$####-              \n");
+    printf("            ,!**=$###$$;-,,,,-:=#####              \n");
+    printf("            :*=*==$$$$!-....,,~!$####-             \n");
+    printf("           .!==**====*-.....,,-:=####=             \n");
+    printf("           -=$***=*==:,. ...,,--*###$=             \n");
+    printf("           ~$$!*****!~......,,,-;$##$=,            \n");
+    printf("           !$**!=*=!~.......,,,-~*###$~            \n");
+    printf("           !=***=**;,.......,,,--;$##$-            \n");
+    printf("           *=**=*$=;,.....,-~~~~~:=##$~            \n");
+    printf("           ~*==*$=!:~-,,.,--------;=$*             \n");
+    printf("           ~*==*$=;---,,.,---**~--~*$!.            \n");
+    printf("           .;$$==**$$~-,.,-~,=!;:--!=;.            \n");
+    printf("           ,*$=*;!~;~-,. .,,-,-----;=-             \n");
+    printf("           .:$*;-----,.. .,,,,,,,,,~!-             \n");
+    printf("             *;,,....... .,,,,,...,-:-             \n");
+    printf("            ,*-............,,.....,,--,             \n");
+    printf("             ........,. .,,--,,.,,,,-              \n");
+    printf("             ..........:-,--,,,,,,,-               \n");
+    printf("              .  ...... ..,,,,,,,-,-               \n");
+    printf("              .. ...... ...,------,-               \n");
+    printf("              .!  .,,--,:--~~~-,----               \n");
+    printf("               ;; ..,,,..,,,--,---~-               \n");
+    printf("               .=,..,...,---------:,               \n");
+    printf("                ;*..,......,-----~*                \n");
+    printf("                ,=.,,..  ..,,---~;                 \n");
+    printf("                :# .,,..,,,,---~-;#:.              \n");
+    printf("               -*@  .~-,---~-~~--:#$*;             \n");
+    printf("             .~:#$  ..-~~::~~~---~##$$!,           \n");
+    printf("            -;~*#;  ...,-~~------~$#$$$$:          \n");
+    printf("           ~;;;$$:. ....,,-------~!######==-        \n");
+    printf("          ,~:**;==$;,.....,,,--,---~!##$$##$$==,    \n");
+    printf("        .-::!=!:$=#;,,...,,,,-,,---~!#$$$##$$$=$*,.\n");
+    printf("    ::!:~:!=!;*$$#;,,..,,,,,,,,,--~;=$=$$#$===$=$*:\n");
+    printf("   ;;!*:::!*;*$$#;,,..,,,,,,,,,,-~:!!=$$#$===$====\n");
+    printf("~!;;!!*!:;**!!=$#:,,...,,,,,,,,,---::**=$$=$$$$===\n");
+    printf("*!:!!=*!;;!!!**$#;,,....,,,..,,,-,-~~****==$$#$===\n");
+    printf("!!;*!$*=;;!!!!!=@:,.. ..... ..,,,,,-~=*===$$$$$$==\n");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+    printf(" \n                  [ HP : %d ]\n" , BossMobHP[1]);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
     int messageDisplayed = 0;
     int numberDisplayed = 1;
     while (BossMobHP[1] > 0) {
         char input = getchar();
         if (!numberDisplayed) {
-            printf(" HP : %d\n", BossMobHP[1]);
-            printf("{ ³ª°¡±â : 0 }\n"); // ³ª°¡±â ½ºÆäÀÌ½º¹Ù ´©¸£¸é ÇÑ¹ø´õ ½ÇÇà °íÄ¡±â. ¸ðµç Dungeon
+            printf("                    .,,,,. .,,                     \n");
+            printf("                   :=####*!*$$*-                   \n");
+            printf("                  ###########=##!                  \n");
+            printf("                -=#####@@@@##$###;                 \n");
+            printf("               ~*########@########*                \n");
+            printf("              ,!$#######@###$#####$:               \n");
+            printf("             :!==$$####$!:~--:*$####-              \n");
+            printf("            ,!**=$###$$;-,,,,-:=#####              \n");
+            printf("            :*=*==$$$$!-....,,~!$####-             \n");
+            printf("           .!==**====*-.....,,-:=####=             \n");
+            printf("           -=$***=*==:,. ...,,--*###$=             \n");
+            printf("           ~$$!*****!~......,,,-;$##$=,            \n");
+            printf("           !$**!=*=!~.......,,,-~*###$~            \n");
+            printf("           !=***=**;,.......,,,--;$##$-            \n");
+            printf("           *=**=*$=;,.....,-~~~~~:=##$~            \n");
+            printf("           ~*==*$=!:~-,,.,--------;=$*             \n");
+            printf("           ~*==*$=;---,,.,---**~--~*$!.            \n");
+            printf("           .;$$==**$$~-,.,-~,=!;:--!=;.            \n");
+            printf("           ,*$=*;!~;~-,. .,,-,-----;=-             \n");
+            printf("           .:$*;-----,.. .,,,,,,,,,~!-             \n");
+            printf("             *;,,....... .,,,,,...,-:-             \n");
+            printf("            ,*-............,,.....,,--,             \n");
+            printf("             ........,. .,,--,,.,,,,-              \n");
+            printf("             ..........:-,--,,,,,,,-               \n");
+            printf("              .  ...... ..,,,,,,,-,-               \n");
+            printf("              .. ...... ...,------,-               \n");
+            printf("              .!  .,,--,:--~~~-,----               \n");
+            printf("               ;; ..,,,..,,,--,---~-               \n");
+            printf("               .=,..,...,---------:,               \n");
+            printf("                ;*..,......,-----~*                \n");
+            printf("                ,=.,,..  ..,,---~;                 \n");
+            printf("                :# .,,..,,,,---~-;#:.              \n");
+            printf("               -*@  .~-,---~-~~--:#$*;             \n");
+            printf("             .~:#$  ..-~~::~~~---~##$$!,           \n");
+            printf("            -;~*#;  ...,-~~------~$#$$$$:          \n");
+            printf("           ~;;;$$:. ....,,-------~!######==-        \n");
+            printf("          ,~:**;==$;,.....,,,--,---~!##$$##$$==,    \n");
+            printf("        .-::!=!:$=#;,,...,,,,-,,---~!#$$$##$$$=$*,.\n");
+            printf("    ::!:~:!=!;*$$#;,,..,,,,,,,,,--~;=$=$$#$===$=$*:\n");
+            printf("   ;;!*:::!*;*$$#;,,..,,,,,,,,,,-~:!!=$$#$===$====\n");
+            printf("~!;;!!*!:;**!!=$#:,,...,,,,,,,,,---::**=$$=$$$$===\n");
+            printf("*!:!!=*!;;!!!**$#;,,....,,,..,,,-,-~~****==$$#$===\n");
+            printf("!!;*!$*=;;!!!!!=@:,.. ..... ..,,,,,-~=*===$$$$$$==\n");
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+            printf(" \n                  [ HP : %d ]\n ", BossMobHP[1]);
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            printf(" \n { ë‚˜ê°€ê¸° : 0 }\n"); // ë‚˜ê°€ê¸° ìŠ¤íŽ˜ì´ìŠ¤ë°” ëˆ„ë¥´ë©´ í•œë²ˆë” ì‹¤í–‰ ê³ ì¹˜ê¸°. ëª¨ë“  Dungeon
             numberDisplayed = 1;
         }
-
         if (input == '0') {
-            printf(" ´øÀüÀ» ³ª°©´Ï´Ù.\n");
+            printf(" \n ë˜ì „ì„ ë‚˜ê°‘ë‹ˆë‹¤.\n");
             return 0;
         }
         else if (input == '\n') {
@@ -277,32 +428,101 @@ void Dungeon2() {
         }
         else {
             if (!messageDisplayed) {
-                printf(" ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n");
-                printf(" {³ª°¡±â : 0 }\n");
+                printf("\n ë‹¤ì‹œ ìž…ë ¥í•´ì£¼ì„¸ìš”.\n");
+                printf(" {ë‚˜ê°€ê¸° : 0 }\n");
                 messageDisplayed = 1;
             }
         }
     }
-    printf(" À¸¾î¾ï...³»°¡ Áö´Ù´Ï...\n");
+    printf(" ìœ¼ì–´ì–µ...ë‚´ê°€ ì§€ë‹¤ë‹ˆ...\n");
     Sleep(1000);
-    printf(" ´øÀü 2 ¿Ï·á!\n");
+    printf(" ë˜ì „ 2 ì™„ë£Œ!\n");
     return 0;
 }
 void Dungeon3() {
-    printf(" ³ª ÀÌÀºÀÓ!");
-    printf("HP : %d\n", BossMobHP[2]);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    printf("\n ì´ì€ìž„ êµìˆ˜ë‹˜ : ê´œì°®ì•„ ë‹¤ì‹œ ì²œì²œížˆ í•´ì™€^^ (ìžê¸°ì†Œê°œì„œë¥¼ ë°˜ìœ¼ë¡œ ì°Ÿìœ¼ì‹œë©´ì„œ)\n");
+    printf("\n");
+    printf("                                                  \n");
+    printf("                                                  \n");
+    printf("                        ,~;;-                     \n");
+    printf("                       -##$$==*-                  \n");
+    printf("                      =###@$=$==:                 \n");
+    printf("                    ,$#*;!*=#$$=*~                \n");
+    printf("                    :#*,,,,,!==$=!-               \n");
+    printf("                   -#=,,....-!$==*;               \n");
+    printf("                   ~#~,.....,~$==*;,              \n");
+    printf("                   !#,,......-====!;              \n");
+    printf("                   ;$-~,,,,--~=$$$!!,             \n");
+    printf("                   :---,,.,-,-*$=$!:,             \n");
+    printf("                   -,~:-..-;;~~=$#$*~             \n");
+    printf("                   ,,.,,. .,,..*$$$;;               \n");
+    printf("                   ,,..,...... !$##*=              \n");
+    printf("                    ,,,~,:-....-$##*!              \n");
+    printf("                   --,,,..,,,.,*##!!            \n");
+    printf("                   -,---,,,,,.,*##=*-            \n");
+    printf("                   :,,-,,,,...,=##=!~          \n");
+    printf("                  -#-,,,...,.,,###=*:                 \n");
+    printf("                  !#=-,....,,-*#$#$*:             \n");
+    printf("                 ,=@@!~-----~!####$=:             \n");
+    printf("                 !##@@!***!;!$###@$=;             \n");
+    printf("             :#*=#@@@@$*!*$#@@@@#$!==:,           \n");
+    printf("             !=#$@@@@#$###=$#@@$*===:;:           \n");
+    printf("             =###@@@@**$=$$##$==#!*!:;;           \n");
+    printf("           -*$@##@@##*==$=##@=#*$**!;;:;,         \n");
+    printf("           !$#@#@@@$$**=$$#@$$=*!!!!;::;~         \n");
+    printf("          :=$#@@@##$*==$##@$$=**!!!!!;:;*         \n");
+    printf("         -*$$#@@#==$===$$$===*!!;!!;;;!:!-        \n");
+    printf("         **=#=#@$$$!====$=#=!;:;!*;*!!;;;,        \n");
+    printf("       ~!!=##*@#$$=======$**!;!;;;!!;;;:,          \n");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+    printf(" \n                [ HP : %d ]\n", BossMobHP[2]);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
     int messageDisplayed = 0;
     int numberDisplayed = 1;
     while (BossMobHP[2] > 0) {
         char input = getchar();
         if (!numberDisplayed) {
-            printf(" HP : %d\n", BossMobHP[2]);
-            printf(" { ³ª°¡±â : 0 }\n");
+            printf("                                                  \n");
+            printf("                                                  \n");
+            printf("                        ,~;;-                     \n");
+            printf("                       -##$$==*-                  \n");
+            printf("                      =###@$=$==:                 \n");
+            printf("                    ,$#*;!*=#$$=*~                \n");
+            printf("                    :#*,,,,,!==$=!-               \n");
+            printf("                   -#=,,....-!$==*;               \n");
+            printf("                   ~#~,.....,~$==*;,              \n");
+            printf("                   !#,,......-====!;              \n");
+            printf("                   ;$-~,,,,--~=$$$!!,             \n");
+            printf("                   :---,,.,-,-*$=$!:,             \n");
+            printf("                   -,~:-..-;;~~=$#$*~             \n");
+            printf("                   ,,.,,. .,,..*$$$;;               \n");
+            printf("                   ,,..,...... !$##*=              \n");
+            printf("                    ,,,~,:-....-$##*!              \n");
+            printf("                   --,,,..,,,.,*##!!            \n");
+            printf("                   -,---,,,,,.,*##=*-            \n");
+            printf("                   :,,-,,,,...,=##=!~          \n");
+            printf("                  -#-,,,...,.,,###=*:                 \n");
+            printf("                  !#=-,....,,-*#$#$*:             \n");
+            printf("                 ,=@@!~-----~!####$=:             \n");
+            printf("                 !##@@!***!;!$###@$=;             \n");
+            printf("             :#*=#@@@@$*!*$#@@@@#$!==:,           \n");
+            printf("             !=#$@@@@#$###=$#@@$*===:;:           \n");
+            printf("             =###@@@@**$=$$##$==#!*!:;;           \n");
+            printf("           -*$@##@@##*==$=##@=#*$**!;;:;,         \n");
+            printf("           !$#@#@@@$$**=$$#@$$=*!!!!;::;~         \n");
+            printf("          :=$#@@@##$*==$##@$$=**!!!!!;:;*         \n");
+            printf("         -*$$#@@#==$===$$$===*!!;!!;;;!:!-        \n");
+            printf("         **=#=#@$$$!====$=#=!;:;!*;*!!;;;,        \n");
+            printf("       ~!!=##*@#$$=======$**!;!;;;!!;;;:,          \n");
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+            printf(" \n                [ HP : %d ]\n", BossMobHP[2]);
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            printf(" \n { ë‚˜ê°€ê¸° : 0 }\n");
             numberDisplayed = 1;
         }
-
         if (input == '0') {
-            printf(" ´øÀüÀ» ³ª°©´Ï´Ù.\n");
+            printf(" \n ë˜ì „ì„ ë‚˜ê°‘ë‹ˆë‹¤.\n");
             return 0;
         }
         else if (input == '\n') {
@@ -316,32 +536,97 @@ void Dungeon3() {
         }
         else {
             if (!messageDisplayed) {
-                printf(" ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n");
-                printf(" { ³ª°¡±â : 0 }\n");
+                printf(" ë‹¤ì‹œ ìž…ë ¥í•´ì£¼ì„¸ìš”.\n");
+                printf(" { ë‚˜ê°€ê¸° : 0 }\n");
                 messageDisplayed = 1;
             }
         }
     }
-    printf(" À¸¾î¾ï...³»°¡ Áö´Ù´Ï...\n");
+    printf(" ìœ¼ì–´ì–µ...ë‚´ê°€ ì§€ë‹¤ë‹ˆ...\n");
     Sleep(1000);
-    printf(" ´øÀü 3 ¿Ï·á!\n");
+    printf(" ë˜ì „ 3 ì™„ë£Œ!\n");
     return 0;
 }
 void Dungeon4() {
-    printf(" ³ª ÀÌ¿î¼®!");
-    printf(" HP : %d\n", BossMobHP[3]);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    printf("\n ì´ìš´ì„ êµìˆ˜ë‹˜ : ì´ˆë“±í•™ìƒë„ ì•„ëŠ”ê±¸ ëª¨ë¥´ëŠ” ì£¼ì œì—......\n");
+    printf("\n");
+    printf("                    :=*!=$.                      \n");
+    printf("                   ,*$##$#$$:                     \n");
+    printf("                  ,$$##$$$###~                    \n");
+    printf("                  =$$##$#####$-                   \n");
+    printf("                 ~$$$#$$$$###$$.                  \n");
+    printf("                 !=$#$=**$###$$:                  \n");
+    printf("                .==$$=!:~;$###$:                  \n");
+    printf("                 =##*=*--:=*##$;                  \n");
+    printf("                 =$****-~;*!=$*~                  \n");
+    printf("                  ==:~;:$::~~~:                   \n");
+    printf("                  ;,.--,.;--:.-,                  \n");
+    printf("                  :  -,. -:~-...                  \n");
+    printf("                  ,   , ,:~~--..                  \n");
+    printf("                   ... .,,~:--                    \n");
+    printf("                   ...-..:;:--                    \n");
+    printf("                      . .---~-                    \n");
+    printf("                    ..  .,--~,                    \n");
+    printf("                    .,.  ,-~-.                    \n");
+    printf("                    ..,,-~;:-.                    \n");
+    printf("                   ! ,.,~;;~~ .                   \n");
+    printf("                  ~*   .--~~-~-                   \n");
+    printf("                .=$*     .~~~;,:                  \n");
+    printf("               :$#$#$    -:~:~~=*                 \n");
+    printf("             ;=$$$$#$$; ., ~~-.==*~               \n");
+    printf("           -$$$$$##$###=,. ~:-=#$#$$$-            \n");
+    printf("          ,$$#$$$#######:-,~--######$#=.          \n");
+    printf("          =$$$###$#######!.,,$########$*          \n");
+    printf("         ,$$$$############!-;##########$;         \n");
+    printf("         ~$$$$$#$#@####$################=         \n");
+    printf("         ~$$$$##########################*        \n");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+    printf(" \n                  [ HP : %d ]\n", BossMobHP[3]);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
     int messageDisplayed = 0;
     int numberDisplayed = 1;
     while (BossMobHP[0] > 0) {
         char input = getchar();
         if (!numberDisplayed) {
-            printf(" HP : %d\n", BossMobHP[3]);
-            printf(" { ³ª°¡±â : 0 }\n");
+            printf("                    :=*!=$.                      \n");
+            printf("                   ,*$##$#$$:                     \n");
+            printf("                  ,$$##$$$###~                    \n");
+            printf("                  =$$##$#####$-                   \n");
+            printf("                 ~$$$#$$$$###$$.                  \n");
+            printf("                 !=$#$=**$###$$:                  \n");
+            printf("                .==$$=!:~;$###$:                  \n");
+            printf("                 =##*=*--:=*##$;                  \n");
+            printf("                 =$****-~;*!=$*~                  \n");
+            printf("                  ==:~;:$::~~~:                   \n");
+            printf("                  ;,.--,.;--:.-,                  \n");
+            printf("                  :  -,. -:~-...                  \n");
+            printf("                  ,   , ,:~~--..                  \n");
+            printf("                   ... .,,~:--                    \n");
+            printf("                   ...-..:;:--                    \n");
+            printf("                      . .---~-                    \n");
+            printf("                    ..  .,--~,                    \n");
+            printf("                    .,.  ,-~-.                    \n");
+            printf("                    ..,,-~;:-.                    \n");
+            printf("                   ! ,.,~;;~~ .                   \n");
+            printf("                  ~*   .--~~-~-                   \n");
+            printf("                .=$*     .~~~;,:                  \n");
+            printf("               :$#$#$    -:~:~~=*                 \n");
+            printf("             ;=$$$$#$$; ., ~~-.==*~               \n");
+            printf("           -$$$$$##$###=,. ~:-=#$#$$$-            \n");
+            printf("          ,$$#$$$#######:-,~--######$#=.          \n");
+            printf("          =$$$###$#######!.,,$########$*          \n");
+            printf("         ,$$$$############!-;##########$;         \n");
+            printf("         ~$$$$$#$#@####$################=         \n");
+            printf("         ~$$$$##########################*        \n");
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+            printf(" \n                  [ HP : %d ]\n", BossMobHP[3]);
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            printf(" \n { ë‚˜ê°€ê¸° : 0 }\n");
             numberDisplayed = 1;
         }
-
         if (input == '0') {
-            printf(" ´øÀüÀ» ³ª°©´Ï´Ù.\n");
+            printf(" \n ë˜ì „ì„ ë‚˜ê°‘ë‹ˆë‹¤.\n");
             return 0;
         }
         else if (input == '\n') {
@@ -355,32 +640,115 @@ void Dungeon4() {
         }
         else {
             if (!messageDisplayed) {
-                printf(" ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n");
-                printf(" { ³ª°¡±â : 0 }\n");
+                printf(" ë‹¤ì‹œ ìž…ë ¥í•´ì£¼ì„¸ìš”.\n");
+                printf(" { ë‚˜ê°€ê¸° : 0 }\n");
                 messageDisplayed = 1;
             }
         }
     }
-    printf(" À¸¾î¾ï...³»°¡ Áö´Ù´Ï...\n");
+    printf(" ìœ¼ì–´ì–µ...ë‚´ê°€ ì§€ë‹¤ë‹ˆ...\n");
     Sleep(1000);
-    printf(" ´øÀü 4 ¿Ï·á!\n");
+    printf(" ë˜ì „ 4 ì™„ë£Œ!\n");
     return 0;
 }
 void Dungeon5() {
-    printf(" ³ª ±è¿µÃµ!");
-    printf(" HP : %d\n", BossMobHP[4]);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    printf("\n ê¹€ì˜ì²œ êµìˆ˜ë‹˜ : ë‚˜ëŠ” ì´í•´ê°€ ì•ˆë¼...\n");
+    printf("\n");
+    printf("                               .. .,                                  \n");
+    printf("                            .,;;~-~~:,,                                \n");
+    printf("                           -;#==!*=$$*$-                               \n");
+    printf("                           =####==$#$$=!-                              \n");
+    printf("                         .!$@#$=!!*=#$$*!.                             \n");
+    printf("                        .~=#=:-,-,--:;!===,                            \n");
+    printf("                        ,=#*~,,......,-~!$!.                            \n");
+    printf("                       .!#$:,,,.........,*=-                            \n");
+    printf("                       ;##=-,,...........~$:                            \n");
+    printf("                       !@#*-,,..... ......$;                            \n");
+    printf("                       *@#!-,,... .... ...=:                            \n");
+    printf("                       ,=#@;,,,,,-... ..,..=;                            \n");
+    printf("                       ,=~#$-~~~.,~..,,-~,.$,                            \n");
+    printf("                       ~,=;-:;;!-;;-~:~:-;!.                            \n");
+    printf("                        ,::,,,-~,,;,-~--,$~.                            \n");
+    printf("                        ,,-,,..,,--.~,,,..,                             \n");
+    printf("                        -,-,,..,-,. ..,,,..                             \n");
+    printf("                        .,-,,...,,........                              \n");
+    printf("                         =-,,,..~-,..~....                              \n");
+    printf("                         !---,,-,,,-,,-,..                              \n");
+    printf("                          ~-,,,~~~-,,,-,,                               \n");
+    printf("                         .-~,,.-~-..,-,.,.                              \n");
+    printf("                         ,~-~-,,,,,,,,,,.                               \n");
+    printf("                         ;*----,,--,,,,,                                \n");
+    printf("                        ,$#=---,..,,..,.                                \n");
+    printf("                       .$##@$~-~,,,..,,;                                \n");
+    printf("                      ,*$$#$##*:::~~,,!*.                               \n");
+    printf("                     ;*$#$##=##$*!!:-,@$;:                              \n");
+    printf("                    ;!$$$$$$$#@###$--:@$=!!~                            \n");
+    printf("                 .,;=$$#==$#####@@@=:=@#$*!**,.                          \n");
+    printf("                -~*=$$$###$###=#@@@#*$#@$*==$=!~.                        \n");
+    printf("               -**=$=$$$$###=$=$#@##$##@$=*===$=!                         \n");
+    printf("              .**$=!$=#=#$=$=*=$$=#$#@#=#*===#==$*:                      \n");
+    printf("             -=$$==*=#=$$###$!=#===$##==$====$*$$;*~                     \n");
+    printf("            ~$$##$$*$###$$##**$$=====#!*$===!$=#$;!*                      \n");
+    printf("            !#####*==$$##$$**=$===$*!!#*$*==*$=$$=*!                       \n");
+    printf("            ;$###=$$##$=@!$==$$===!=!;:!*$=;*$$=$$$=~                      \n");
+    printf("            !#$$#=$$$$=$$$$===##*$$==!:;!==!*#$=$==*!                      \n");
+    printf("            ;##$#$*=$$$$=##=$$=!*===$*;~*$=*!$*!*=!=*~                     \n");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+    printf(" \n                    [ HP : %d ]\n", BossMobHP[4]);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
     int messageDisplayed = 0;
     int numberDisplayed = 1;
     while (BossMobHP[4] > 0) {
         char input = getchar();
         if (!numberDisplayed) {
-            printf(" HP : %d\n", BossMobHP[4]);
-            printf(" { ³ª°¡±â : 0 }\n");
+            printf("                               .. .,                                  \n");
+            printf("                            .,;;~-~~:,,                                \n");
+            printf("                           -;#==!*=$$*$-                               \n");
+            printf("                           =####==$#$$=!-                              \n");
+            printf("                         .!$@#$=!!*=#$$*!.                             \n");
+            printf("                        .~=#=:-,-,--:;!===,                            \n");
+            printf("                        ,=#*~,,......,-~!$!.                            \n");
+            printf("                       .!#$:,,,.........,*=-                            \n");
+            printf("                       ;##=-,,...........~$:                            \n");
+            printf("                       !@#*-,,..... ......$;                            \n");
+            printf("                       *@#!-,,... .... ...=:                            \n");
+            printf("                       ,=#@;,,,,,-... ..,..=;                            \n");
+            printf("                       ,=~#$-~~~.,~..,,-~,.$,                            \n");
+            printf("                       ~,=;-:;;!-;;-~:~:-;!.                            \n");
+            printf("                        ,::,,,-~,,;,-~--,$~.                            \n");
+            printf("                        ,,-,,..,,--.~,,,..,                             \n");
+            printf("                        -,-,,..,-,. ..,,,..                             \n");
+            printf("                        .,-,,...,,........                              \n");
+            printf("                         =-,,,..~-,..~....                              \n");
+            printf("                         !---,,-,,,-,,-,..                              \n");
+            printf("                          ~-,,,~~~-,,,-,,                               \n");
+            printf("                         .-~,,.-~-..,-,.,.                              \n");
+            printf("                         ,~-~-,,,,,,,,,,.                               \n");
+            printf("                         ;*----,,--,,,,,                                \n");
+            printf("                        ,$#=---,..,,..,.                                \n");
+            printf("                       .$##@$~-~,,,..,,;                                \n");
+            printf("                      ,*$$#$##*:::~~,,!*.                               \n");
+            printf("                     ;*$#$##=##$*!!:-,@$;:                              \n");
+            printf("                    ;!$$$$$$$#@###$--:@$=!!~                            \n");
+            printf("                 .,;=$$#==$#####@@@=:=@#$*!**,.                          \n");
+            printf("                -~*=$$$###$###=#@@@#*$#@$*==$=!~.                        \n");
+            printf("               -**=$=$$$$###=$=$#@##$##@$=*===$=!                         \n");
+            printf("              .**$=!$=#=#$=$=*=$$=#$#@#=#*===#==$*:                      \n");
+            printf("             -=$$==*=#=$$###$!=#===$##==$====$*$$;*~                     \n");
+            printf("            ~$$##$$*$###$$##**$$=====#!*$===!$=#$;!*                      \n");
+            printf("            !#####*==$$##$$**=$===$*!!#*$*==*$=$$=*!                       \n");
+            printf("            ;$###=$$##$=@!$==$$===!=!;:!*$=;*$$=$$$=~                      \n");
+            printf("            !#$$#=$$$$=$$$$===##*$$==!:;!==!*#$=$==*!                      \n");
+            printf("            ;##$#$*=$$$$=##=$$=!*===$*;~*$=*!$*!*=!=*~                     \n");
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+            printf(" \n                    [ HP : %d ]\n", BossMobHP[4]);
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            printf(" \n { ë‚˜ê°€ê¸° : 0 }\n");
             numberDisplayed = 1;
         }
-
         if (input == '0') {
-            printf(" ´øÀüÀ» ³ª°©´Ï´Ù.\n");
+            printf(" \n ë˜ì „ì„ ë‚˜ê°‘ë‹ˆë‹¤.\n");
             return 0;
         }
         else if (input == '\n') {
@@ -394,69 +762,57 @@ void Dungeon5() {
         }
         else {
             if (!messageDisplayed) {
-                printf(" ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n");
-                printf(" { ³ª°¡±â : 0 }\n");
+                printf(" ë‹¤ì‹œ ìž…ë ¥í•´ì£¼ì„¸ìš”.\n");
+                printf(" { ë‚˜ê°€ê¸° : 0 }\n");
                 messageDisplayed = 1;
             }
         }
     }
-    printf(" À¸¾î¾ï...³»°¡ Áö´Ù´Ï...\n");
+    printf(" ìœ¼ì–´ì–µ...ë‚´ê°€ ì§€ë‹¤ë‹ˆ...\n");
     Sleep(1000);
-    printf(" ´øÀü 5 ¿Ï·á!\n");
+    printf(" ë˜ì „ 5 ì™„ë£Œ!\n");
     return 0;
 }
 
-
-
 int main(void)
 {
-    system("mode con cols=120 lines=30 | title ÀÌÁöÈ£ ÇÐ»ý Å°¿ì±â");
-
-
-    srand((unsigned int)time(NULL));         // ·£´ý ½Ãµå°ª ¼³Á¤
-
+    srand((unsigned int)time(NULL));         // ëžœë¤ ì‹œë“œê°’ ì„¤ì •
     while (!isGameOver)
     {
-        system("@cls||clear");      // È­¸é Á¤¸®
-
+        system("@cls||clear");      // í™”ë©´ ì •ë¦¬
+        system("mode con cols=200 lines=100 | title ì´ì§€í˜¸ í•™ìƒ í‚¤ìš°ê¸°");
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-        printf(" ** ÀÌÁöÈ£ ÇÐ»ý Å°¿ì±â **  \n\n");
-
-        // »óÅÂ Ãâ·Â
+        printf(" ** ì´ì§€í˜¸ í•™ìƒ í‚¤ìš°ê¸° **  \n\n");
+        // ìƒíƒœ ì¶œë ¥
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 3);
-        printf(" ÇÐ»ý ·¹º§ : + %d %s (ÆÄ¿ö : %d)\n", level, enhancementMessages1[level], JihoPower[level]);
+        printf(" í•™ìƒ ë ˆë²¨ : + %d %s (íŒŒì›Œ : %d)\n", level, enhancementMessages1[level], JihoPower[level]);
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-        printf(" \n ÇöÀç ¼ÒÁö±Ý : %d¿ø\n", money);
-        printf(" ÇÐ½À ºñ¿ë : %d¿ø\n", enhancementCosts[level]);
-        printf(" ÇÐ½À ¼º°ø·ü : %.2f%%\n", enhancementProbabilitiesStage1[level]);
-        printf(" \n º¸À¯ º¹½À±Ç °¹¼ö : %d\n", tickets);
-        printf(" \n ¸Þ´º:\n\n");
-        printf(" * 1. ÇÐ»ý °­È­ÇÏ±â\n");
-        printf(" * 2. »óÁ¡°¡±â\n");
-        printf(" * 3. °­ÀÇ½Ç°¡±â\n");
-        printf(" * 4. Æ÷±âÇÏ±â\n\n");
-
+        printf(" \n í˜„ìž¬ ì†Œì§€ê¸ˆ : %dì›\n", money);
+        printf(" í•™ìŠµ ë¹„ìš© : %dì›\n", enhancementCosts[level]);
+        printf(" í•™ìŠµ ì„±ê³µë¥  : %.2f%%\n", enhancementProbabilitiesStage1[level]);
+        printf(" \n ë³´ìœ  ë³µìŠµê¶Œ ê°¯ìˆ˜ : %d\n", tickets);
+        printf(" \n ë©”ë‰´:\n\n");
+        printf(" * 1. í•™ìƒ ê°•í™”í•˜ê¸°\n");
+        printf(" * 2. ìƒì ê°€ê¸°\n");
+        printf(" * 3. ê°•ì˜ì‹¤ê°€ê¸°\n");
+        printf(" * 4. í¬ê¸°í•˜ê¸°\n\n");
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
-        printf("\n * ¸Þ´º¸¦ ¼±ÅÃÇÏ¼¼¿ä : ");
+        printf("\n * ë©”ë‰´ë¥¼ ì„ íƒí•˜ì„¸ìš” : ");
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
         scanf_s("%d", &isTry);
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-
-
         switch (isTry)
         {
-        case 1:     // °­È­¿¡ µµÀü ÇÒ °æ¿ì
-            // µ·ÀÌ ºÎÁ·ÇÏ¸é ¸Þ½ÃÁö Ãâ·Â ÈÄ break
+        case 1:     // ê°•í™”ì— ë„ì „ í•  ê²½ìš°
+            // ëˆì´ ë¶€ì¡±í•˜ë©´ ë©”ì‹œì§€ ì¶œë ¥ í›„ break
             if (money < enhancementCosts[level]) {
-                printf("µ·ÀÌ ºÎÁ·ÇÏ¿© °øºÎ ÇÒ ¼ö ¾ø½À´Ï´Ù.\n");
+                printf("ëˆì´ ë¶€ì¡±í•˜ì—¬ ê³µë¶€ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n");
                 break;
             }
-            printf("\n  *** ÇÐ½ÀÁß *** \n\n");
+            printf("\n  *** í•™ìŠµì¤‘ *** \n\n");
             //Sleep(2000);
-
             float randNum = (float)rand() / RAND_MAX * 100.0f;
             int i;
-
             if (randNum < enhancementProbabilitiesStage1[level]) {
                 money -= enhancementCosts[level];
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
@@ -465,9 +821,8 @@ int main(void)
                 printf("    + %d  -> + %d \n", level, level + 1);
                 printf("                  \n");
                 printf(" ***** SUCCESS *****\n");
-                // °­È­¿¡ ¼º°ø ÇßÀ» ½Ã, ·¹º§À» ÇÏ³ª Áõ°¡ ½ÃÅ´
+                // ê°•í™”ì— ì„±ê³µ í–ˆì„ ì‹œ, ë ˆë²¨ì„ í•˜ë‚˜ ì¦ê°€ ì‹œí‚´
                 level++;
-
             }
             else
             {
@@ -477,27 +832,26 @@ int main(void)
                 printf("      %d  ->  % d    \n", level, level - 1);
                 printf("                  \n");
                 printf(" ***** FAILURE *****\n");
-                printf("\n ¾îÀÍÈÄ.. ÇÚµåÆùÀ» ºÃ³×..±³¼ö´ÔÀÌ ºÁ¹ö·È´Ù...\n");
-                printf("\n [+%d Áö½ÄÀ» ÀÒ¾ú½À´Ï´Ù.]\n\n", level);
-
+                printf("\n ì–´ìµí›„.. í•¸ë“œí°ì„ ë´¤ë„¤..êµìˆ˜ë‹˜ì´ ë´ë²„ë ¸ë‹¤...\n");
+                printf("\n [+%d ì§€ì‹ì„ ìžƒì—ˆìŠµë‹ˆë‹¤.]\n\n", level);
                 if (1 <= level <= 20)
                 {
                     if (tickets != 0)
                     {
                         money -= enhancementCosts[level];
-                        printf("ÇÐ½À¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù. \nÇöÀç ÇÐ½À ¼öÄ¡¸¦ À¯ÁöÇÏ½Ã°Ú½À´Ï±î? \n{º¸À¯ ÇÐ½À±Ç °¹¼ö : %d}\n(YES : 1/ NO : 2) : ", tickets);
+                        printf("í•™ìŠµì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤. \ní˜„ìž¬ í•™ìŠµ ìˆ˜ì¹˜ë¥¼ ìœ ì§€í•˜ì‹œê² ìŠµë‹ˆê¹Œ? \n{ë³´ìœ  í•™ìŠµê¶Œ ê°¯ìˆ˜ : %d}\n(YES : 1/ NO : 2) : ", tickets);
                         scanf_s("%d", &choice);
                         if (choice == 1) {
                             tickets--;
-                            printf("\nº¹½À±ÇÀ» »ç¿ëÇÕ´Ï´Ù. (º¸À¯ º¹½À±Ç °¹¼ö : %d)\n", tickets);
+                            printf("\në³µìŠµê¶Œì„ ì‚¬ìš©í•©ë‹ˆë‹¤. (ë³´ìœ  ë³µìŠµê¶Œ ê°¯ìˆ˜ : %d)\n", tickets);
                             money += enhancementCosts[level];
                         }
                         else if (choice == 2) {
-                            printf("ÇÐ½À ¼öÄ¡¸¦ ÃÊ±âÈ­ÇÕ´Ï´Ù.\n");
-                            level = 0; // °­È­ ¼öÄ¡ ÃÊ±âÈ­
+                            printf("í•™ìŠµ ìˆ˜ì¹˜ë¥¼ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.\n");
+                            level = 0; // ê°•í™” ìˆ˜ì¹˜ ì´ˆê¸°í™”
                         }
                         else {
-                            printf("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½Ã ¼±ÅÃÇÏ¼¼¿ä.\n");
+                            printf("ìž˜ëª»ëœ ìž…ë ¥ìž…ë‹ˆë‹¤. ë‹¤ì‹œ ì„ íƒí•˜ì„¸ìš”.\n");
                             continue;
                         }
                     }
@@ -507,26 +861,25 @@ int main(void)
                     }
                 }
             }
-            // °­È­ ºñ¿ë Â÷°¨
-
+            // ê°•í™” ë¹„ìš© ì°¨ê°
             break;
         case 2:
             GoStore();
             break;
         case 3:
-            printf("\n *** °­ÀÇ½Ç·Î ÀÌµ¿ ***\n\n");
-           // Sleep(2000);
+            printf("\n *** ê°•ì˜ì‹¤ë¡œ ì´ë™ ***\n\n");
+            // Sleep(2000);
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-            printf(" ÀÌ°÷Àº °­ÀÇ½ÇÀÔ´Ï´Ù. ±³¼ö´Ôµé°ú ¸é´ãÀ» ÇÒ ¼ö ÀÖ½À´Ï´Ù.\n");
+            printf(" ì´ê³³ì€ ê°•ì˜ì‹¤ìž…ë‹ˆë‹¤. êµìˆ˜ë‹˜ë“¤ê³¼ ë©´ë‹´ì„ í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.\n");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-            printf("\n 1. ÀÌ»óÇö ±³¼ö´Ô (1~4°­ ÃßÃµ)\n");
-            printf(" 2. À±¼Ò¹Ì ±³¼ö´Ô (5~8°­ ÃßÃµ)\n");
-            printf(" 3. ÀÌÀºÀÓ ±³¼ö´Ô (9°­~12°­ ÃßÃµ)\n");
-            printf(" 4. ÀÌ¿î¼® ±³¼ö´Ô (13°­~16°­ ÃßÃµ)\n");
-            printf(" 5. ±è¿µÃµ ±³¼ö´Ô (17°­~20°­ ÃßÃµ)\n\n");
-            printf(" ¸ÞÀÎÈ­¸éÀ¸·Î ³ª°¡±â - [ 1~5¸¦ Á¦¿ÜÇÑ ¸ðµç ÀÔ·ÂÅ° ]\n\n");
+            printf("\n 1. ì´ìƒí˜„ êµìˆ˜ë‹˜ (1~4ê°• ì¶”ì²œ)\n");
+            printf(" 2. ìœ¤ì†Œë¯¸ êµìˆ˜ë‹˜ (5~8ê°• ì¶”ì²œ)\n");
+            printf(" 3. ì´ì€ìž„ êµìˆ˜ë‹˜ (9ê°•~12ê°• ì¶”ì²œ)\n");
+            printf(" 4. ì´ìš´ì„ êµìˆ˜ë‹˜ (13ê°•~16ê°• ì¶”ì²œ)\n");
+            printf(" 5. ê¹€ì˜ì²œ êµìˆ˜ë‹˜ (17ê°•~20ê°• ì¶”ì²œ)\n\n");
+            printf(" ë©”ì¸í™”ë©´ìœ¼ë¡œ ë‚˜ê°€ê¸° - [ 1~5ë¥¼ ì œì™¸í•œ ëª¨ë“  ìž…ë ¥í‚¤ ]\n\n");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-            printf(" ¸é´ãÇÏ°í ½ÍÀº ±³¼ö´ÔÀÇ ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
+            printf(" ë©´ë‹´í•˜ê³  ì‹¶ì€ êµìˆ˜ë‹˜ì˜ ë²ˆí˜¸ë¥¼ ìž…ë ¥í•˜ì„¸ìš” : ");
             scanf_s("%d", &dungeonSelect);
             switch (dungeonSelect) {
             case 1:
@@ -545,26 +898,25 @@ int main(void)
                 Dungeon5();
                 break;
             default:
-                printf("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½Ã ¼±ÅÃÇÏ¼¼¿ä.\n");
+                printf("ìž˜ëª»ëœ ìž…ë ¥ìž…ë‹ˆë‹¤. ë‹¤ì‹œ ì„ íƒí•˜ì„¸ìš”.\n");
                 break;
             }
             break;
         case 4:
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
-            printf("\n ÀÌ·±! ÀÌÁöÈ£ ÇÐ»ýÀÌ ÀÚÅð Çß½À´Ï´Ù ÀÌÁ¦ ¾îÂ¼ÁÒ...?\n");
-            isGameOver = true; // °ÔÀÓ Á¾·á
+            printf("\n ì´ëŸ°! ì´ì§€í˜¸ í•™ìƒì´ ìží‡´ í–ˆìŠµë‹ˆë‹¤ ì´ì œ ì–´ì©Œì£ ...?\n");
+            isGameOver = true; // ê²Œìž„ ì¢…ë£Œ
             break;
         default:
-            printf("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½Ã ¼±ÅÃÇÏ¼¼¿ä.\n"); // ¿£ÅÍ ´­·¯¾ßÁö ³ª°¡±â.
+            printf("ìž˜ëª»ëœ ìž…ë ¥ìž…ë‹ˆë‹¤. ë‹¤ì‹œ ì„ íƒí•˜ì„¸ìš”.\n"); // ì—”í„° ëˆŒëŸ¬ì•¼ì§€ ë‚˜ê°€ê¸°.
             break;
         }
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-        printf("\n °è¼ÓÇÏ·Á¸é ¾Æ¹« Å°³ª ´©¸£¼¼¿ä! \n");
-        getchar(); // °³Çà ¹®ÀÚ Ã³¸®¸¦ À§ÇØ getchar »ç¿ë
+        printf("\n ê³„ì†í•˜ë ¤ë©´ ì•„ë¬´ í‚¤ë‚˜ ëˆ„ë¥´ì„¸ìš”! \n");
+        getchar(); // ê°œí–‰ ë¬¸ìž ì²˜ë¦¬ë¥¼ ìœ„í•´ getchar ì‚¬ìš©
 
-        // »ç¿ëÀÚ ÀÔ·Â ´ë±â
-        while (getchar() != '\n'); // ¹öÆÛ ºñ¿ì±â
+        // ì‚¬ìš©ìž ìž…ë ¥ ëŒ€ê¸°
+        while (getchar() != '\n'); // ë²„í¼ ë¹„ìš°ê¸°
     }
-
     return 0;
 }
