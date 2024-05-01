@@ -20,41 +20,41 @@
 /// 
 /// </summary>
 char* enhancementMessages1[] = {
-    "병아리 신입생(세상의 때가 묻지 않은 귀여운 신입생이 등장했다!)",
-    "C언어를 배운 1학년(김영철 교수님께 칭찬을 받은 귀여운 1학년이다.)",
-    "HTML5를 배운 1학년(이윤임 교수님의 사랑을 받는 1학년이다.)",
-    "포토샵을 배운 1학년(노은석 교수님께서 매우 만족하신다.)",
-    "파이썬을 배운 1학년(이은석 교수님께 욕을 많이 먹었다. 슬슬 사람이 이상해진다.)",
-    "JavaScript를 배운 1학년(이윤임 교수님께선 큰 신뢰를 걸고 계신다.)",
-    "C언어응용을 배운 1학년(김영철 교수님께 혼났다. 분명 C언어를 배웠는데...??)",
-    "유니티를 배운 2학년(이성현 교수님께서 걱정하신다. 원래 착했던 애가 이상해지고 있다...)",
-    "C# 프로그래밍을 배운 2학년(윤수미 교수님께서 좋아하신다. 다행히 아직 초반이라...)",
-    "앱기획을 배운 2학년(김영철 교수님께 맞기 직전까지 갔다. 한강물의 온도가 궁금하다...)",
-    "현타가 온 대학생(교수님께 혼나고, 과제에 치이고... 학생의 눈앞에 눈물이 글썽인다.)",
-    "반응형웹을 배운 2학년(이은석 교수님께서 좋아하신다. 잠을 자지 않고 과제를 끝냈다.)",
-    "C++을 배운 2학년(이제 C계얼 언어를 다 배웠다. 근데 포인터는 도저히 이해가 안된다...)",
-    "유니티로 게임을 개발한 3학년(코피를 흘려가며 게임을 만들었다. 이성현 교수님께서 \"이게 게임이 맞나\"라고 하셨다.)",
-    "HTML과 CSS로 웹을 만들어 본 3학년(이윤임 교수님께 잔소리를 많이 들었다. 그래도 내심 교수님께서 기특해하신다.)",
-    "전공동아리 멘토를 하는 3학년(후배들의 존경을 받고 있다. 이은석 교수님과 이성현 교수님도 그렇게 생각하실까?)",
-    "3D모델링을 배운 3학년(노은석 교수님과 1대1 면담을 했다. 아트도 괜찮은 것 같은데... 어디로 갈지 모르겠다.)",
-    "창업동아리를 하는 3학년(매일 학교에 21시까지 후배, 동기들과 같이 작업을 한다. 이정도면 귀신이다.)",
-    "기획서 작성을 마스터한 3학년(본인은 정말 잘한다고 생각한다. 이은석 교수님과 이성현 교수님도 그렇게 생각하실까?)",
-    "현장 실습을 다녀온 3학년(회사에선 오랜만에 인재가 들어왔다고 한다. 하지만 본인은 회사가 별로다.)",
-    "졸업 가운을 입고 있는 대학생(모든 능력을 탑재했다. 이제 진짜 지옥을 향해 걸어간다.)"
+    "병아리 신입생 이지호(세상의 때가 묻지 않은 야생의 지호가 등장했다!)",
+    "C언어를 배운 1학년 이지호(김영천 교수님께 칭찬을 받은 귀여운 1학년이다.)",
+    "HTML5를 배운 1학년 이지호(이은임 교수님의 사랑을 받는 1학년이다.)",
+    "포토샵을 배운 1학년 이지호(노연석 교수님께서 매우 만족하신다.)",
+    "파이썬을 배운 1학년 이지호(이운석 교수님께 욕을 많이 먹었다. 슬슬 사람이 이상해진다.)",
+    "JavaScript를 배운 1학년 이지호(이은임 교수님께선 큰 신뢰를 걸고 계신다.)",
+    "C언어응용을 배운 1학년 이지호(김영천 교수님께 혼났다. 분명 C언어를 배웠는데...??)",
+    "유니티를 배운 2학년 이지호(이상현 교수님께서 걱정하신다. 원래 착했던 애가 이상해지고 있다...)",
+    "C# 프로그래밍을 배운 2학년 이지호(윤소미 교수님께서 좋아하신다. 다행히 아직 초반이라...)",
+    "앱기획을 배운 2학년 이지호(김영천 교수님께 맞기 직전까지 갔다. 한강물의 온도가 궁금하다...)",
+    "현타가 온 이지호(교수님께 혼나고, 과제에 치이고... 지호의 눈앞에 눈물이 글썽인다.)",
+    "반응형웹을 배운 2학년 이지호(이운석 교수님께서 좋아하신다. 잠을 자지 않고 과제를 끝냈다.)",
+    "C++을 배운 2학년 이지호(이제 C계얼 언어를 다 배웠다. 근데 포인터는 도저히 이해가 안된다...)",
+    "유니티로 게임을 개발한 3학년 이지호(코피를 흘려가며 게임을 만들었다. 이상현 교수님께서 \"이게 게임이 맞나\"라고 하셨다.)",
+    "HTML과 CSS로 웹을 만들어 본 3학년 이지호(이은임 교수님께 잔소리를 많이 들었다. 그래도 내심 교수님께서 기특해하신다.)",
+    "전공동아리 멘토를 하는 3학년 이지호(후배들의 존경을 받고 있다. 이운석 교수님과 이상현 교수님도 그렇게 생각하실까?)",
+    "3D모델링을 배운 3학년 이지호(노연석 교수님과 1대1 면담을 했다. 아트도 괜찮은 것 같은데... 어디로 갈지 모르겠다.)",
+    "창업동아리를 하는 3학년 이지호(매일 학교에 밤 10시까지 후배, 동기들과 같이 작업을 한다. 이정도면 귀신이다.)",
+    "기획서 작성을 마스터한 3학년 이지호(본인은 정말 잘한다고 생각한다. 이운석 교수님과 이상현 교수님도 그렇게 생각하실까?)",
+    "현장 실습을 다녀온 3학년 이지호(회사에선 오랜만에 인재가 들어왔다고 한다. 하지만 본인은 회사가 별로다.)",
+    "졸업 가운을 입고 있는 이지호(모든 능력을 탑재했다. 이제 진짜 지옥을 향해 걸어간다.)"
 };
 // 2스테이지 
-char* enhancementMessages2[] = {
-"크래프톤 면접을 보고왔다.. 결과가 어떻게 나왔을까??"
-"꿈에 그리던 크래프톤을 붙었다.. 희망으로 가득찬 나의 앞날이 어떻게 될까??"
-"첫 출근 아침 .. 9시까지 출근이여서 8시에 집에서 출발했다.. 9시 되기 20분전.. 회사앞이다..."
-"다행이도 9시 10분전에 도착하였다.. 첫 출근인데 늦을수는 없지?!"
-"첫날에는 어떻게 해야하는건지 선임분이 알려주실거를 알려주시고 계시다.."
-"6시에 퇴근시간에 맞춰 집을 가려고 했었는데.. 신입 회식을 한다고??"
-"회식을 끝내고 집에 들어왔는데 몹시 힘이 들어 기절을 해버렸다.. 일어나니? 7시반??"
-"비슷비슷한 일상을 보내다... 계약직에서 정규직으로 성공을 했다!"
-"점점..회사에 녹아드는 개발자이다.. 근데 너무 힘든데??"
-"스펙을 쌓을만큼 쌓은 개발자. 딴 직종으로 이직을 원하는데..."
-};
+//char* enhancementMessages2[] = {
+//"크래프톤 면접을 보고왔다.. 결과가 어떻게 나왔을까??"
+//"꿈에 그리던 크래프톤을 붙었다.. 희망으로 가득찬 나의 앞날이 어떻게 될까??"
+//"첫 출근 아침 .. 9시까지 출근이여서 8시에 집에서 출발했다.. 9시 되기 20분전.. 회사앞이다..."
+//"다행이도 9시 10분전에 도착하였다.. 첫 출근인데 늦을수는 없지?!"
+//"첫날에는 어떻게 해야하는건지 선임분이 알려주실거를 알려주시고 계시다.."
+//"6시에 퇴근시간에 맞춰 집을 가려고 했었는데.. 신입 회식을 한다고??"
+//"회식을 끝내고 집에 들어왔는데 몹시 힘이 들어 기절을 해버렸다.. 일어나니? 7시반??"
+//"비슷비슷한 일상을 보내다... 계약직에서 정규직으로 성공을 했다!"
+//"점점..회사에 녹아드는 개발자이다.. 근데 너무 힘든데??"
+//"스펙을 쌓을만큼 쌓은 개발자. 딴 직종으로 이직을 원하는데..."
+//};
 int isTry = 0;                  // 강화 시도 여부 선택 변수
 int level = 0;                  // 현재 무기의 강화 수치
 int money = INITIAL_MONEY;      // 현재 소지금 
@@ -86,7 +86,7 @@ int studentSalaries[MAX_ENHANCEMENTStage1 + 1] = {
     150000
 };
 int BossMobHP[BOSSLEVEL + 1] = {
-    5000,100000,500000,3000000,10000000
+    5000,50000,250000,1000000,5000000
 };
 int JihoPower[MAX_ENHANCEMENTStage1 + 1] = {
     0,10,50,100,150,250,
@@ -175,35 +175,34 @@ void GoStore() {
             break;
         }
     }
-    if (level == MAX_ENHANCEMENTStage1) {
-        printf("\n축하합니다! 20단계까지 모두 클리어하셨습니다!\n");
-        printf("다음 스테이지로 진행하시겠습니까? (YES: 1 / NO: 2) : ");
-        scanf_s("%d", &choice);
-        if (choice == 1) {
-            // 다음 스테이지로 진행
-            // 여기에 다음 스테이지를 초기화하거나 전환 메시지를 표시하는 코드를 추가할 수 있습니다.
-            printf("\n다음 스테이지로 이동합니다!\n");
-            // 다음 스테이지로 이동하기 위한 추가 코드
-            level = 21; // 다음 스테이지를 위해 레벨을 0으로 초기화
-            money = INITIAL_MONEY; // 다음 스테이지를 위해 돈 초기화
-            // 다음 스테이지를 위한 필요한 초기화를 추가할 수 있습니다.
-        }
-        else if (choice == 2) {
-            // 게임 종료
-            printf("\n게임을 종료합니다. 수고하셨습니다!\n");
-            isGameOver = true;
-        }
-        else {
-            printf("\n잘못된 입력입니다. 다시 선택하세요.\n");
-        }
-    }
-    else {
+    //if (level == MAX_ENHANCEMENTStage1) {
+    //    printf("\n축하합니다! 20단계까지 모두 클리어하셨습니다!\n");
+    //    printf("다음 스테이지로 진행하시겠습니까? (YES: 1 / NO: 2) : ");
+    //    scanf_s("%d", &choice);
+    //    if (choice == 1) {
+    //        // 다음 스테이지로 진행
+    //        // 여기에 다음 스테이지를 초기화하거나 전환 메시지를 표시하는 코드를 추가할 수 있습니다.
+    //        printf("\n다음 스테이지로 이동합니다!\n");
+    //        // 다음 스테이지로 이동하기 위한 추가 코드
+    //        level = 21; // 다음 스테이지를 위해 레벨을 0으로 초기화
+    //        money = INITIAL_MONEY; // 다음 스테이지를 위해 돈 초기화
+    //        // 다음 스테이지를 위한 필요한 초기화를 추가할 수 있습니다.
+    //    }
+    //    else if (choice == 2) {
+    //        // 게임 종료
+    //        printf("\n게임을 종료합니다. 수고하셨습니다!\n");
+    //        isGameOver = true;
+    //    }
+    //    else {
+    //        printf("\n잘못된 입력입니다. 다시 선택하세요.\n");
+    //    }
+    //}
+    //else {
 
-    }
+    //}
 }
 void Dungeon1() {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    printf("\n 이상현 교수님 : 아트는 무슨 아트야... 개발도 못하는 것들이..\n");
     printf("\n");
     printf("                         ..=~                     \n");
     printf("                       *=$#$$$=,                  \n");
@@ -237,6 +236,7 @@ void Dungeon1() {
     printf("             !!=:;*;:***;=::*!!!*=*==#=*          \n");
     printf("            :!*!:***!**!=;*!:!**!=*$$***          \n");
     printf("            !!**!;*;!!*!~=$;=;=*=***!==!          \n");
+    printf("\n 이상현 교수님 : 아트는 무슨 아트야... 개발도 못하는 것들이..\n");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
     printf(" \n                  [ HP : %d ]\n", BossMobHP[0]);
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
@@ -277,6 +277,7 @@ void Dungeon1() {
             printf("             !!=:;*;:***;=::*!!!*=*==#=*          \n");
             printf("            :!*!:***!**!=;*!:!**!=*$$***          \n");
             printf("            !!**!;*;!!*!~=$;=;=*=***!==!          \n");
+            printf("\n 이상현 교수님 : 아트는 무슨 아트야... 개발도 못하는 것들이..\n");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
             printf(" \n                  [ HP : %d ]\n", BossMobHP[0]);
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
@@ -284,7 +285,8 @@ void Dungeon1() {
             numberDisplayed = 1;
         }
         if (input == '0') {
-            printf(" \n 던전을 나갑니다.\n");
+            printf(" \n 강의실을 나갑니다.\n");
+            BossMobHP[0] = 5000;
             return 0;
         }
         else if (input == '\n') {
@@ -304,14 +306,13 @@ void Dungeon1() {
             }
         }
     }
-    printf(" 으어억...내가 지다니...\n");
+    printf(" 됐어... 이제 너랑 얘기 안할꺼야...\n");
     Sleep(1000);
-    printf(" 던전 1 완료!\n");
+    printf(" 면담 완료!\n");
     return 0;
 }
 void Dungeon2() {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    printf("\n 윤소미 교수님 : 하... 잠시만요...\n");
     printf("\n");
     printf("                    .,,,,. .,,                     \n");
     printf("                   :=####*!*$$*-                   \n");
@@ -356,8 +357,9 @@ void Dungeon2() {
     printf("~!;;!!*!:;**!!=$#:,,...,,,,,,,,,---::**=$$=$$$$===\n");
     printf("*!:!!=*!;;!!!**$#;,,....,,,..,,,-,-~~****==$$#$===\n");
     printf("!!;*!$*=;;!!!!!=@:,.. ..... ..,,,,,-~=*===$$$$$$==\n");
+    printf("\n 윤소미 교수님 : 하... 잠시만요...\n");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
-    printf(" \n                  [ HP : %d ]\n" , BossMobHP[1]);
+    printf(" \n                  [ HP : %d ]\n", BossMobHP[1]);
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
     int messageDisplayed = 0;
     int numberDisplayed = 1;
@@ -407,6 +409,7 @@ void Dungeon2() {
             printf("~!;;!!*!:;**!!=$#:,,...,,,,,,,,,---::**=$$=$$$$===\n");
             printf("*!:!!=*!;;!!!**$#;,,....,,,..,,,-,-~~****==$$#$===\n");
             printf("!!;*!$*=;;!!!!!=@:,.. ..... ..,,,,,-~=*===$$$$$$==\n");
+            printf("\n 윤소미 교수님 : 하... 잠시만요...\n");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
             printf(" \n                  [ HP : %d ]\n ", BossMobHP[1]);
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
@@ -414,7 +417,8 @@ void Dungeon2() {
             numberDisplayed = 1;
         }
         if (input == '0') {
-            printf(" \n 던전을 나갑니다.\n");
+            printf(" \n 강의실을 나갑니다.\n");
+            BossMobHP[1] = 50000;
             return 0;
         }
         else if (input == '\n') {
@@ -434,14 +438,13 @@ void Dungeon2() {
             }
         }
     }
-    printf(" 으어억...내가 지다니...\n");
+    printf(" 다행히 수업이 어렵진 않았나 보네요 ^^\n");
     Sleep(1000);
-    printf(" 던전 2 완료!\n");
+    printf(" 면담 완료!\n");
     return 0;
 }
 void Dungeon3() {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    printf("\n 이은임 교수님 : 괜찮아 다시 천천히 해와^^ (자기소개서를 반으로 찟으시면서)\n");
     printf("\n");
     printf("                                                  \n");
     printf("                                                  \n");
@@ -475,6 +478,7 @@ void Dungeon3() {
     printf("         -*$$#@@#==$===$$$===*!!;!!;;;!:!-        \n");
     printf("         **=#=#@$$$!====$=#=!;:;!*;*!!;;;,        \n");
     printf("       ~!!=##*@#$$=======$**!;!;;;!!;;;:,          \n");
+    printf("\n 이은임 교수님 : 괜찮아 다시 천천히 해와^^ (자기소개서를 반으로 찟으시면서)\n");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
     printf(" \n                [ HP : %d ]\n", BossMobHP[2]);
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
@@ -515,6 +519,7 @@ void Dungeon3() {
             printf("         -*$$#@@#==$===$$$===*!!;!!;;;!:!-        \n");
             printf("         **=#=#@$$$!====$=#=!;:;!*;*!!;;;,        \n");
             printf("       ~!!=##*@#$$=======$**!;!;;;!!;;;:,          \n");
+            printf("\n 이은임 교수님 : 괜찮아 다시 천천히 해와^^ (자기소개서를 반으로 찟으시면서)\n");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
             printf(" \n                [ HP : %d ]\n", BossMobHP[2]);
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
@@ -522,7 +527,8 @@ void Dungeon3() {
             numberDisplayed = 1;
         }
         if (input == '0') {
-            printf(" \n 던전을 나갑니다.\n");
+            printf(" \n 강의실을 나갑니다.\n");
+            BossMobHP[2] = 250000;
             return 0;
         }
         else if (input == '\n') {
@@ -542,14 +548,13 @@ void Dungeon3() {
             }
         }
     }
-    printf(" 으어억...내가 지다니...\n");
+    printf(" 그래 고생했어~~~^^\n");
     Sleep(1000);
-    printf(" 던전 3 완료!\n");
+    printf(" 면담 완료!\n");
     return 0;
 }
 void Dungeon4() {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    printf("\n 이운석 교수님 : 초등학생도 아는걸 모르는 주제에......\n");
     printf("\n");
     printf("                    :=*!=$.                      \n");
     printf("                   ,*$##$#$$:                     \n");
@@ -581,6 +586,7 @@ void Dungeon4() {
     printf("         ,$$$$############!-;##########$;         \n");
     printf("         ~$$$$$#$#@####$################=         \n");
     printf("         ~$$$$##########################*        \n");
+    printf("\n 이운석 교수님 : 초등학생도 아는걸 모르는 주제에......\n");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
     printf(" \n                  [ HP : %d ]\n", BossMobHP[3]);
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
@@ -619,6 +625,7 @@ void Dungeon4() {
             printf("         ,$$$$############!-;##########$;         \n");
             printf("         ~$$$$$#$#@####$################=         \n");
             printf("         ~$$$$##########################*        \n");
+            printf("\n 이운석 교수님 : 초등학생도 아는걸 모르는 주제에......\n");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
             printf(" \n                  [ HP : %d ]\n", BossMobHP[3]);
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
@@ -626,7 +633,8 @@ void Dungeon4() {
             numberDisplayed = 1;
         }
         if (input == '0') {
-            printf(" \n 던전을 나갑니다.\n");
+            printf(" \n 강의실을 나갑니다.\n");
+            BossMobHP[3] = 1000000;
             return 0;
         }
         else if (input == '\n') {
@@ -646,14 +654,13 @@ void Dungeon4() {
             }
         }
     }
-    printf(" 으어억...내가 지다니...\n");
+    printf(" 으어어얽...난 이제 안녕 못 해...\n");
     Sleep(1000);
-    printf(" 던전 4 완료!\n");
+    printf(" 면담 완료!\n");
     return 0;
 }
 void Dungeon5() {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    printf("\n 김영천 교수님 : 나는 이해가 안돼...\n");
     printf("\n");
     printf("                               .. .,                                  \n");
     printf("                            .,;;~-~~:,,                                \n");
@@ -694,6 +701,7 @@ void Dungeon5() {
     printf("            ;$###=$$##$=@!$==$$===!=!;:!*$=;*$$=$$$=~                      \n");
     printf("            !#$$#=$$$$=$$$$===##*$$==!:;!==!*#$=$==*!                      \n");
     printf("            ;##$#$*=$$$$=##=$$=!*===$*;~*$=*!$*!*=!=*~                     \n");
+    printf("\n 김영천 교수님 : 나는 이해가 안돼... 왜 이리 노력들을 안하는 거야...\n");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
     printf(" \n                    [ HP : %d ]\n", BossMobHP[4]);
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
@@ -741,6 +749,7 @@ void Dungeon5() {
             printf("            ;$###=$$##$=@!$==$$===!=!;:!*$=;*$$=$$$=~                      \n");
             printf("            !#$$#=$$$$=$$$$===##*$$==!:;!==!*#$=$==*!                      \n");
             printf("            ;##$#$*=$$$$=##=$$=!*===$*;~*$=*!$*!*=!=*~                     \n");
+            printf("\n 김영천 교수님 : 나는 이해가 안돼... 왜 이리 노력들을 안하는 거야...\n");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
             printf(" \n                    [ HP : %d ]\n", BossMobHP[4]);
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
@@ -748,7 +757,8 @@ void Dungeon5() {
             numberDisplayed = 1;
         }
         if (input == '0') {
-            printf(" \n 던전을 나갑니다.\n");
+            printf(" \n 강의실을 나갑니다.\n");
+            BossMobHP[4] = 5000000;
             return 0;
         }
         else if (input == '\n') {
@@ -768,9 +778,12 @@ void Dungeon5() {
             }
         }
     }
-    printf(" 으어억...내가 지다니...\n");
-    Sleep(1000);
-    printf(" 던전 5 완료!\n");
+    printf(" 그래... 우리 모범생... 고생 많았다.\n");
+    Sleep(2000);
+    printf(" 게임 완료!\n");
+    Sleep(2000);
+    printf("저희 게임을 플레이해주셔서 감사합니다!");
+    isGameOver = true;
     return 0;
 }
 
@@ -780,7 +793,7 @@ int main(void)
     while (!isGameOver)
     {
         system("@cls||clear");      // 화면 정리
-        system("mode con cols=200 lines=100 | title 이지호 학생 키우기");
+        system("title 이지호 학생 키우기");
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
         printf(" ** 이지호 학생 키우기 **  \n\n");
         // 상태 출력
@@ -826,15 +839,27 @@ int main(void)
             }
             else
             {
-                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-                printf(" ***** FAILURE *****\n");
-                printf("                  \n");
-                printf("      %d  ->  % d    \n", level, level - 1);
-                printf("                  \n");
-                printf(" ***** FAILURE *****\n");
-                printf("\n 어익후.. 핸드폰을 봤네..교수님이 봐버렸다...\n");
-                printf("\n [+%d 지식을 잃었습니다.]\n\n", level);
-                if (1 <= level <= 20)
+                if (level != 20)
+                {
+                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+                    printf(" ***** FAILURE *****\n");
+                    printf("                  \n");
+                    printf("      %d  ->  % d    \n", level, level - 1);
+                    printf("                  \n");
+                    printf(" ***** FAILURE *****\n");
+                    printf("\n 어익후.. 핸드폰을 봤네..교수님이 봐버렸다...\n");
+                    printf("\n [+%d 지식을 잃었습니다.]\n\n", level);
+                }
+                if (level == 20)
+                {
+                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+                    printf(" ***** &&&& *****\n");
+                    printf("                  \n");
+                    printf(" 최고 강화 단계입니다. \n");
+                    printf("                  \n");
+                    printf(" ***** &&&& *****\n");
+                }
+                if (1 <= level < 20)
                 {
                     if (tickets != 0)
                     {
@@ -857,7 +882,15 @@ int main(void)
                     }
                     else
                     {
-                        level = 0;
+                        if (level == 20)
+                        {
+                            level = 20;
+                            JihoPower[level];
+                        }
+                        if (level != 20)
+                        {
+                            level = 0;
+                        }
                     }
                 }
             }
