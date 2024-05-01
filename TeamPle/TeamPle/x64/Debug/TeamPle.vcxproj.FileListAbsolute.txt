@@ -1,2 +1,4 @@
 C:\Users\one\Desktop\GameTeam\TeamPle\x64\Debug\libcurl.dll
 C:\Users\one\Desktop\GameTeam\TeamPle\x64\Debug\LibCurlShim.dll
+C:\HW\GameTeam\TeamPle\x64\Debug\libcurl.dll
+C:\HW\GameTeam\TeamPle\x64\Debug\LibCurlShim.dll

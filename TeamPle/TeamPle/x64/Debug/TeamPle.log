@@ -1,1 +1,13 @@
-﻿LINK : fatal error LNK1104: 'C:\Users\one\Desktop\GameTeam\TeamPle\x64\Debug\TeamPle.exe' 파일을 열 수 없습니다.
+﻿  main.c
+C:\HW\GameTeam\TeamPle\main.c(290,21): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\TeamPle\main.c(316,13): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\TeamPle\main.c(426,21): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\TeamPle\main.c(452,13): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\TeamPle\main.c(540,21): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\TeamPle\main.c(567,13): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\TeamPle\main.c(651,21): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\TeamPle\main.c(676,13): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\TeamPle\main.c(778,21): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\TeamPle\main.c(804,13): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\TeamPle\main.c(845,17): warning C4101: 'i' :참조되지 않은 지역 변수입니다.
+  TeamPle.vcxproj -> C:\HW\GameTeam\TeamPle\x64\Debug\TeamPle.exe
