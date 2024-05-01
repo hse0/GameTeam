@@ -64,26 +64,26 @@ int tickets = 0;
 int dungeonSelect = 0;
 // 강화 성공 확률 배열
 float enhancementProbabilitiesStage1[MAX_ENHANCEMENTStage1 + 1] = {
-    100.0f,100.0f,100.0f,100.0f,
-    100.0f,100.0f,100.0f,100.0f,
-    100.0f,100.0f,100.0f,100.0f,
-    100.0f,100.0f,100.0f,100.0f,
-    100.0f,100.0f,100.0f,100.0f
+    100.0f,100.0f,95.0f,95.0f,
+    90.0f,85.0f,80.0f,57.0f,
+    54.0f,50.0f,45.0f,40.0f,
+    30.0f,20.0f,15.0f,10.0f,
+    8.0f,6.0f,3.0f,1.0f
 };
 // 강화 시도 비용 배열
 int enhancementCosts[MAX_ENHANCEMENTStage1 + 1] = {
     20000, 30000, 40000, 50000, 60000,
-    70000, 80000, 90000, 50000, 55000,
-    60000, 65000, 70000, 75000, 80000,
-    85000, 90000, 95000, 100000, 105000,
+    70000, 80000, 110000, 130000, 150000,
+    200000, 250000, 350000, 500000, 600000,
+    700000, 800000, 850000, 900000, 1000000,
 };
 // 학생 급여 배열
 int studentSalaries[MAX_ENHANCEMENTStage1 + 1] = {
-    0, 50000, 60000, 65000, 70000,
-    75000, 80000, 85000, 90000, 95000,
-    100000, 105000, 110000, 115000, 120000,
-    125000, 130000, 135000, 140000,145000,
-    150000
+    0, 15000, 20000, 30000, 50000,
+    60000, 90000, 110000, 500000, 650000,
+    800000, 2000000, 3500000, 4500000, 10000000,
+    21000000, 40000000, 66000000, 108000000,370000000,
+    1
 };
 int BossMobHP[BOSSLEVEL + 1] = {
     5000,50000,250000,1000000,5000000
@@ -94,14 +94,6 @@ int JihoPower[MAX_ENHANCEMENTStage1 + 1] = {
     1000,1200,1400,1500,5000,
     7000,10000,30000,65000,150000
 };
-// 강화 유지 비용 배열
-//int maintainCosts[MAX_ENHANCEMENT + 1] = {
-//    0, 0, 0, 0, 0,
-//    0, 0, 0, 0, 0,
-//    5000, 6000, 7000, 8000, 9000,
-//    10000, 11000, 12000, 13000, 14000,
-//    15000
-//};
 // 학생 판매 함수
 void sellStudent(int* level, int* money) {
     if (*level == 0) {
@@ -155,14 +147,22 @@ void GoStore() {
             }
             break;
         case 2:
-            if (money < REVIEW_TICKET_COST) {
+            printf(" \n 복습권을 몇 개 구매하시겠습니까? : ");
+            int numTickets;
+            if (scanf_s("%d", &numTickets) != 1 || numTickets <= 0) {
+                printf("잘못된 입력입니다.\n");
+                break;
+            }
+            while (getchar() != '\n'); // 입력 버퍼 비우기
+
+            if (money < REVIEW_TICKET_COST * numTickets) {
                 printf(" \n 재화가 부족하여 복습권을 구매할 수 없습니다.\n\n");
                 break;
             }
             else {
-                money -= REVIEW_TICKET_COST;
-                tickets++;
-                printf(" \n 복습권을 구매하였습니다.\n");
+                money -= REVIEW_TICKET_COST * numTickets;
+                tickets += numTickets;
+                printf(" \n 복습권을 %d개 구매하였습니다.\n", numTickets);
                 printf("\n 보유 복습권 갯수 : %d개\n", tickets);
                 printf(" \n 현재 소지금: %d원\n\n", money);
                 break;
@@ -308,6 +308,10 @@ void Dungeon1() {
     }
     printf(" 됐어... 이제 너랑 얘기 안할꺼야...\n");
     Sleep(1000);
+    tickets += 1;
+    printf("\n");
+    printf("보상으로 복습권 1개를 획득했습니다!\n");
+    printf("\n");
     printf(" 면담 완료!\n");
     return 0;
 }
@@ -440,6 +444,10 @@ void Dungeon2() {
     }
     printf(" 다행히 수업이 어렵진 않았나 보네요 ^^\n");
     Sleep(1000);
+    tickets += 3;
+    printf("\n");
+    printf("보상으로 복습권 3개를 획득했습니다!\n");
+    printf("\n");
     printf(" 면담 완료!\n");
     return 0;
 }
@@ -550,6 +558,11 @@ void Dungeon3() {
     }
     printf(" 그래 고생했어~~~^^\n");
     Sleep(1000);
+    tickets += 1;
+    money += 2000000;
+    printf("\n");
+    printf("보상으로 복습권 10개와 200만원을 획득했습니다!\n");
+    printf("\n");
     printf(" 면담 완료!\n");
     return 0;
 }
@@ -656,6 +669,9 @@ void Dungeon4() {
     }
     printf(" 으어어얽...난 이제 안녕 못 해...\n");
     Sleep(1000);
+    money += 10000000;
+    tickets += 50;
+    printf("보상으로 복습권 50개와 1000만원을 획득했습니다!\n");
     printf(" 면담 완료!\n");
     return 0;
 }
@@ -780,6 +796,7 @@ void Dungeon5() {
     }
     printf(" 그래... 우리 모범생... 고생 많았다.\n");
     Sleep(2000);
+    //보상 구현 뭘 할까?
     printf(" 게임 완료!\n");
     Sleep(2000);
     printf("저희 게임을 플레이해주셔서 감사합니다!");
