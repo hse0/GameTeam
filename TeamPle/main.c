@@ -6,7 +6,7 @@
 #include <Windows.h>
 #define MAX_ENHANCEMENTStage1 20
 #define WAIT_TIME 0.5
-#define INITIAL_MONEY 2000000
+#define INITIAL_MONEY 200000000
 #define ENHANCEMENT_THRESHOLD 10
 #define REVIEW_TICKET_COST 200000
 #define BOSSLEVEL 5
@@ -53,21 +53,46 @@ int dungeonSelect = 0;
 
 //구글 시트 축적 데이터
 int nickname_initial; // 닉네임
-
-int Success[MAX_ENHANCEMENTStage1] = {
-    0,0,0,0,0,
-    0,0,0,0,0,
-    0,0,0,0,0,
-    0,0,0,0,0
-};
+//축적 데이터를 쌓기 위한 강화 단계 설정 배열
 int Levels[MAX_ENHANCEMENTStage1] = {
     1,2,3,4,5,
     6,7,8,9,10,
     11,12,13,14,15,
     16,17,18,19,20
 };
+// 강화 단계별 총 강화 시도 횟수
+int Attempt[MAX_ENHANCEMENTStage1] = {
+    0,0,0,0,0,
+    0,0,0,0,0,
+    0,0,0,0,0,
+    0,0,0,0,0
+};
+// 강화 단계별 성공 횟수
+int Success[MAX_ENHANCEMENTStage1] = {
+    0,0,0,0,0,
+    0,0,0,0,0,
+    0,0,0,0,0,
+    0,0,0,0,0
+};
+// 강화 단계별 실패 횟수
+int Failure[MAX_ENHANCEMENTStage1] = {
+    0,0,0,0,0,
+    0,0,0,0,0,
+    0,0,0,0,0,
+    0,0,0,0,0
+};
+// 강화 단계별 복습권 구매 갯수
+int TicketBuyLevels[MAX_ENHANCEMENTStage1] =
+{
+    0,0,0,0,0,
+    0,0,0,0,0,
+    0,0,0,0,0,
+    0,0,0,0,0
+};
+
+
 // 강화시도
-int oneAttempt = 0;
+int attempt = 0;
 int success = 0; //성공
 int failure = 0; // 실패
 int enhancement_cost = 0; // 강화비용
@@ -84,6 +109,14 @@ float enhancementProbabilitiesStage1[MAX_ENHANCEMENTStage1 + 1] = {
     30.0f,20.0f,15.0f,10.0f,
     8.0f,6.0f,3.0f,1.0f
 };
+/*float enhancementProbabilitiesStage1[MAX_ENHANCEMENTStage1 + 1] = {
+    100.0f,100.0f,100.0f,100.0f,
+    100.0f,100.0f,100.0f,100.0f,
+    100.0f,100.0f,100.0f,95.0f,
+    100.0f,100.0f,100.0f,90.0f,
+    90.0f,85.0f,100.0f,85.0f
+};*/
+
 // 강화 시도 비용 배열
 int enhancementCosts[MAX_ENHANCEMENTStage1 + 1] = {
     20000, 30000, 40000, 50000, 60000,
@@ -100,7 +133,7 @@ int studentSalaries[MAX_ENHANCEMENTStage1 + 1] = {
     1
 };
 int BossMobHP[BOSSLEVEL + 1] = {
-    5000,100000,500000,3000000,10000000
+    5000,50000,250000,1000000,5000000
 };
 int JihoPower[MAX_ENHANCEMENTStage1 + 1] = {
     0,10,50,100,150,250,
@@ -160,7 +193,7 @@ void GoStore() {
                 printf("\n 강화한 레벨: + %d\n", level);
                 printf("\n 판매 금액: %d원\n\n", studentSalaries[level]);
                 money += studentSalaries[level];
-                oneAttempt = 0;
+                attempt = 0;
                 failure = 0;
                 success = 0;
                 enhancementCosts; //현재 강화 비용
@@ -192,6 +225,8 @@ void GoStore() {
                 printf(" \n 복습권을 %d개 구매하였습니다.\n", numTickets);
                 printf("\n 보유 복습권 갯수 : %d개\n", tickets);
                 printf(" \n 현재 소지금: %d원\n\n", money);
+                TicketBuyLevels[level] += numTickets;
+                printf("[%d강 단계에서 복습권 %d개 구입함!]\n\n", level, TicketBuyLevels[level]);
                 break;
             }
         case 3:
@@ -607,7 +642,7 @@ void Dungeon4() {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
     int messageDisplayed = 0;
     int numberDisplayed = 1;
-    while (BossMobHP[0] > 0) {
+    while (BossMobHP[3] > 0) {
         char input = getchar();
         if (!numberDisplayed) {
             printf("                    :=*!=$.                      \n");
@@ -872,17 +907,26 @@ int main(void)
                 printf("    + %d  -> + %d \n", level, level + 1);
                 printf("                  \n");
                 printf(" ***** SUCCESS *****\n");
-                level++;
-                // 강화에 성공 했을 시, 레벨을 하나 증가 시킴
-                for (int i = 0; i < 20; i++)
+                level++;// 강화에 성공 했을 시, 레벨을 하나 증가 시킴
+                
+                for (int i = 0; i < 20; i++) // 강화 성공 횟수 데이터 수집
                 {
                     if (level == Levels[i])
                     {
-                        Success[i] += 1;
+                        Success[level] += 1;
                         break;
                     }
                 }
                 printf("%d강 강화 성공 횟수 : %d", level, Success[level]);
+                for (int i = 0; i < 20; i++) // 강화 성공 횟수 데이터 수집
+                {
+                    if (level == Levels[i])
+                    {
+                        Attempt[level] += 1;
+                        break;
+                    }
+                }
+                printf("\n\n%d강 시도 횟수 : %d", level, Attempt[level]);
             }
             else
             {
@@ -896,6 +940,24 @@ int main(void)
                     printf(" ***** FAILURE *****\n");
                     printf("\n 어익후.. 핸드폰을 봤네..교수님이 봐버렸다...\n");
                     printf("\n [+%d 지식을 잃었습니다.]\n\n", level);
+                    for (int i = 0; i < 20; i++) // 강화 성공 횟수 데이터 수집
+                    {
+                        if (level == Levels[i])
+                        {
+                            Attempt[level] += 1;
+                            break;
+                        }
+                    }
+                    printf("\n\n%d강 시도 횟수 : %d", level, Attempt[level]);
+                    for (int i = 0; i < 20; i++) // 강화 실패 횟수 데이터 수집
+                    {
+                        if (level == Levels[i])
+                        {
+                            Failure[level] += 1;
+                            break;
+                        }
+                    }
+                    printf("%d강 강화 실패 횟수 : %d", level, Failure[level]);
                 }
                 if (level == 20)
                 {
