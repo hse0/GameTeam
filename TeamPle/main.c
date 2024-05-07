@@ -916,28 +916,28 @@ int main(void)
                         break;
                     }
                 }
-                printf("%d강 강화 성공 횟수 : %d", level, Success[level]);    
-            }
-            if (level != 20)
-            {
-                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-                printf(" ***** FAILURE *****\n");
-                printf("                  \n");
-                printf("      %d  ->  % d    \n", level, level - 1);
-                printf("                  \n");
-                printf(" ***** FAILURE *****\n");
-                printf("\n 어익후.. 핸드폰을 봤네..교수님이 봐버렸다...\n");
-                printf("\n [+%d 지식을 잃었습니다.]\n\n", level);
-                for (int i = 0; i < 20; i++) // 강화 실패 횟수 데이터 수집
+                printf("%d강 강화 성공 횟수 : %d", level, Success[level]);
+                if (level != 20)
                 {
-                    if (level == Levels[i])
+                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+                    printf(" ***** FAILURE *****\n");
+                    printf("                  \n");
+                    printf("      %d  ->  % d    \n", level, level - 1);
+                    printf("                  \n");
+                    printf(" ***** FAILURE *****\n");
+                    printf("\n 어익후.. 핸드폰을 봤네..교수님이 봐버렸다...\n");
+                    printf("\n [+%d 지식을 잃었습니다.]\n\n", level);
+                    for (int i = 0; i < 20; i++) // 강화 실패 횟수 데이터 수집
                     {
-                        Failure[level] += 1;
-                        break;
+                        if (level == Levels[i])
+                        {
+                            Failure[level] += 1;
+                            break;
+                        }
                     }
+                    printf("%d강 강화 실패 횟수 : %d", level, Failure[level]);
                 }
-                printf("%d강 강화 실패 횟수 : %d", level, Failure[level]);
-            }
+            }          
             for (int i = 0; i < 20; i++) // 강화 성공 횟수 데이터 수집
             {
                 if (level == Levels[i])
