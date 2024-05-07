@@ -42,19 +42,7 @@ char* enhancementMessages1[] = {
     "현장 실습을 다녀온 3학년 이지호(회사에선 오랜만에 인재가 들어왔다고 한다. 하지만 본인은 회사가 별로다.)",
     "졸업 가운을 입고 있는 이지호(모든 능력을 탑재했다. 이제 진짜 지옥을 향해 걸어간다.)"
 };
-// 2스테이지 
-//char* enhancementMessages2[] = {
-//"크래프톤 면접을 보고왔다.. 결과가 어떻게 나왔을까??"
-//"꿈에 그리던 크래프톤을 붙었다.. 희망으로 가득찬 나의 앞날이 어떻게 될까??"
-//"첫 출근 아침 .. 9시까지 출근이여서 8시에 집에서 출발했다.. 9시 되기 20분전.. 회사앞이다..."
-//"다행이도 9시 10분전에 도착하였다.. 첫 출근인데 늦을수는 없지?!"
-//"첫날에는 어떻게 해야하는건지 선임분이 알려주실거를 알려주시고 계시다.."
-//"6시에 퇴근시간에 맞춰 집을 가려고 했었는데.. 신입 회식을 한다고??"
-//"회식을 끝내고 집에 들어왔는데 몹시 힘이 들어 기절을 해버렸다.. 일어나니? 7시반??"
-//"비슷비슷한 일상을 보내다... 계약직에서 정규직으로 성공을 했다!"
-//"점점..회사에 녹아드는 개발자이다.. 근데 너무 힘든데??"
-//"스펙을 쌓을만큼 쌓은 개발자. 딴 직종으로 이직을 원하는데..."
-//};
+
 int isTry = 0;                  // 강화 시도 여부 선택 변수
 int level = 0;                  // 현재 무기의 강화 수치
 int money = INITIAL_MONEY;      // 현재 소지금 
@@ -62,31 +50,57 @@ int choice;
 bool isGameOver = false;        // 게임 종료 여부 변수
 int tickets = 0;
 int dungeonSelect = 0;
+
+//구글 시트 축적 데이터
+int nickname_initial; // 닉네임
+
+int Success[MAX_ENHANCEMENTStage1] = {
+    0,0,0,0,0,
+    0,0,0,0,0,
+    0,0,0,0,0,
+    0,0,0,0,0
+};
+int Levels[MAX_ENHANCEMENTStage1] = {
+    1,2,3,4,5,
+    6,7,8,9,10,
+    11,12,13,14,15,
+    16,17,18,19,20
+};
+// 강화시도
+int oneAttempt = 0;
+int success = 0; //성공
+int failure = 0; // 실패
+int enhancement_cost = 0; // 강화비용
+int selling_count = 0; // 판매횟수
+int currentDatetTime;
+
+
+
 // 강화 성공 확률 배열
 float enhancementProbabilitiesStage1[MAX_ENHANCEMENTStage1 + 1] = {
-    100.0f,100.0f,100.0f,100.0f,
-    100.0f,100.0f,100.0f,100.0f,
-    100.0f,100.0f,100.0f,100.0f,
-    100.0f,100.0f,100.0f,100.0f,
-    100.0f,100.0f,100.0f,100.0f
+    100.0f,100.0f,95.0f,95.0f,
+    90.0f,85.0f,80.0f,57.0f,
+    54.0f,50.0f,45.0f,40.0f,
+    30.0f,20.0f,15.0f,10.0f,
+    8.0f,6.0f,3.0f,1.0f
 };
 // 강화 시도 비용 배열
 int enhancementCosts[MAX_ENHANCEMENTStage1 + 1] = {
     20000, 30000, 40000, 50000, 60000,
-    70000, 80000, 90000, 50000, 55000,
-    60000, 65000, 70000, 75000, 80000,
-    85000, 90000, 95000, 100000, 105000,
+    70000, 80000, 110000, 130000, 150000,
+    200000, 250000, 350000, 500000, 600000,
+    700000, 800000, 850000, 900000, 1000000,
 };
 // 학생 급여 배열
 int studentSalaries[MAX_ENHANCEMENTStage1 + 1] = {
-    0, 50000, 60000, 65000, 70000,
-    75000, 80000, 85000, 90000, 95000,
-    100000, 105000, 110000, 115000, 120000,
-    125000, 130000, 135000, 140000,145000,
-    150000
+    0, 15000, 20000, 30000, 50000,
+    60000, 90000, 110000, 500000, 650000,
+    800000, 2000000, 3500000, 4500000, 10000000,
+    21000000, 40000000, 66000000, 108000000,370000000,
+    1
 };
 int BossMobHP[BOSSLEVEL + 1] = {
-    5000,50000,250000,1000000,5000000
+    5000,100000,500000,3000000,10000000
 };
 int JihoPower[MAX_ENHANCEMENTStage1 + 1] = {
     0,10,50,100,150,250,
@@ -116,6 +130,7 @@ void sellStudent(int* level, int* money) {
         *level = 0; // 학생을 판매하면 레벨 초기화
     }
 }
+
 void GoStore() {
     printf("\n *** 상점으로 이동 ***\n\n");
     Sleep(2000);
@@ -145,7 +160,11 @@ void GoStore() {
                 printf("\n 강화한 레벨: + %d\n", level);
                 printf("\n 판매 금액: %d원\n\n", studentSalaries[level]);
                 money += studentSalaries[level];
+                oneAttempt = 0;
+                failure = 0;
+                success = 0;
                 enhancementCosts; //현재 강화 비용
+                selling_count++;
                 level = 0;
             }
             else {
@@ -155,14 +174,22 @@ void GoStore() {
             }
             break;
         case 2:
-            if (money < REVIEW_TICKET_COST) {
+            printf(" \n 복습권을 몇 개 구매하시겠습니까? : ");
+            int numTickets;
+            if (scanf_s("%d", &numTickets) != 1 || numTickets <= 0) {
+                printf("잘못된 입력입니다.\n");
+                break;
+            }
+            while (getchar() != '\n'); // 입력 버퍼 비우기
+
+            if (money < REVIEW_TICKET_COST * numTickets) {
                 printf(" \n 재화가 부족하여 복습권을 구매할 수 없습니다.\n\n");
                 break;
             }
             else {
-                money -= REVIEW_TICKET_COST;
-                tickets++;
-                printf(" \n 복습권을 구매하였습니다.\n");
+                money -= REVIEW_TICKET_COST * numTickets;
+                tickets += numTickets;
+                printf(" \n 복습권을 %d개 구매하였습니다.\n", numTickets);
                 printf("\n 보유 복습권 갯수 : %d개\n", tickets);
                 printf(" \n 현재 소지금: %d원\n\n", money);
                 break;
@@ -175,31 +202,6 @@ void GoStore() {
             break;
         }
     }
-    //if (level == MAX_ENHANCEMENTStage1) {
-    //    printf("\n축하합니다! 20단계까지 모두 클리어하셨습니다!\n");
-    //    printf("다음 스테이지로 진행하시겠습니까? (YES: 1 / NO: 2) : ");
-    //    scanf_s("%d", &choice);
-    //    if (choice == 1) {
-    //        // 다음 스테이지로 진행
-    //        // 여기에 다음 스테이지를 초기화하거나 전환 메시지를 표시하는 코드를 추가할 수 있습니다.
-    //        printf("\n다음 스테이지로 이동합니다!\n");
-    //        // 다음 스테이지로 이동하기 위한 추가 코드
-    //        level = 21; // 다음 스테이지를 위해 레벨을 0으로 초기화
-    //        money = INITIAL_MONEY; // 다음 스테이지를 위해 돈 초기화
-    //        // 다음 스테이지를 위한 필요한 초기화를 추가할 수 있습니다.
-    //    }
-    //    else if (choice == 2) {
-    //        // 게임 종료
-    //        printf("\n게임을 종료합니다. 수고하셨습니다!\n");
-    //        isGameOver = true;
-    //    }
-    //    else {
-    //        printf("\n잘못된 입력입니다. 다시 선택하세요.\n");
-    //    }
-    //}
-    //else {
-
-    //}
 }
 void Dungeon1() {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
@@ -308,6 +310,10 @@ void Dungeon1() {
     }
     printf(" 됐어... 이제 너랑 얘기 안할꺼야...\n");
     Sleep(1000);
+    tickets += 1;
+    printf("\n");
+    printf("보상으로 복습권 1개를 획득했습니다!\n");
+    printf("\n");
     printf(" 면담 완료!\n");
     return 0;
 }
@@ -440,6 +446,10 @@ void Dungeon2() {
     }
     printf(" 다행히 수업이 어렵진 않았나 보네요 ^^\n");
     Sleep(1000);
+    tickets += 3;
+    printf("\n");
+    printf("보상으로 복습권 3개를 획득했습니다!\n");
+    printf("\n");
     printf(" 면담 완료!\n");
     return 0;
 }
@@ -550,6 +560,11 @@ void Dungeon3() {
     }
     printf(" 그래 고생했어~~~^^\n");
     Sleep(1000);
+    tickets += 1;
+    money += 2000000;
+    printf("\n");
+    printf("보상으로 복습권 10개와 200만원을 획득했습니다!\n");
+    printf("\n");
     printf(" 면담 완료!\n");
     return 0;
 }
@@ -656,6 +671,11 @@ void Dungeon4() {
     }
     printf(" 으어어얽...난 이제 안녕 못 해...\n");
     Sleep(1000);
+    money += 10000000;
+    tickets += 50;
+    printf("\n");
+    printf("보상으로 복습권 50개와 1000만원을 획득했습니다!\n");
+    printf("\n");
     printf(" 면담 완료!\n");
     return 0;
 }
@@ -789,7 +809,26 @@ void Dungeon5() {
 
 int main(void)
 {
-    srand((unsigned int)time(NULL));         // 랜덤 시드값 설정
+    srand((unsigned int)time(NULL));  // 랜덤 시드값 설정
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+    char nickname_initial[100];  // 닉네임을 저장할 배열
+    printf("\n");
+    printf("  #          ##       ###      ###    #    #\n");
+    printf("  #         #  #     #   #      #     ##   #\n");
+    printf("  #        #    #   #           #     # #  #\n");
+    printf("  #        #    #   #  ###      #     #  # #\n");
+    printf("  #        #    #   #    #      #     #   ##\n");
+    printf("  #         #  #     #   #      #     #    #\n");
+    printf("  ######     ##       ###      ###    #    #\n\n\n\n");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    printf("        [ ID 란에 학번을 입력해주세요 ]  ");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("                 ID : ");
+    fgets(nickname_initial, sizeof(nickname_initial), stdin);  // 사용자로부터 닉네임 입력 받기
+    nickname_initial[strcspn(nickname_initial, "\n")] = 0;  // fgets는 개행 문자까지 읽기 때문에 문자열 끝에서 개행 문자 제거         // 랜덤 시드값 설정
     while (!isGameOver)
     {
         system("@cls||clear");      // 화면 정리
@@ -824,8 +863,7 @@ int main(void)
             }
             printf("\n  *** 학습중 *** \n\n");
             //Sleep(2000);
-            float randNum = (float)rand() / RAND_MAX * 100.0f;
-            int i;
+            int randNum = rand() % 101;
             if (randNum < enhancementProbabilitiesStage1[level]) {
                 money -= enhancementCosts[level];
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
@@ -834,8 +872,17 @@ int main(void)
                 printf("    + %d  -> + %d \n", level, level + 1);
                 printf("                  \n");
                 printf(" ***** SUCCESS *****\n");
-                // 강화에 성공 했을 시, 레벨을 하나 증가 시킴
                 level++;
+                // 강화에 성공 했을 시, 레벨을 하나 증가 시킴
+                for (int i = 0; i < 20; i++)
+                {
+                    if (level == Levels[i])
+                    {
+                        Success[i] += 1;
+                        break;
+                    }
+                }
+                printf("%d강 강화 성공 횟수 : %d", level, Success[level]);
             }
             else
             {
@@ -950,6 +997,14 @@ int main(void)
 
         // 사용자 입력 대기
         while (getchar() != '\n'); // 버퍼 비우기
+
+        char command[2048];
+        sprintf_s(command, sizeof(command),
+            "curl -d \"{\\\"방문시간\\\":\\\"%d\\\",\\\"아이디\\\":\\\"%s\\\",\\\"강화단계\\\":\\\"%d\\\",\\\"시도\\\":\\\"%d\\\",\\\"성공\\\":\\\"%d\\\",\\\"실패\\\":\\\"%d\\\",\\\"강화비용\\\":\\\"%d\\\",\\\"판매횟수\\\":\\\"%d\\\"}\" https://script.google.com/macros/s/AKfycbwn3SnxJGoqQYCxIDJkRE2zDqpk9s-pW29ow2ewXrvfmu3Jon1vhymr4jELEq4xXykh/\\exec",
+            currentDatetTime, nickname_initial, level, level + 1, success, failure, enhancement_cost, selling_count);
+
+        system(command);
+        srand((unsigned int)time(NULL));         // 랜덤 시드값 설정 
     }
     return 0;
 }
