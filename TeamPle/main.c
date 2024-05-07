@@ -50,6 +50,7 @@ int choice;
 bool isGameOver = false;        // 게임 종료 여부 변수
 int tickets = 0;
 int dungeonSelect = 0;
+int ForCondition = 0; // 총 강화 횟수 집계 for문 조절 변수
 
 //구글 시트 축적 데이터
 int nickname_initial; // 닉네임
@@ -900,6 +901,7 @@ int main(void)
             //Sleep(2000);
             float randNum = rand() % 101;
             if (randNum < enhancementProbabilitiesStage1[level]) {
+                ForCondition = 1;
                 money -= enhancementCosts[level];
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
                 printf(" ***** SUCCESS *****\n");
@@ -917,6 +919,21 @@ int main(void)
                     }
                 }
                 printf("%d강 강화 성공 횟수 : %d", level, Success[level]);
+                if (ForCondition == 1)
+                {
+                    for (int i = 0; i < 20; i++) // 강화 실패 횟수 데이터 수집
+                    {
+                        if (level == Levels[i])
+                        {
+                            Attempt[level] += 1;
+                            break;
+                        }
+                    }
+                    printf("\n\n%d강 시도 횟수 : %d", level, Attempt[level]);
+                }
+            }
+            else {
+                ForCondition = 2;
                 if (level != 20)
                 {
                     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
@@ -936,60 +953,64 @@ int main(void)
                         }
                     }
                     printf("%d강 강화 실패 횟수 : %d", level, Failure[level]);
-                }
-            }          
-            for (int i = 0; i < 20; i++) // 강화 성공 횟수 데이터 수집
-            {
-                if (level == Levels[i])
-                {
-                    Attempt[level] += 1;
-                    break;
-                }
-            }
-            printf("\n\n%d강 시도 횟수 : %d", level, Attempt[level]);
-            if (level == 20)
-            {
-                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-                printf(" ***** &&&& *****\n");
-                printf("                  \n");
-                printf(" 최고 강화 단계입니다. \n");
-                printf("                  \n");
-                printf(" ***** &&&& *****\n");
-            }
-            if (1 <= level < 20)
-            {
-                if (tickets != 0)
-                {
-                    money -= enhancementCosts[level];
-                    printf("학습에 실패하였습니다. \n현재 학습 수치를 유지하시겠습니까? \n{보유 학습권 갯수 : %d}\n(YES : 1/ NO : 2) : ", tickets);
-                    scanf_s("%d", &choice);
-                    if (choice == 1) {
-                        tickets--;
-                        printf("\n복습권을 사용합니다. (보유 복습권 갯수 : %d)\n", tickets);
-                        money += enhancementCosts[level];
-                    }
-                    else if (choice == 2) {
-                        printf("학습 수치를 초기화합니다.\n");
-                        level = 0; // 강화 수치 초기화
-                    }
-                    else {
-                        printf("잘못된 입력입니다. 다시 선택하세요.\n");
-                        continue;
-                    }
-                }
-                else
-                {
-                    if (level == 20)
+                    if (ForCondition == 2)
                     {
-                        level = 20;
-                        JihoPower[level];
-                    }
-                    if (level != 20)
+                        for (int i = 0; i < 20; i++) // 강화 실패 횟수 데이터 수집
+                        {
+                            if (level == Levels[i])
+                            {
+                                Attempt[level] += 1;
+                                break;
+                            }
+                        }
+                        printf("\n\n%d강 시도 횟수 : %d", level, Attempt[level]);
+                    }     
+                }
+                if (level == 20)
+                {
+                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+                    printf(" ***** &&&& *****\n");
+                    printf("                  \n");
+                    printf(" 최고 강화 단계입니다. \n");
+                    printf("                  \n");
+                    printf(" ***** &&&& *****\n");
+                }
+                if (1 <= level < 20)
+                {
+                    if (tickets != 0)
                     {
-                        level = 0;
+                        money -= enhancementCosts[level];
+                        printf("학습에 실패하였습니다. \n현재 학습 수치를 유지하시겠습니까? \n{보유 학습권 갯수 : %d}\n(YES : 1/ NO : 2) : ", tickets);
+                        scanf_s("%d", &choice);
+                        if (choice == 1) {
+                            tickets--;
+                            printf("\n복습권을 사용합니다. (보유 복습권 갯수 : %d)\n", tickets);
+                            money += enhancementCosts[level];
+                        }
+                        else if (choice == 2) {
+                            printf("학습 수치를 초기화합니다.\n");
+                            level = 0; // 강화 수치 초기화
+                        }
+                        else {
+                            printf("잘못된 입력입니다. 다시 선택하세요.\n");
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if (level == 20)
+                        {
+                            level = 20;
+                            JihoPower[level];
+                        }
+                        if (level != 20)
+                        {
+                            level = 0;
+                        }
                     }
                 }
             }
+            
             // 강화 비용 차감
             break;
         case 2:

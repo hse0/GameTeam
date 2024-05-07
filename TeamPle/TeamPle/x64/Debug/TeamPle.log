@@ -1,13 +1,13 @@
 ﻿  main.c
-C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(327,21): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(353,13): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(463,21): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(489,13): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(577,21): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(604,13): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(688,21): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(715,13): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(817,21): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(842,13): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(901,36): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(328,21): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(354,13): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(464,21): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(490,13): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(578,21): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(605,13): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(689,21): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(716,13): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(818,21): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(843,13): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(902,36): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   TeamPle.vcxproj -> C:\Users\user\Desktop\GameDataTeam\TeamPle\x64\Debug\TeamPle.exe
