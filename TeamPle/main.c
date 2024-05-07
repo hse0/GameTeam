@@ -6,7 +6,7 @@
 #include <Windows.h>
 #define MAX_ENHANCEMENTStage1 20
 #define WAIT_TIME 0.5
-#define INITIAL_MONEY 200000000
+#define INITIAL_MONEY 2000000
 #define ENHANCEMENT_THRESHOLD 10
 #define REVIEW_TICKET_COST 200000
 #define BOSSLEVEL 5
@@ -50,7 +50,7 @@ int choice;
 bool isGameOver = false;        // 게임 종료 여부 변수
 int tickets = 0;
 int dungeonSelect = 0;
-int ForCondition = 0; // 총 강화 횟수 집계 for문 조절 변수
+int ZeroOneGangHwa = 0;
 
 //구글 시트 축적 데이터
 int nickname_initial; // 닉네임
@@ -113,9 +113,9 @@ float enhancementProbabilitiesStage1[MAX_ENHANCEMENTStage1 + 1] = {
 /*float enhancementProbabilitiesStage1[MAX_ENHANCEMENTStage1 + 1] = {
     100.0f,100.0f,100.0f,100.0f,
     100.0f,100.0f,100.0f,100.0f,
-    100.0f,100.0f,100.0f,95.0f,
-    100.0f,100.0f,100.0f,90.0f,
-    90.0f,85.0f,100.0f,85.0f
+    100.0f,100.0f,100.0f,100.0f,
+    100.0f,100.0f,100.0f,100.0f,
+    100.0f,100.0f,100.0f,100.0f
 };*/
 
 // 강화 시도 비용 배열
@@ -879,6 +879,20 @@ int main(void)
         printf(" 학습 비용 : %d원\n", enhancementCosts[level]);
         printf(" 학습 성공률 : %.2f%%\n", enhancementProbabilitiesStage1[level]);
         printf(" \n 보유 복습권 갯수 : %d\n", tickets);
+        if (level == 0)
+        {
+            ZeroOneGangHwa++;
+            printf("\n {%d강 -> %d강 %d차 시도 중...}\n", level, level + 1, ZeroOneGangHwa);
+        }
+        else if (level == 20)
+        {
+            printf("\n {최고 강화 단계 달성!!!}\n");
+        }
+        else
+        {
+            printf("\n {%d강 -> %d강 %d차 시도 중...}\n", level, level + 1, Attempt[level]);
+        }
+
         printf(" \n 메뉴:\n\n");
         printf(" * 1. 학생 강화하기\n");
         printf(" * 2. 상점가기\n");
@@ -901,7 +915,6 @@ int main(void)
             //Sleep(2000);
             float randNum = rand() % 101;
             if (randNum < enhancementProbabilitiesStage1[level]) {
-                ForCondition = 1;
                 money -= enhancementCosts[level];
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
                 printf(" ***** SUCCESS *****\n");
@@ -918,22 +931,10 @@ int main(void)
                         break;
                     }
                 }
-                printf("%d강 강화 성공 횟수 : %d", level, Success[level]);
-                if (ForCondition == 1)
-                {
-                    for (int i = 0; i < 20; i++) // 강화 실패 횟수 데이터 수집
-                    {
-                        if (level == Levels[i])
-                        {
-                            Attempt[level] += 1;
-                            break;
-                        }
-                    }
-                    printf("\n\n%d강 시도 횟수 : %d", level, Attempt[level]);
-                }
+                printf("\n [%d강 강화 성공 횟수 : %d]\n", level, Success[level]);
+                Attempt[level] += 1;
             }
             else {
-                ForCondition = 2;
                 if (level != 20)
                 {
                     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
@@ -952,19 +953,7 @@ int main(void)
                             break;
                         }
                     }
-                    printf("%d강 강화 실패 횟수 : %d", level, Failure[level]);
-                    if (ForCondition == 2)
-                    {
-                        for (int i = 0; i < 20; i++) // 강화 실패 횟수 데이터 수집
-                        {
-                            if (level == Levels[i])
-                            {
-                                Attempt[level] += 1;
-                                break;
-                            }
-                        }
-                        printf("\n\n%d강 시도 횟수 : %d", level, Attempt[level]);
-                    }     
+                    printf("\n [%d강 강화 실패 횟수 : %d]\n", level, Failure[level]);
                 }
                 if (level == 20)
                 {
@@ -1010,7 +999,7 @@ int main(void)
                     }
                 }
             }
-            
+
             // 강화 비용 차감
             break;
         case 2:

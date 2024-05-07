@@ -9,5 +9,5 @@ C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(689,21): warning C4098: 'Dunge
 C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(716,13): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
 C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(818,21): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
 C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(843,13): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(902,36): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\GameDataTeam\TeamPle\main.c(916,36): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   TeamPle.vcxproj -> C:\Users\user\Desktop\GameDataTeam\TeamPle\x64\Debug\TeamPle.exe
