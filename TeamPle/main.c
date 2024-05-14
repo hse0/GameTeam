@@ -1,15 +1,13 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
-#define MAX_DATETIME_LENGTH 20
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
 #include <stdbool.h>
 #include <Windows.h>
-#include <windows.h>
 #define MAX_ENHANCEMENTStage1 20
 #define WAIT_TIME 0.5
-#define INITIAL_MONEY 200000000
+#define INITIAL_MONEY 2000000
 #define ENHANCEMENT_THRESHOLD 10
 #define REVIEW_TICKET_COST 200000
 #define BOSSLEVEL 5
@@ -38,7 +36,7 @@ char* enhancementMessages1[] = {
     "졸업 가운을 입고 있는 이지호(모든 능력을 탑재했다. 이제 진짜 지옥을 향해 걸어간다.)"
 };
 
-int  failure = 0;
+int failure = 0;
 int isTry = 0;                  // 강화 시도 여부 선택 변수
 int choice;
 bool isGameOver = false;        // 게임 종료 여부 변수
@@ -46,7 +44,6 @@ int tickets = 0;
 int enhancement_cost = 0;
 int dungeonSelect = 0;
 int ZeroOneGangHwa = 0;
-
 
 //축적 데이터를 쌓기 위한 강화 단계 설정 배열
 int Levels[MAX_ENHANCEMENTStage1] = {
@@ -57,10 +54,10 @@ int Levels[MAX_ENHANCEMENTStage1] = {
 };
 // 강화 단계별 총 강화 시도 횟수
 int Attempt[MAX_ENHANCEMENTStage1] = {
-    0,0,0,0,0,
-    0,0,0,0,0,
-    0,0,0,0,0,
-    0,0,0,0,0
+    1,1,1,1,1,
+    1,1,1,1,1,
+    1,1,1,1,1,
+    1,1,1,1,1
 };
 // 강화 단계별 성공 횟수
 int Success[MAX_ENHANCEMENTStage1] = {
@@ -85,11 +82,11 @@ int TicketBuyLevels[MAX_ENHANCEMENTStage1] =
     0,0,0,0,0
 };
 
-// 강화시도
-char nickname_initial; // 닉네임
-char currentDateTime[MAX_DATETIME_LENGTH]; // 방문 시간
-char endDateTime[MAX_DATETIME_LENGTH]; // 종료 시간
+int nickname_initial; // 닉네임
+int currentDateTime; // 방문 시간
+int endDateTime = 2; // 종료 시간
 int level = 0; // 강화 단계
+int attemptlevel = 0;
 int TicketBuyLevels[MAX_ENHANCEMENTStage1]; // 단계별 구매 횟수
 int attempt = 0; // 강화시도 횟수
 int success = 0;  // 성공 횟수
@@ -97,12 +94,17 @@ int selling_count = 0; // 판매횟수
 int money = INITIAL_MONEY; // 현재 비용 
 int numTickets = 0;
 
-
-// 복습권 사용 갯수 변수 설정해주기
-
-
-
-
+void Gopost()
+{
+    char command[2048];
+    static void sendToGoogleSheet(const int* nickname_initial, const int* currentDateTime, const int* endDateTime, int level, int TicketBuyLevels[], int attempt, int success, int selling_count, int money); {
+        sprintf_s(command, sizeof(command),
+            "curl -d \"{\\\"아이디\\\":\\\"%d\\\",\\\"접속시간\\\":\\\"%d\\\",\\\"종료시간\\\":\\\"%d\\\",\\\"강화 단계\\\":\\\"%d\\\",\\\"단계별 복습권 구매갯수\\\":\\\"%d\\\",\\\"강화시도횟수\\\":\\\"%d\\\",\\\"성공 횟수\\\":\\\"%d\\\",\\\"판매 횟수\\\":\\\"%d\\\",\\\"현재 비용\\\":\\\"%d\\\"}\" https://script.google.com/macros/s/AKfycbyA6TP4mH1yZ1ERsrBswmDlm9DtBgxKKnUBoHeOhihUtounJo5HKBMQ3v0kOtDKyKK3/exec",
+            nickname_initial, currentDateTime, endDateTime, attemptlevel, TicketBuyLevels[level], attempt, success, selling_count, money);
+        system(command);
+        srand((unsigned int)time(NULL));         // 랜덤 시드값 설정 
+    }
+}
 // 강화 성공 확률 배열
 float enhancementProbabilitiesStage1[MAX_ENHANCEMENTStage1 + 1] = {
 
@@ -146,7 +148,7 @@ int BossMobHP[BOSSLEVEL + 1] = {
     5000,50000,250000,1000000,5000000
 };
 int JihoPower[MAX_ENHANCEMENTStage1 + 1] = {
-    0,10,50,100,150,250,
+    0,10000,50,100,150,250,
     300,400,500,600,800,
     1000,1200,1400,1500,5000,
     7000,10000,30000,65000,150000
@@ -241,52 +243,17 @@ void GoStore() {
     }
 }
 void Dungeon1() {
+    char attack;
     BossMobHP[0] = 5000;
-    int enterPressed = 0;
-    printf("                         ..=~                     \n");
-    printf("                       *=$#$$$=,                  \n");
-    printf("                      ==$###*##$;                 \n");
-    printf("                     !==$$*=*$$#$:                \n");
-    printf("                    -=$*==!;!==$#*                \n");
-    printf("                    !=*!=::~:!=$$=,               \n");
-    printf("                    $**!;-,,~:=$$=:               \n");
-    printf("                    ;!::-,.,~~!===~               \n");
-    printf("                    ~:~::,,:!;~;*!*               \n");
-    printf("                    ,~.:!-=-=~.-;;~               \n");
-    printf("                    ,..~-.:-:--~;-                \n");
-    printf("                       .. ,-,,,-:,                \n");
-    printf("                       ,. -~,,,-,,                \n");
-    printf("                      .,.,--~--,,                 \n");
-    printf("                      .,..,~~,-,-                 \n");
-    printf("                      .. .--,---                  \n");
-    printf("                       .. .--~~,-                 \n");
-    printf("                       ,,-~;;:-*;.                \n");
-    printf("                        ,~:;:,$==!                \n");
-    printf("                        .,  :***=!!               \n");
-    printf("                      !    ~;*****!;:             \n");
-    printf("                   ;!**.. ,::!*;!!;!=;            \n");
-    printf("                 :**;!; ,!!*=*!**;$=*=!           \n");
-    printf("                !;=!!*;.;!;*!***===!===,          \n");
-    printf("               -!**!*!!.*!!$=!;!!;*==$=!          \n");
-    printf("               !!*!*!!.**!!$=!;!!=$$$=;           \n");
-    printf("              ,***;;;*-*;==!!!!;!!=$$=;           \n");
-    printf("              !!;;!;!:;!;;:=*!!;=*$*==**          \n");
-    printf("             .=!!;!;!**:@***;;!*=!$$*==!          \n");
-    printf("             !!=:;*;:***;=::*!!!*=*==#=*          \n");
-    printf("            :!*!:***!**!=;*!:!**!=*$$***          \n");
-    printf("            !!**!;*;!!*!~=$;=;=*=***!==!          \n");
-    printf("\n 이상현 교수님 : 아트는 무슨 아트야... 개발도 못하는 것들이..\n");
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
-    printf(" \n                  [ HP : %d ]\n", BossMobHP[0]);
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    printf(" \n { 나가기 : 0 }\n");
-    while (1) {
-        SHORT keyState = GetAsyncKeyState(VK_RETURN);
-        int pressed = keyState & 0x8000;             
-        if (enterPressed && !pressed)
+    while (getchar() != '\n');
+    while (BossMobHP[0] > 0) {
+        int PictureOn = 1;
+        int MissOff = 0;
+        int attackCount = 1;
+        if (PictureOn)
         {
-            BossMobHP[0] -= JihoPower[level];
-            printf("                         ..=~                     \n");
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            printf("\n                       ..=~                     \n");
             printf("                       *=$#$$$=,                  \n");
             printf("                      ==$###*##$;                 \n");
             printf("                     !==$$*=*$$#$:                \n");
@@ -322,85 +289,56 @@ void Dungeon1() {
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
             printf(" \n                  [ HP : %d ]\n", BossMobHP[0]);
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-            printf(" \n { 나가기 : 0 }\n");                            
+            printf(" \n { 나가기 : 0 }\n");
+            printf("\n 교수님께 드리고 싶은 말씀을 입력하세요.\n => ");
+            PictureOn = 1;
         }
-        enterPressed = pressed;
-        if (GetAsyncKeyState('0') & 0x8000) {
+        attack = getchar();
+        if (attack == '0') {
             printf(" \n 강의실을 나갑니다.\n");
             BossMobHP[0] = 5000;
             return 0;
         }
-        if (BossMobHP[0] <= 0)
+        else if (attack != ' ' || attack != '\t' || attack != '\n')
         {
-            break;
+            if (MissOff) {
+                MissOff = 0;
+            }
+            else if (attack != '\n')
+            {
+                while (getchar() != '\n')
+                {
+                    attackCount++;
+                }
+                BossMobHP[0] -= (attackCount * JihoPower[level]);
+                PictureOn = 0;
+            }
         }
-        Sleep(10);
     }
+    Sleep(500);
     printf(" 됐어... 이제 너랑 얘기 안할꺼야...\n");
     tickets += 1;
     printf("\n");
-    printf("보상으로 복습권 1개를 획득했습니다!\n");
+    printf(" 보상으로 복습권 1개를 획득했습니다!\n");
     printf("\n");
+    Sleep(1000);
     printf(" 면담 완료!\n");
     Sleep(1000);
+    printf("\n 엔터 키를 누르면 메인 화면으로 이동합니다.");
     return 0;
 }
 void Dungeon2() {
+    char attack;
     BossMobHP[1] = 50000;
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    printf("\n");
-    printf("                    .,,,,. .,,                     \n");
-    printf("                   :=####*!*$$*-                   \n");
-    printf("                  ###########=##!                  \n");
-    printf("                -=#####@@@@##$###;                 \n");
-    printf("               ~*########@########*                \n");
-    printf("              ,!$#######@###$#####$:               \n");
-    printf("             :!==$$####$!:~--:*$####-              \n");
-    printf("            ,!**=$###$$;-,,,,-:=#####              \n");
-    printf("            :*=*==$$$$!-....,,~!$####-             \n");
-    printf("           .!==**====*-.....,,-:=####=             \n");
-    printf("           -=$***=*==:,. ...,,--*###$=             \n");
-    printf("           ~$$!*****!~......,,,-;$##$=,            \n");
-    printf("           !$**!=*=!~.......,,,-~*###$~            \n");
-    printf("           !=***=**;,.......,,,--;$##$-            \n");
-    printf("           *=**=*$=;,.....,-~~~~~:=##$~            \n");
-    printf("           ~*==*$=!:~-,,.,--------;=$*             \n");
-    printf("           ~*==*$=;---,,.,---**~--~*$!.            \n");
-    printf("           .;$$==**$$~-,.,-~,=!;:--!=;.            \n");
-    printf("           ,*$=*;!~;~-,. .,,-,-----;=-             \n");
-    printf("           .:$*;-----,.. .,,,,,,,,,~!-             \n");
-    printf("             *;,,....... .,,,,,...,-:-             \n");
-    printf("            ,*-............,,.....,,--,             \n");
-    printf("             ........,. .,,--,,.,,,,-              \n");
-    printf("             ..........:-,--,,,,,,,-               \n");
-    printf("              .  ...... ..,,,,,,,-,-               \n");
-    printf("              .. ...... ...,------,-               \n");
-    printf("              .!  .,,--,:--~~~-,----               \n");
-    printf("               ;; ..,,,..,,,--,---~-               \n");
-    printf("               .=,..,...,---------:,               \n");
-    printf("                ;*..,......,-----~*                \n");
-    printf("                ,=.,,..  ..,,---~;                 \n");
-    printf("                :# .,,..,,,,---~-;#:.              \n");
-    printf("               -*@  .~-,---~-~~--:#$*;             \n");
-    printf("             .~:#$  ..-~~::~~~---~##$$!,           \n");
-    printf("            -;~*#;  ...,-~~------~$#$$$$:          \n");
-    printf("           ~;;;$$:. ....,,-------~!######==-        \n");
-    printf("          ,~:**;==$;,.....,,,--,---~!##$$##$$==,    \n");
-    printf("        .-::!=!:$=#;,,...,,,,-,,---~!#$$$##$$$=$*,.\n");
-    printf("    ::!:~:!=!;*$$#;,,..,,,,,,,,,--~;=$=$$#$===$=$*:\n");
-    printf("   ;;!*:::!*;*$$#;,,..,,,,,,,,,,-~:!!=$$#$===$====\n");
-    printf("~!;;!!*!:;**!!=$#:,,...,,,,,,,,,---::**=$$=$$$$===\n");
-    printf("*!:!!=*!;;!!!**$#;,,....,,,..,,,-,-~~****==$$#$===\n");
-    printf("!!;*!$*=;;!!!!!=@:,.. ..... ..,,,,,-~=*===$$$$$$==\n");
-    printf("\n 윤소미 교수님 : 하... 잠시만요...\n");
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
-    printf(" \n                  [ HP : %d ]\n", BossMobHP[1]);
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    int messageDisplayed = 0;
-    int numberDisplayed = 1;
+    while (getchar() != '\n');
     while (BossMobHP[1] > 0) {
-        char input = getchar();
-        if (!numberDisplayed) {
+        int PictureOn = 1;
+        int MissOff = 0;
+        int attackCount = 1;
+        if (PictureOn)
+        {
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            printf("\n");
             printf("                    .,,,,. .,,                     \n");
             printf("                   :=####*!*$$*-                   \n");
             printf("                  ###########=##!                  \n");
@@ -446,87 +384,58 @@ void Dungeon2() {
             printf("!!;*!$*=;;!!!!!=@:,.. ..... ..,,,,,-~=*===$$$$$$==\n");
             printf("\n 윤소미 교수님 : 하... 잠시만요...\n");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
-            printf(" \n                  [ HP : %d ]\n ", BossMobHP[1]);
+            printf(" \n                  [ HP : %d ]\n", BossMobHP[1]);
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-            printf(" \n { 나가기 : 0 }\n"); // 나가기 스페이스바 누르면 한번더 실행 고치기. 모든 Dungeon
-            numberDisplayed = 1;
+            printf(" \n { 나가기 : 0 }\n");
+            printf("\n 교수님께 드리고 싶은 말씀을 입력하세요.\n => ");
+            PictureOn = 1;
         }
-        if (input == '0') {
+        attack = getchar();
+        if (attack == '0') {
             printf(" \n 강의실을 나갑니다.\n");
             BossMobHP[1] = 50000;
             return 0;
         }
-        else if (input == '\n') {
-            if (messageDisplayed) {
-                messageDisplayed = 0;
+        else if (attack != ' ' || attack != '\t' || attack != '\n')
+        {
+            if (MissOff) {
+                MissOff = 0;
             }
-            else {
-                BossMobHP[1] -= JihoPower[level];
-                numberDisplayed = 0;
-            }
-        }
-        else {
-            if (!messageDisplayed) {
-                printf("\n 다시 입력해주세요.\n");
-                printf(" {나가기 : 0 }\n");
-                messageDisplayed = 1;
+            else if (attack != '\n')
+            {
+                while (getchar() != '\n')
+                {
+                    attackCount++;
+                }
+                BossMobHP[1] -= (attackCount * JihoPower[level]);
+                PictureOn = 0;
             }
         }
     }
+    Sleep(500);
     printf(" 다행히 수업이 어렵진 않았나 보네요 ^^\n");
     tickets += 3;
     printf("\n");
-    printf("보상으로 복습권 3개를 획득했습니다!\n");
+    printf(" 보상으로 복습권 3개를 획득했습니다!\n");
     printf("\n");
+    Sleep(1000);
     printf(" 면담 완료!\n");
     Sleep(1000);
+    printf("\n 엔터 키를 누르면 메인 화면으로 이동합니다.");
     return 0;
 }
 void Dungeon3() {
+    char attack;
     BossMobHP[2] = 250000;
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    printf("\n");
-    printf("                                                  \n");
-    printf("                                                  \n");
-    printf("                        ,~;;-                     \n");
-    printf("                       -##$$==*-                  \n");
-    printf("                      =###@$=$==:                 \n");
-    printf("                    ,$#*;!*=#$$=*~                \n");
-    printf("                    :#*,,,,,!==$=!-               \n");
-    printf("                   -#=,,....-!$==*;               \n");
-    printf("                   ~#~,.....,~$==*;,              \n");
-    printf("                   !#,,......-====!;              \n");
-    printf("                   ;$-~,,,,--~=$$$!!,             \n");
-    printf("                   :---,,.,-,-*$=$!:,             \n");
-    printf("                   -,~:-..-;;~~=$#$*~             \n");
-    printf("                   ,,.,,. .,,..*$$$;;               \n");
-    printf("                   ,,..,...... !$##*=              \n");
-    printf("                    ,,,~,:-....-$##*!              \n");
-    printf("                   --,,,..,,,.,*##!!            \n");
-    printf("                   -,---,,,,,.,*##=*-            \n");
-    printf("                   :,,-,,,,...,=##=!~          \n");
-    printf("                  -#-,,,...,.,,###=*:                 \n");
-    printf("                  !#=-,....,,-*#$#$*:             \n");
-    printf("                 ,=@@!~-----~!####$=:             \n");
-    printf("                 !##@@!***!;!$###@$=;             \n");
-    printf("             :#*=#@@@@$*!*$#@@@@#$!==:,           \n");
-    printf("             !=#$@@@@#$###=$#@@$*===:;:           \n");
-    printf("             =###@@@@**$=$$##$==#!*!:;;           \n");
-    printf("           -*$@##@@##*==$=##@=#*$**!;;:;,         \n");
-    printf("           !$#@#@@@$$**=$$#@$$=*!!!!;::;~         \n");
-    printf("          :=$#@@@##$*==$##@$$=**!!!!!;:;*         \n");
-    printf("         -*$$#@@#==$===$$$===*!!;!!;;;!:!-        \n");
-    printf("         **=#=#@$$$!====$=#=!;:;!*;*!!;;;,        \n");
-    printf("       ~!!=##*@#$$=======$**!;!;;;!!;;;:,          \n");
-    printf("\n 이은임 교수님 : 괜찮아 다시 천천히 해와^^ (자기소개서를 반으로 찟으시면서)\n");
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
-    printf(" \n                [ HP : %d ]\n", BossMobHP[2]);
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    int messageDisplayed = 0;
-    int numberDisplayed = 1;
+    while (getchar() != '\n');
     while (BossMobHP[2] > 0) {
-        char input = getchar();
-        if (!numberDisplayed) {
+        int PictureOn = 1;
+        int MissOff = 0;
+        int attackCount = 1;
+        if (PictureOn)
+        {
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            printf("\n");
             printf("                                                  \n");
             printf("                                                  \n");
             printf("                        ,~;;-                     \n");
@@ -564,83 +473,56 @@ void Dungeon3() {
             printf(" \n                [ HP : %d ]\n", BossMobHP[2]);
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
             printf(" \n { 나가기 : 0 }\n");
-            numberDisplayed = 1;
+            printf("\n 교수님께 드리고 싶은 말씀을 입력하세요.\n => ");
+            PictureOn = 1;
         }
-        if (input == '0') {
+        attack = getchar();
+        if (attack == '0') {
             printf(" \n 강의실을 나갑니다.\n");
             BossMobHP[2] = 250000;
             return 0;
         }
-        else if (input == '\n') {
-            if (messageDisplayed) {
-                messageDisplayed = 0;
+        else if (attack != ' ' || attack != '\t' || attack != '\n')
+        {
+            if (MissOff) {
+                MissOff = 0;
             }
-            else {
-                BossMobHP[2] -= JihoPower[level];
-                numberDisplayed = 0;
-            }
-        }
-        else {
-            if (!messageDisplayed) {
-                printf(" 다시 입력해주세요.\n");
-                printf(" { 나가기 : 0 }\n");
-                messageDisplayed = 1;
+            else if (attack != '\n')
+            {
+                while (getchar() != '\n')
+                {
+                    attackCount++;
+                }
+                BossMobHP[2] -= (attackCount * JihoPower[level]);
+                PictureOn = 0;
             }
         }
     }
+    Sleep(500);
     printf(" 그래 고생했어~~~^^\n");
     tickets += 1;
     money += 2000000;
     printf("\n");
     printf("보상으로 복습권 10개와 200만원을 획득했습니다!\n");
     printf("\n");
+    Sleep(1000);
     printf(" 면담 완료!\n");
     Sleep(1000);
+    printf("\n 엔터 키를 누르면 메인 화면으로 이동합니다.");
     return 0;
 }
 void Dungeon4() {
+    char attack;
     BossMobHP[3] = 1000000;
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    printf("\n");
-    printf("                    :=*!=$.                      \n");
-    printf("                   ,*$##$#$$:                     \n");
-    printf("                  ,$$##$$$###~                    \n");
-    printf("                  =$$##$#####$-                   \n");
-    printf("                 ~$$$#$$$$###$$.                  \n");
-    printf("                 !=$#$=**$###$$:                  \n");
-    printf("                .==$$=!:~;$###$:                  \n");
-    printf("                 =##*=*--:=*##$;                  \n");
-    printf("                 =$****-~;*!=$*~                  \n");
-    printf("                  ==:~;:$::~~~:                   \n");
-    printf("                  ;,.--,.;--:.-,                  \n");
-    printf("                  :  -,. -:~-...                  \n");
-    printf("                  ,   , ,:~~--..                  \n");
-    printf("                   ... .,,~:--                    \n");
-    printf("                   ...-..:;:--                    \n");
-    printf("                      . .---~-                    \n");
-    printf("                    ..  .,--~,                    \n");
-    printf("                    .,.  ,-~-.                    \n");
-    printf("                    ..,,-~;:-.                    \n");
-    printf("                   ! ,.,~;;~~ .                   \n");
-    printf("                  ~*   .--~~-~-                   \n");
-    printf("                .=$*     .~~~;,:                  \n");
-    printf("               :$#$#$    -:~:~~=*                 \n");
-    printf("             ;=$$$$#$$; ., ~~-.==*~               \n");
-    printf("           -$$$$$##$###=,. ~:-=#$#$$$-            \n");
-    printf("          ,$$#$$$#######:-,~--######$#=.          \n");
-    printf("          =$$$###$#######!.,,$########$*          \n");
-    printf("         ,$$$$############!-;##########$;         \n");
-    printf("         ~$$$$$#$#@####$################=         \n");
-    printf("         ~$$$$##########################*        \n");
-    printf("\n 이운석 교수님 : 초등학생도 아는걸 모르는 주제에......\n");
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
-    printf(" \n                  [ HP : %d ]\n", BossMobHP[3]);
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    int messageDisplayed = 0;
-    int numberDisplayed = 1;
+    while (getchar() != '\n');
     while (BossMobHP[3] > 0) {
-        char input = getchar();
-        if (!numberDisplayed) {
+        int PictureOn = 1;
+        int MissOff = 0;
+        int attackCount = 1;
+        if (PictureOn)
+        {
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            printf("\n");
             printf("                    :=*!=$.                      \n");
             printf("                   ,*$##$#$$:                     \n");
             printf("                  ,$$##$$$###~                    \n");
@@ -676,92 +558,56 @@ void Dungeon4() {
             printf(" \n                  [ HP : %d ]\n", BossMobHP[3]);
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
             printf(" \n { 나가기 : 0 }\n");
-            numberDisplayed = 1;
+            printf("\n 교수님께 드리고 싶은 말씀을 입력하세요.\n => ");
+            PictureOn = 1;
         }
-        if (input == '0') {
+        attack = getchar();
+        if (attack == '0') {
             printf(" \n 강의실을 나갑니다.\n");
             BossMobHP[3] = 1000000;
             return 0;
         }
-        else if (input == '\n') {
-            if (messageDisplayed) {
-                messageDisplayed = 0;
+        else if (attack != ' ' || attack != '\t' || attack != '\n')
+        {
+            if (MissOff) {
+                MissOff = 0;
             }
-            else {
-                BossMobHP[3] -= JihoPower[level];
-                numberDisplayed = 0;
-            }
-        }
-        else {
-            if (!messageDisplayed) {
-                printf(" 다시 입력해주세요.\n");
-                printf(" { 나가기 : 0 }\n");
-                messageDisplayed = 1;
+            else if (attack != '\n')
+            {
+                while (getchar() != '\n')
+                {
+                    attackCount++;
+                }
+                BossMobHP[3] -= (attackCount * JihoPower[level]);
+                PictureOn = 0;
             }
         }
     }
+    Sleep(500);
     printf(" 으어어얽...난 이제 안녕 못 해...\n");
     money += 10000000;
     tickets += 50;
     printf("\n");
     printf("보상으로 복습권 50개와 1000만원을 획득했습니다!\n");
+    Sleep(1000);
     printf("\n");
     printf(" 면담 완료!\n");
     Sleep(1000);
+    printf("\n 엔터 키를 누르면 메인 화면으로 이동합니다.");
     return 0;
 }
 void Dungeon5() {
+    char attack;
     BossMobHP[4] = 5000000;
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    printf("\n");
-    printf("                               .. .,                                  \n");
-    printf("                            .,;;~-~~:,,                                \n");
-    printf("                           -;#==!*=$$*$-                               \n");
-    printf("                           =####==$#$$=!-                              \n");
-    printf("                         .!$@#$=!!*=#$$*!.                             \n");
-    printf("                        .~=#=:-,-,--:;!===,                            \n");
-    printf("                        ,=#*~,,......,-~!$!.                            \n");
-    printf("                       .!#$:,,,.........,*=-                            \n");
-    printf("                       ;##=-,,...........~$:                            \n");
-    printf("                       !@#*-,,..... ......$;                            \n");
-    printf("                       *@#!-,,... .... ...=:                            \n");
-    printf("                       ,=#@;,,,,,-... ..,..=;                            \n");
-    printf("                       ,=~#$-~~~.,~..,,-~,.$,                            \n");
-    printf("                       ~,=;-:;;!-;;-~:~:-;!.                            \n");
-    printf("                        ,::,,,-~,,;,-~--,$~.                            \n");
-    printf("                        ,,-,,..,,--.~,,,..,                             \n");
-    printf("                        -,-,,..,-,. ..,,,..                             \n");
-    printf("                        .,-,,...,,........                              \n");
-    printf("                         =-,,,..~-,..~....                              \n");
-    printf("                         !---,,-,,,-,,-,..                              \n");
-    printf("                          ~-,,,~~~-,,,-,,                               \n");
-    printf("                         .-~,,.-~-..,-,.,.                              \n");
-    printf("                         ,~-~-,,,,,,,,,,.                               \n");
-    printf("                         ;*----,,--,,,,,                                \n");
-    printf("                        ,$#=---,..,,..,.                                \n");
-    printf("                       .$##@$~-~,,,..,,;                                \n");
-    printf("                      ,*$$#$##*:::~~,,!*.                               \n");
-    printf("                     ;*$#$##=##$*!!:-,@$;:                              \n");
-    printf("                    ;!$$$$$$$#@###$--:@$=!!~                            \n");
-    printf("                 .,;=$$#==$#####@@@=:=@#$*!**,.                          \n");
-    printf("                -~*=$$$###$###=#@@@#*$#@$*==$=!~.                        \n");
-    printf("               -**=$=$$$$###=$=$#@##$##@$=*===$=!                         \n");
-    printf("              .**$=!$=#=#$=$=*=$$=#$#@#=#*===#==$*:                      \n");
-    printf("             -=$$==*=#=$$###$!=#===$##==$====$*$$;*~                     \n");
-    printf("            ~$$##$$*$###$$##**$$=====#!*$===!$=#$;!*                      \n");
-    printf("            !#####*==$$##$$**=$===$*!!#*$*==*$=$$=*!                       \n");
-    printf("            ;$###=$$##$=@!$==$$===!=!;:!*$=;*$$=$$$=~                      \n");
-    printf("            !#$$#=$$$$=$$$$===##*$$==!:;!==!*#$=$==*!                      \n");
-    printf("            ;##$#$*=$$$$=##=$$=!*===$*;~*$=*!$*!*=!=*~                     \n");
-    printf("\n 김영천 교수님 : 나는 이해가 안돼... 왜 이리 노력들을 안하는 거야...\n");
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
-    printf(" \n                    [ HP : %d ]\n", BossMobHP[4]);
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    int messageDisplayed = 0;
-    int numberDisplayed = 1;
+    while (getchar() != '\n');
     while (BossMobHP[4] > 0) {
-        char input = getchar();
-        if (!numberDisplayed) {
+        int PictureOn = 1;
+        int MissOff = 0;
+        int attackCount = 1;
+        if (PictureOn)
+        {
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            printf("\n");
             printf("                               .. .,                                  \n");
             printf("                            .,;;~-~~:,,                                \n");
             printf("                           -;#==!*=$$*$-                               \n");
@@ -806,36 +652,43 @@ void Dungeon5() {
             printf(" \n                    [ HP : %d ]\n", BossMobHP[4]);
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
             printf(" \n { 나가기 : 0 }\n");
-            numberDisplayed = 1;
+            printf("\n 교수님께 드리고 싶은 말씀을 입력하세요.\n => ");
+            PictureOn = 1;
         }
-        if (input == '0') {
+        attack = getchar();
+        if (attack == '0') {
             printf(" \n 강의실을 나갑니다.\n");
             BossMobHP[4] = 5000000;
             return 0;
         }
-        else if (input == '\n') {
-            if (messageDisplayed) {
-                messageDisplayed = 0;
+        else if (attack != ' ' || attack != '\t' || attack != '\n')
+        {
+            if (MissOff) {
+                MissOff = 0;
             }
-            else {
-                BossMobHP[4] -= JihoPower[level];
-                numberDisplayed = 0;
-            }
-        }
-        else {
-            if (!messageDisplayed) {
-                printf(" 다시 입력해주세요.\n");
-                printf(" { 나가기 : 0 }\n");
-                messageDisplayed = 1;
+            else if (attack != '\n')
+            {
+                while (getchar() != '\n')
+                {
+                    attackCount++;
+                }
+                BossMobHP[4] -= (attackCount * JihoPower[level]);
+                PictureOn = 0;
             }
         }
     }
-    printf(" 그래... 우리 모범생... 고생 많았다.\n");
+    Sleep(500);
+    printf(" 그래... 우리 모범생... 고생 많았다.\n\n");
     Sleep(2000);
-    printf(" 게임 완료!\n");
+    printf(" 게임 완료!\n\n");
     Sleep(2000);
-    printf("저희 게임을 플레이해주셔서 감사합니다!");
+    printf(" 저희 게임을 플레이해주셔서 감사합니다!\n\n");
     Sleep(2000);
+    printf(" *********** 게임 클리어 ***********\n");
+    printf(" 게임을 끝까지 클리어하셨다면 cmd창을\n 컴퓨터의 현재 시간, 날짜와 같이 나오게 캡쳐해서 보내주시면\n 음료수 기프티콘을 보내드립니다!\n [(010-9580-1369)로 연락주세요!]\n");
+    printf(" *********** 게임 클리어 ***********\n\n");
+    Sleep(120000);
+    printf("고생하셨습니다!");
     isGameOver = true;
     return 0;
 }
@@ -845,8 +698,6 @@ int main(void)
 
     srand((unsigned int)time(NULL));  // 랜덤 시드값 설정
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-    char nickname_initial[100];  // 닉네임을 저장할 배열
-
     printf("\n");
     printf("  #          ##       ###      ###    #    #\n");
     printf("  #         #  #     #   #      #     ##   #\n");
@@ -862,9 +713,7 @@ int main(void)
     printf("\n");
     printf("\n");
     printf("                 ID : ");
-    fgets(nickname_initial, sizeof(nickname_initial), stdin);  // 사용자로부터 닉네임 입력 받기
-    nickname_initial[strcspn(nickname_initial, "\n")] = 0;  // fgets는 개행 문자까지 읽기 때문에 문자열 끝에서 개행 문자 제거       
-
+    scanf_s("%d", &nickname_initial);
     while (!isGameOver)
     {
         system("@cls||clear");      // 화면 정리
@@ -880,14 +729,7 @@ int main(void)
         printf(" 학습 성공률 : %.2f%%\n", enhancementProbabilitiesStage1[level]);
         printf(" \n 보유 복습권 갯수 : %d\n", tickets);
         printf(" 요구 복습권 수 : %d개", failureTicketCosts[level]);
-
-        if (level == 0)
-        {
-            ZeroOneGangHwa++;
-            printf("\n {%d강 -> %d강 %d차 시도 중...}\n", level, level + 1, ZeroOneGangHwa);
-
-        }
-        else if (level == 20)
+        if (level == 20)
         {
             printf("\n {최고 강화 단계 달성!!!}\n");
         }
@@ -895,7 +737,7 @@ int main(void)
         {
             printf("\n {%d강 -> %d강 %d차 시도 중...}\n", level, level + 1, Attempt[level]);
         }
-
+        isTry = 0;
         printf(" \n 메뉴:\n\n");
         printf(" * 1. 학생 강화하기\n");
         printf(" * 2. 상점가기\n");
@@ -916,7 +758,8 @@ int main(void)
             }
             printf("\n  *** 학습중 *** \n\n");
             //Sleep(2000);
-            float randNum = rand() % 101;
+            float randNum = rand() % 100;
+            Attempt[level]++;
             if (randNum < enhancementProbabilitiesStage1[level]) {
                 money -= enhancementCosts[level];
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
@@ -925,6 +768,7 @@ int main(void)
                 printf("    + %d  -> + %d \n", level, level + 1);
                 printf("                  \n");
                 printf(" ***** SUCCESS *****\n");
+                attemptlevel = level;
                 level++;// 강화에 성공 했을 시, 레벨을 하나 증가 시킴
                 for (int i = 0; i < 20; i++) // 강화 성공 횟수 데이터 수집
                 {
@@ -948,6 +792,7 @@ int main(void)
                     printf(" ***** FAILURE *****\n");
                     printf("\n 어익후.. 핸드폰을 봤네..교수님이 봐버렸다...\n");
                     printf("\n [+%d 지식을 잃었습니다.]\n\n", level);
+                    attemptlevel = level;
                     for (int i = 0; i < 20; i++) { // 강화 실패 횟수 데이터 수집
                         if (level == Levels[i]) {
                             Failure[level] += 1;
@@ -957,33 +802,31 @@ int main(void)
                     printf("\n [%d강 강화 실패 횟수 : %d]\n", level, Failure[level]);
 
                     if (tickets > 0) {
-                        choice = 0;
                         int ticketsToUse = failureTicketCosts[level]; // 실패 시 소모될 복습권의 수
                         money -= enhancementCosts[level];
-                        printf(" 학습에 실패하였습니다. \n\n 현재 학습 수치를 유지하시겠습니까? \n 소모되는 복습권은 %d개 입니다.\n {보유 학습권 갯수 : %d}\n\n (YES : 1/ NO : 2) : ", ticketsToUse, tickets);
+                        printf("학습에 실패하였습니다. \n현재 학습 수치를 유지하시겠습니까? \n소모되는 복습권은 %d개 입니다.\n{보유 학습권 갯수 : %d}\n(YES : 1/ NO : 2) : ", ticketsToUse, tickets);
                         while (true) {
+                            choice = 0;
                             scanf_s("%d", &choice);
                             while (getchar() != '\n');  // 입력 버퍼 클리어
-                            if (ticketsToUse <= tickets && choice == 1)
-                            {
+                            if (ticketsToUse <= tickets && choice == 1) {
                                 tickets -= ticketsToUse; // 실패 시 소모되는 복습권 갯수 적용
-                                printf("\n 복습권을 사용합니다. (보유 복습권 갯수 : %d)\n", tickets);
+                                printf("\n복습권을 사용합니다. (보유 복습권 갯수 : %d)\n", tickets);
                                 money += enhancementCosts[level];
                                 break;  // 유효한 입력을 받았으므로 반복문 종료
                             }
                             else if (choice == 2) {
-                                printf(" 학습 수치를 초기화합니다.\n");
+                                printf("학습 수치를 초기화합니다.\n");
                                 level = 0; // 강화 수치 초기화
                                 break;  // 유효한 입력을 받았으므로 반복문 종료
                             }
                             else {
-                                printf("\n\n 잘못된 입력을 했거나 복습권이 모자랍니다 다시 선택 하세요!\n (YES : 1 / NO : 2) : ");
+                                printf("잘못된 입력 했거나 복습권이 모자랍니다 다시 선택 하세요! (YES : 1 / NO : 2) : ");
                             }
                         }
                     }
-                    if (tickets <= 0)
-                    {
-                        printf(" 복습권이 없어 학습 수치를 초기화합니다.\n");
+                    else {
+                        printf("복습권이 없어 학습 수치를 초기화합니다.\n");
                         level = 0;  // 복습권이 없으므로 레벨을 초기화
                     }
                 }
@@ -994,7 +837,6 @@ int main(void)
                     printf(" ***** MAX LEVEL *****\n");
                 }
             }
-            printf("\n 계속하려면 아무 키나 누르세요! \n");
             // 강화 비용 차감
             break;
         case 2:
@@ -1003,7 +845,6 @@ int main(void)
         case 3:
             printf("\n *** 강의실로 이동 ***\n\n");
             // Sleep(2000);
-            printf("\n");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
             printf(" 이곳은 강의실입니다. 교수님들과 면담을 할 수 있습니다.\n");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
@@ -1040,45 +881,19 @@ int main(void)
         case 4:
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
             printf("\n 이런! 이지호 학생이 자퇴 했습니다 이제 어쩌죠...?\n");
-
+            endDateTime = 1;
             isGameOver = true; // 게임 종료
             break;
         default:
             printf("잘못된 입력입니다. 다시 선택하세요.\n"); // 엔터 눌러야지 나가기.
             break;
         }
-        /*Sleep(1000);*/
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-
+        getchar();
+        printf("\n 계속하려면 엔터 키를 누르세요! \n");// 개행 문자 처리를 위해 getchar 사용
         // 사용자 입력 대기
         while (getchar() != '\n'); // 버퍼 비우기
-
-        char command[2048];
-
-        void sendToGoogleSheet(const char* nickname_initial, const char* currentDateTime, const char* endDateTime, int level, int TicketBuyLevels[], int attempt, int success, int selling_count, int money); {
-            // TicketBuyLevels 배열을 문자열로 변환
-            char TicketBuyLevelsStr[512] = "";
-            for (int i = 0; i < sizeof(TicketBuyLevels) / sizeof(TicketBuyLevels[0]); i++) {
-                char temp[32];
-                sprintf(temp, "%d", TicketBuyLevels[i]);
-                strcat(TicketBuyLevelsStr, temp);
-                if (i < sizeof(TicketBuyLevels) / sizeof(TicketBuyLevels[0]) - 1) {
-                    strcat(TicketBuyLevelsStr, ",");
-                }
-            }
-
-            // curl 명령어 생성
-            sprintf_s(command, sizeof(command),
-                "curl -d \"{\\\"아이디\\\":\\\"%s\\\",\\\"접속시간\\\":\\\"%s\\\",\\\"종료시간\\\":\\\"%s\\\",\\\"강화 단계\\\":\\\"%d\\\",\\\"단계별 복습권 구매갯수\\\":\\\"%s\\\",\\\"강화시도횟수\\\":\\\"%d\\\",\\\"성공 횟수\\\":\\\"%d\\\",\\\"판매 횟수\\\":\\\"%d\\\",\\\"현재 비용\\\":\\\"%d\\\"}\" https://script.google.com/macros/s/AKfycbxg6gLqurtAF9Izw3c34JwhPGiau-MElKPU27mUe3Dh15P6_fJdRLHRyPv9A17cXQAt/\\exec",
-                nickname_initial, currentDateTime, endDateTime, level, TicketBuyLevelsStr, attempt, success, selling_count, money);
-
-            // curl 명령어 실행
-            system(command);
-
-            // 랜덤 시드값 설정 
-            srand((unsigned int)time(NULL));
-        }
-
+        Gopost();
     }
     return 0;
 }
