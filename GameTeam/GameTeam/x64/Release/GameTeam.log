@@ -9,10 +9,11 @@ C:\Users\one\Desktop\GameTeamPle\GameTeam\main.c(558,21): warning C4098: 'Dungeo
 C:\Users\one\Desktop\GameTeamPle\GameTeam\main.c(587,13): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
 C:\Users\one\Desktop\GameTeamPle\GameTeam\main.c(652,21): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
 C:\Users\one\Desktop\GameTeamPle\GameTeam\main.c(683,13): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeamPle\GameTeam\main.c(816,41): warning C4552: '+': 식의 결과가 사용되지 않습니다.
 C:\Users\one\Desktop\GameTeamPle\GameTeam\main.c(762,36): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
-  4 of 17 functions (23.5%) were compiled, the rest were copied from previous compilation.
+  0 of 17 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   GameTeam.vcxproj -> C:\Users\one\Desktop\GameTeamPle\GameTeam\x64\Release\GameTeam.exe

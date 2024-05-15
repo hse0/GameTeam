@@ -99,8 +99,8 @@ void Gopost()
 {
     char command[2048];
     sprintf_s(command, sizeof(command),
-        "curl -d \"{\\\"아이디\\\":\\\"%d\\\",\\\"접속시간\\\":\\\"%d\\\",\\\"종료시간\\\":\\\"%d\\\",\\\"강화단계\\\":\\\"%d\\\",\\\"단계별복습권구매갯수\\\":\\\"%d\\\",\\\"강화시도횟수\\\":\\\"%d\\\",\\\"성공횟수\\\":\\\"%d\\\",\\\"판매횟수\\\":\\\"%d\\\",\\\"현재비용\\\":\\\"%d\\\"}\" https://script.google.com/macros/s/AKfycbw9598-RJ93Q75ltMHzsbsUGMTyoHLbeJnn14jqHz3iTk1_bAiTt6fJnIIXlVKX1cwq/exec",
-        nickname_initial, currentDateTime, endDateTime, attemptlevel, TicketBuyLevels[level], attempt, success, selling_count, money);
+        "curl -d \"{\\\"아이디\\\":\\\"%d\\\",\\\"접속시간\\\":\\\"%d\\\",\\\"종료시간\\\":\\\"%d\\\",\\\"강화단계\\\":\\\"%d\\\",\\\"단계별복습권구매갯수\\\":\\\"%d\\\",\\\"강화시도횟수\\\":\\\"%d\\\",\\\"판매횟수\\\":\\\"%d\\\",\\\"현재비용\\\":\\\"%d\\\"}\" https://script.google.com/macros/s/AKfycby2CBSun8_hCI4xYBzVQaLUKwMX5fUfFXL8sh6bS5CwxF8oyWIqyEl6jC31opBweO9m/exec",
+        nickname_initial, currentDateTime, endDateTime, attemptlevel, tickets, attempt, selling_count, money);
     system(command);
     srand((unsigned int)time(NULL));         // 랜덤 시드값 설정 
 }
@@ -787,7 +787,7 @@ int main(void)
                     attemptlevel = level;
                     for (int i = 0; i < 20; i++) { // 강화 실패 횟수 데이터 수집
                         if (level == Levels[i]) {
-                            Failure[level] += 1;
+                            attempt++;
                             break;
                         }
                     }
@@ -805,11 +805,15 @@ int main(void)
                                 tickets -= ticketsToUse; // 실패 시 소모되는 복습권 갯수 적용
                                 printf("\n복습권을 사용합니다. (보유 복습권 갯수 : %d)\n", tickets);
                                 money += enhancementCosts[level];
+                               
+                                
                                 break;  // 유효한 입력을 받았으므로 반복문 종료
                             }
                             else if (choice == 2) {
                                 printf("학습 수치를 초기화합니다.\n");
                                 level = 0; // 강화 수치 초기화
+                                TicketBuyLevels[level] = 0;
+                                attempt + 1;
                                 break;  // 유효한 입력을 받았으므로 반복문 종료
                             }
                             else {
