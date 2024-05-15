@@ -1,0 +1,15 @@
+﻿  main.c
+C:\Users\one\Desktop\GameTeamPle\GameTeam\main.c(235,13): warning C4013: 'pritnf'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\one\Desktop\GameTeamPle\GameTeam\main.c(298,21): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeamPle\GameTeam\main.c(326,13): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeamPle\GameTeam\main.c(386,21): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeamPle\GameTeam\main.c(414,13): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeamPle\GameTeam\main.c(472,21): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeamPle\GameTeam\main.c(501,13): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeamPle\GameTeam\main.c(557,21): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeamPle\GameTeam\main.c(586,13): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeamPle\GameTeam\main.c(651,21): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeamPle\GameTeam\main.c(682,13): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\one\Desktop\GameTeamPle\GameTeam\main.c(761,36): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+main.obj : error LNK2019: pritnfGoStore 함수에서 참조되는 확인할 수 없는 외부 기호
+C:\Users\one\Desktop\GameTeamPle\GameTeam\x64\Debug\GameTeam.exe : fatal error LNK1120: 1개의 확인할 수 없는 외부 참조입니다.
