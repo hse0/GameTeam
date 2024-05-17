@@ -1,2 +1,0 @@
-C:\Users\one\Desktop\GameTeam\TeamPle\Debug\libcurl.dll
-C:\Users\one\Desktop\GameTeam\TeamPle\Debug\LibCurlShim.dll
