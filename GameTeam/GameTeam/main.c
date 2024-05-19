@@ -767,8 +767,8 @@ int main(void)
         printf("  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
         printf("                                                                                       ┃ 학습 성공률 : %.2f%%\n", enhancementProbabilitiesStage1[level]);
         printf("                                                                                       ┃  학습 비용  : %d원\n", enhancementCosts[level]);
-        printf("                                                                                       ┃ 요구 복습권 : %d개\n", tickets);
-        printf("                                                                                       ┃ 보유 복습권 : %d개\n", failureTicketCosts[level]);
+        printf("                                                                                       ┃ 요구 복습권 : %d개\n", failureTicketCosts[level]);
+        printf("                                                                                       ┃ 보유 복습권 : %d개\n", tickets);
         printf("                                                                                       ┃ 현재 소지금 : %d원\n", money);
         printf("                                                                                       ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
         printf("\n");
