@@ -1,5 +1,4 @@
 ﻿  main.c
-<<<<<<< HEAD
 C:\Users\user\Desktop\GameTeam\GameTeam\main.c(352,21): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
 C:\Users\user\Desktop\GameTeam\GameTeam\main.c(380,13): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
 C:\Users\user\Desktop\GameTeam\GameTeam\main.c(441,21): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
@@ -12,28 +11,167 @@ C:\Users\user\Desktop\GameTeam\GameTeam\main.c(703,21): warning C4098: 'Dungeon5
 C:\Users\user\Desktop\GameTeam\GameTeam\main.c(734,13): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
 C:\Users\user\Desktop\GameTeam\GameTeam\main.c(889,41): warning C4552: '+': 식의 결과가 사용되지 않습니다.
 C:\Users\user\Desktop\GameTeam\GameTeam\main.c(835,36): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다.
-  0 of 17 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  코드를 생성했습니다.
-  GameTeam.vcxproj -> C:\Users\user\Desktop\GameTeam\GameTeam\x64\Release\GameTeam.exe
-=======
-C:\HW\GameTeam\GameTeam\main.c(352,13): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
-C:\HW\GameTeam\GameTeam\main.c(380,5): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
-C:\HW\GameTeam\GameTeam\main.c(441,13): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
-C:\HW\GameTeam\GameTeam\main.c(469,5): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
-C:\HW\GameTeam\GameTeam\main.c(527,13): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
-C:\HW\GameTeam\GameTeam\main.c(556,5): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
-C:\HW\GameTeam\GameTeam\main.c(613,13): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
-C:\HW\GameTeam\GameTeam\main.c(642,5): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
-C:\HW\GameTeam\GameTeam\main.c(703,13): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
-C:\HW\GameTeam\GameTeam\main.c(734,5): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
-C:\HW\GameTeam\GameTeam\main.c(890,45): warning C4552: '+': 식의 결과가 사용되지 않습니다.
-C:\HW\GameTeam\GameTeam\main.c(836,40): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다.
-  Previous IPDB was built with incompatible compiler, fall back to full compilation.
-  All 17 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  코드를 생성했습니다.
-  GameTeam.vcxproj -> C:\HW\GameTeam\GameTeam\x64\Release\GameTeam.exe
->>>>>>> f9fe0d1f90e56fe88e62e4a003477433d7eb707c
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(983,7): error C2374: 'enhancementMessages1': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(16,7):
+  'enhancementMessages1' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1007,7): error C2374: 'enhancementMessages2': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(40,7):
+  'enhancementMessages2' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1031,5): error C2374: 'failure': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(64,5):
+  'failure' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1032,5): error C2374: 'isTry': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(65,5):
+  'isTry' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1034,6): error C2374: 'isGameOver': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(67,6):
+  'isGameOver' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1035,5): error C2374: 'tickets': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(68,5):
+  'tickets' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1036,5): error C2374: 'enhancement_cost': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(69,5):
+  'enhancement_cost' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1037,5): error C2374: 'dungeonSelect': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(70,5):
+  'dungeonSelect' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1038,5): error C2374: 'ZeroOneGangHwa': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(71,5):
+  'ZeroOneGangHwa' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1041,5): error C2374: 'Levels': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(74,5):
+  'Levels' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1048,5): error C2374: 'Attempt': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(81,5):
+  'Attempt' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1055,5): error C2374: 'Success': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(88,5):
+  'Success' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1062,5): error C2374: 'Failure': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(95,5):
+  'Failure' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1069,5): error C2374: 'TicketBuyLevels': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(115,5):
+  'TicketBuyLevels' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1079,5): error C2374: 'endDateTime': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(112,5):
+  'endDateTime' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1080,5): error C2374: 'level': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(113,5):
+  'level' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1081,5): error C2374: 'attemptlevel': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(114,5):
+  'attemptlevel' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1083,5): error C2374: 'attempt': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(116,5):
+  'attempt' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1084,5): error C2374: 'success': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(117,5):
+  'success' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1085,5): error C2374: 'selling_count': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(118,5):
+  'selling_count' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1086,5): error C2374: 'money': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(119,5):
+  'money' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1087,5): error C2374: 'numTickets': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(120,5):
+  'numTickets' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1088,5): error C2374: 'realMoneyStore': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(121,5):
+  'realMoneyStore' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1090,6): error C2084: 'void Gopost()' 함수에 이미 본문이 있습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(123,6):
+  'Gopost'의 이전 정의를 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1100,7): error C2374: 'enhancementProbabilitiesStage1': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(133,7):
+  'enhancementProbabilitiesStage1' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1118,5): error C2374: 'enhancementCosts': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(151,5):
+  'enhancementCosts' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1125,5): error C2374: 'failureTicketCosts': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(158,5):
+  'failureTicketCosts' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1132,5): error C2374: 'studentSalaries': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(165,5):
+  'studentSalaries' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1138,5): error C2374: 'BossMobHP': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(171,5):
+  'BossMobHP' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1141,5): error C2374: 'JihoPower': 재정의. 여러 번 초기화했습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(174,5):
+  'JihoPower' 선언을 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1149,6): error C2084: 'void sellStudent(int *,int *)' 함수에 이미 본문이 있습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(182,6):
+  'sellStudent'의 이전 정의를 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1163,6): error C2084: 'void GoStore()' 함수에 이미 본문이 있습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(196,6):
+  'GoStore'의 이전 정의를 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1261,6): error C2084: 'void Dungeon1()' 함수에 이미 본문이 있습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(295,6):
+  'Dungeon1'의 이전 정의를 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1318,21): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1346,13): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1348,6): error C2084: 'void Dungeon2()' 함수에 이미 본문이 있습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(382,6):
+  'Dungeon2'의 이전 정의를 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1407,21): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1435,13): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1437,6): error C2084: 'void Dungeon3()' 함수에 이미 본문이 있습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(471,6):
+  'Dungeon3'의 이전 정의를 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1493,21): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1522,13): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1524,6): error C2084: 'void Dungeon4()' 함수에 이미 본문이 있습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(558,6):
+  'Dungeon4'의 이전 정의를 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1579,21): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1608,13): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1610,6): error C2084: 'void Dungeon5()' 함수에 이미 본문이 있습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(644,6):
+  'Dungeon5'의 이전 정의를 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1669,21): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1700,13): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1702,5): error C2084: 'int main(void)' 함수에 이미 본문이 있습니다.
+  C:\Users\user\Desktop\GameTeam\GameTeam\main.c(736,5):
+  'main'의 이전 정의를 참조하십시오.
+  
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1856,41): warning C4552: '+': 식의 결과가 사용되지 않습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(1802,36): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
