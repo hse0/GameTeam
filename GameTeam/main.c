@@ -119,13 +119,14 @@ int selling_count = 0; // 판매횟수
 int money = INITIAL_MONEY; // 현재 비용 
 int numTickets = 0;
 int realMoneyStore = 0; // 현질 상점
+int storeCount = 0;
 
 void Gopost()
 {
     char command[2048];
     sprintf_s(command, sizeof(command),
-        "curl -d \"{\\\"아이디\\\":\\\"%d\\\",\\\"접속시간\\\":\\\"%d\\\",\\\"종료시간\\\":\\\"%d\\\",\\\"강화단계\\\":\\\"%d\\\",\\\"단계별복습권구매갯수\\\":\\\"%d\\\",\\\"강화시도횟수\\\":\\\"%d\\\",\\\"판매횟수\\\":\\\"%d\\\",\\\"현재비용\\\":\\\"%d\\\"}\" https://script.google.com/macros/s/AKfycby2CBSun8_hCI4xYBzVQaLUKwMX5fUfFXL8sh6bS5CwxF8oyWIqyEl6jC31opBweO9m/exec",
-        nickname_initial, currentDateTime, endDateTime, attemptlevel, tickets, attempt, selling_count, money);
+        "curl -s -k -d \"{\\\"아이디\\\":\\\"%d\\\",\\\"접속시간\\\":\\\"%d\\\",\\\"종료시간\\\":\\\"%d\\\",\\\"강화단계\\\":\\\"%d\\\",\\\"단계별복습권구매갯수\\\":\\\"%d\\\",\\\"강화시도횟수\\\":\\\"%d\\\",\\\"판매횟수\\\":\\\"%d\\\",\\\"스토어추가금액\\\":\\\"%d\\\",\\\"현재비용\\\":\\\"%d\\\"}\" https://script.google.com/macros/s/AKfycbwwCYbp9DNQewVYm8kuCJMmbeW1w8gw09kibPtXipwJJIRyutvkLcyTBNR3GM5yAaz5/exec > NUL 2>&1",
+        nickname_initial, currentDateTime, endDateTime, attemptlevel, tickets, attempt, selling_count,storeCount, money);
     system(command);
     srand((unsigned int)time(NULL));         // 랜덤 시드값 설정 
 }
