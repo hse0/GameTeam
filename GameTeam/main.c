@@ -258,7 +258,7 @@ void GoStore() {
                 printf("[%d강 단계에서 복습권 %d개 구입함!]\n\n", level, TicketBuyLevels[level]);
                 break;
             }
-        case 3 : 
+        case 3:
             while (realMoneyStore != 5)
             {
                 realMoneyStore = 0;
@@ -282,9 +282,9 @@ void GoStore() {
                 }
             }
             break;
-        case 4 :
+        case 4:
             isTry = 0;
-            printf("\n 2초뒤에 상점에서 나갑니다....");      
+            printf("\n 2초뒤에 상점에서 나갑니다....");
             return;// 상점 메뉴에서 빠져나감
         default:
             printf(" 잘못된 입력입니다.\n");
@@ -809,11 +809,11 @@ int main(void)
         printf("\n");
         printf("\n");
         printf("\n");
-        printf("\n");  
+        printf("\n");
         printf("   ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
         printf("   ┃                                < 선 택 해 라 >                                    ┃          회원 정보          ┃\n");
         printf("   ┃                                                                                   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
-        printf("   ┃        1. 학습 하기      2. 상점 가기      3. 면담 신청      4. 자퇴 하기                    %d         \n",nickname_initial);
+        printf("   ┃        1. 학습 하기      2. 상점 가기      3. 면담 신청      4. 자퇴 하기                    %d         \n", nickname_initial);
         printf("   ┃                                                                                   ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
         printf("   ┃                                                                                   ┃     Homework is my Life     ┃\n");
         printf("   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
@@ -825,139 +825,139 @@ int main(void)
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
         switch (isTry)
         {
-            case 1:     // 강화에 도전 할 경우
-                // 돈이 부족하면 메시지 출력 후 break
-                if (money < enhancementCosts[level]) {
-                    printf("돈이 부족하여 공부 할 수 없습니다.\n");
-                    break;
-                }
-                printf("\n  *** 학습중 *** \n\n");
-                //Sleep(2000);
-                float randNum = rand() % 100;
-                Attempt[level]++;
-                if (randNum < enhancementProbabilitiesStage1[level]) {
-                    money -= enhancementCosts[level];
-                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-                    printf(" ***** SUCCESS *****\n");
+        case 1:     // 강화에 도전 할 경우
+            // 돈이 부족하면 메시지 출력 후 break
+            if (money < enhancementCosts[level]) {
+                printf("돈이 부족하여 공부 할 수 없습니다.\n");
+                break;
+            }
+            printf("\n  *** 학습중 *** \n\n");
+            //Sleep(2000);
+            float randNum = rand() % 100;
+            Attempt[level]++;
+            if (randNum < enhancementProbabilitiesStage1[level]) {
+                money -= enhancementCosts[level];
+                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+                printf(" ***** SUCCESS *****\n");
+                printf("                  \n");
+                printf("    + %d  -> + %d \n", level, level + 1);
+                printf("                  \n");
+                printf(" ***** SUCCESS *****\n");
+                level++;// 강화에 성공 했을 시, 레벨을 하나 증가 시킴
+                attemptlevel = level;
+                success++;
+                attempt++;
+            }
+            else {
+                if (level != 20) {
+                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+                    printf(" ***** FAILURE *****\n");
                     printf("                  \n");
-                    printf("    + %d  -> + %d \n", level, level + 1);
+                    printf("      %d  ->  % d    \n", level, level - 1);
                     printf("                  \n");
-                    printf(" ***** SUCCESS *****\n");
-                    level++;// 강화에 성공 했을 시, 레벨을 하나 증가 시킴
+                    printf(" ***** FAILURE *****\n");
+                    printf("\n 어익후.. 핸드폰을 봤네..교수님이 봐버렸다...\n");
+                    printf("\n [+%d 지식을 잃었습니다.]\n\n", level);
                     attemptlevel = level;
-                    success++;
-                    attempt++;
-                }
-                else {
-                    if (level != 20) {
-                        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-                        printf(" ***** FAILURE *****\n");
-                        printf("                  \n");
-                        printf("      %d  ->  % d    \n", level, level - 1);
-                        printf("                  \n");
-                        printf(" ***** FAILURE *****\n");
-                        printf("\n 어익후.. 핸드폰을 봤네..교수님이 봐버렸다...\n");
-                        printf("\n [+%d 지식을 잃었습니다.]\n\n", level);
-                        attemptlevel = level;
-                        for (int i = 0; i < 20; i++) { // 강화 실패 횟수 데이터 수집
-                            if (level == Levels[i]) {
-                                attempt++;
-                                break;
-                            }
+                    for (int i = 0; i < 20; i++) { // 강화 실패 횟수 데이터 수집
+                        if (level == Levels[i]) {
+                            attempt++;
+                            break;
                         }
-                        printf("\n [%d강 강화 실패 횟수 : %d]\n", level, Failure[level]);
+                    }
+                    printf("\n [%d강 강화 실패 횟수 : %d]\n", level, Failure[level]);
 
-                        if (tickets > 0) {
-                            int ticketsToUse = failureTicketCosts[level]; // 실패 시 소모될 복습권의 수
-                            money -= enhancementCosts[level];
-                            printf("학습에 실패하였습니다. \n현재 학습 수치를 유지하시겠습니까? \n소모되는 복습권은 %d개 입니다.\n{보유 학습권 갯수 : %d}\n(YES : 1/ NO : 2) : ", ticketsToUse, tickets);
-                            while (true) {
-                                choice = 0;
-                                scanf_s("%d", &choice);
-                                while (getchar() != '\n');  // 입력 버퍼 클리어
-                                if (ticketsToUse <= tickets && choice == 1) {
-                                    tickets -= ticketsToUse; // 실패 시 소모되는 복습권 갯수 적용
-                                    printf("\n복습권을 사용합니다. (보유 복습권 갯수 : %d)\n", tickets);
-                                    money += enhancementCosts[level];
-                               
-                                
-                                    break;  // 유효한 입력을 받았으므로 반복문 종료
-                                }
-                                else if (choice == 2) {
-                                    printf("학습 수치를 초기화합니다.\n");
-                                    level = 0; // 강화 수치 초기화
-                                    TicketBuyLevels[level] = 0;
-                                    attempt + 1;
-                                    break;  // 유효한 입력을 받았으므로 반복문 종료
-                                }
-                                else {
-                                    printf("잘못된 입력 했거나 복습권이 모자랍니다 다시 선택 하세요! (YES : 1 / NO : 2) : ");
-                                }
+                    if (tickets > 0) {
+                        int ticketsToUse = failureTicketCosts[level]; // 실패 시 소모될 복습권의 수
+                        money -= enhancementCosts[level];
+                        printf("학습에 실패하였습니다. \n현재 학습 수치를 유지하시겠습니까? \n소모되는 복습권은 %d개 입니다.\n{보유 학습권 갯수 : %d}\n(YES : 1/ NO : 2) : ", ticketsToUse, tickets);
+                        while (true) {
+                            choice = 0;
+                            scanf_s("%d", &choice);
+                            while (getchar() != '\n');  // 입력 버퍼 클리어
+                            if (ticketsToUse <= tickets && choice == 1) {
+                                tickets -= ticketsToUse; // 실패 시 소모되는 복습권 갯수 적용
+                                printf("\n복습권을 사용합니다. (보유 복습권 갯수 : %d)\n", tickets);
+                                money += enhancementCosts[level];
+
+
+                                break;  // 유효한 입력을 받았으므로 반복문 종료
                             }
-                        }
-                        else {
-                            printf("복습권이 없어 학습 수치를 초기화합니다.\n");
-                            level = 0;  // 복습권이 없으므로 레벨을 초기화
+                            else if (choice == 2) {
+                                printf("학습 수치를 초기화합니다.\n");
+                                level = 0; // 강화 수치 초기화
+                                TicketBuyLevels[level] = 0;
+                                attempt + 1;
+                                break;  // 유효한 입력을 받았으므로 반복문 종료
+                            }
+                            else {
+                                printf("잘못된 입력 했거나 복습권이 모자랍니다 다시 선택 하세요! (YES : 1 / NO : 2) : ");
+                            }
                         }
                     }
                     else {
-                        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-                        printf(" ***** MAX LEVEL *****\n");
-                        printf(" 최고 강화 단계입니다. \n");
-                        printf(" ***** MAX LEVEL *****\n");
+                        printf("복습권이 없어 학습 수치를 초기화합니다.\n");
+                        level = 0;  // 복습권이 없으므로 레벨을 초기화
                     }
                 }
-                // 강화 비용 차감
+                else {
+                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+                    printf(" ***** MAX LEVEL *****\n");
+                    printf(" 최고 강화 단계입니다. \n");
+                    printf(" ***** MAX LEVEL *****\n");
+                }
+            }
+            // 강화 비용 차감
+            break;
+        case 2:
+            GoStore();
+            break;
+        case 3:
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            printf("   ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+            printf("   ┃  이곳은 교수님과 함께하는 면담실 입니다 면담을 완료하면 다양한 보상이 주어집니다! ┃        < 추천 면담 >        ┃\n");
+            printf("   ┃                                                                                   ┃                             ┃\n");
+            printf("   ┃         1. 이상현 교수님과 면담                    2. 윤소미 교수님과 면담        ┃1강  ~ 11강 => 이상현 교수님 ┃\n");
+            printf("   ┃                                                                                   ┃12강 ~ 14강 => 윤소미 교수님 ┃\n");
+            printf("   ┃         3. 이은임 교수님과 면담                    4. 이운석 교수님과 면담        ┃15강 ~ 17강 => 이은임 교수님 ┃\n");
+            printf("   ┃                                                                                   ┃18강 ~ 19강 => 이운석 교수님 ┃\n");
+            printf("   ┃                              5.  김영천 교수님과 면담                             ┃    20강    => 김영천 교수님 ┃\n");
+            printf("   ┃                                                                                   ┃                             ┃\n");
+            printf("   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+            printf("   메인화면으로 나가기 - [ 1~5를 제외한 모든 입력키 ]\n\n");
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+            printf("   면담하고 싶은 교수님의 번호를 입력하세요 : ");
+            scanf_s("%d", &dungeonSelect);
+            switch (dungeonSelect) {
+            case 1:
+                Dungeon1();
                 break;
             case 2:
-                GoStore();
+                Dungeon2();
                 break;
-            case 3:       
-                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-                printf("   ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-                printf("   ┃  이곳은 교수님과 함께하는 면담실 입니다 면담을 완료하면 다양한 보상이 주어집니다! ┃        < 추천 면담 >        ┃\n");
-                printf("   ┃                                                                                   ┃                             ┃\n");
-                printf("   ┃         1. 이상현 교수님과 면담                    2. 윤소미 교수님과 면담        ┃1강  ~ 11강 => 이상현 교수님 ┃\n");
-                printf("   ┃                                                                                   ┃12강 ~ 14강 => 윤소미 교수님 ┃\n");
-                printf("   ┃         3. 이은임 교수님과 면담                    4. 이운석 교수님과 면담        ┃15강 ~ 17강 => 이은임 교수님 ┃\n");
-                printf("   ┃                                                                                   ┃18강 ~ 19강 => 이운석 교수님 ┃\n");
-                printf("   ┃                              5.  김영천 교수님과 면담                             ┃    20강    => 김영천 교수님 ┃\n");
-                printf("   ┃                                                                                   ┃                             ┃\n");
-                printf("   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
-                printf("   메인화면으로 나가기 - [ 1~5를 제외한 모든 입력키 ]\n\n");
-                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-                printf("   면담하고 싶은 교수님의 번호를 입력하세요 : ");
-                scanf_s("%d", &dungeonSelect);                 
-                switch (dungeonSelect) {
-                case 1:
-                    Dungeon1();
-                    break;
-                case 2:
-                    Dungeon2();
-                    break;
-                case 3:
-                    Dungeon3();
-                    break;
-                case 4:
-                    Dungeon4();
-                    break;
-                case 5:
-                    Dungeon5();
-                    break;
-                default:
-                    printf("잘못된 입력입니. 다시 선택하세요.\n");
-                    break;
-                }
+            case 3:
+                Dungeon3();
+                break;
             case 4:
-                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
-                printf("\n 이런! 이지호 학생이 자퇴 했습니다 이제 어쩌죠...?\n");
-                endDateTime = 1;
-                isGameOver = true; // 게임 종료
+                Dungeon4();
+                break;
+            case 5:
+                Dungeon5();
                 break;
             default:
-                printf("잘못된 입력입니다. 다시 선택하세요.\n"); // 엔터 눌러야지 나가기.
-                while (getchar() != '\n'); // 입력 버퍼 비우기
+                printf("잘못된 입력입니. 다시 선택하세요.\n");
                 break;
+            }
+        case 4:
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+            printf("\n 이런! 이지호 학생이 자퇴 했습니다 이제 어쩌죠...?\n");
+            endDateTime = 1;
+            isGameOver = true; // 게임 종료
+            break;
+        default:
+            printf("잘못된 입력입니다. 다시 선택하세요.\n"); // 엔터 눌러야지 나가기.
+            while (getchar() != '\n'); // 입력 버퍼 비우기
+            break;
         }
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
         Gopost();

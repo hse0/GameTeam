@@ -1,19 +1,18 @@
 ﻿  main.c
-C:\Users\user\Desktop\GameDataTeam\GameTeam\main.c(352,21): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\GameTeam\main.c(380,13): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\GameTeam\main.c(441,21): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\GameTeam\main.c(469,13): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\GameTeam\main.c(527,21): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\GameTeam\main.c(556,13): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\GameTeam\main.c(613,21): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\GameTeam\main.c(642,13): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\GameTeam\main.c(703,21): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\GameTeam\main.c(734,13): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\user\Desktop\GameDataTeam\GameTeam\main.c(890,45): warning C4552: '+': 식의 결과가 사용되지 않습니다.
-C:\Users\user\Desktop\GameDataTeam\GameTeam\main.c(836,40): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(352,13): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(380,5): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(441,13): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(469,5): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(527,13): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(556,5): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(613,13): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(642,5): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(703,13): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(734,5): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(890,45): warning C4552: '+': 식의 결과가 사용되지 않습니다.
+C:\HW\GameTeam\GameTeam\main.c(836,40): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
-  15 of 17 functions (88.2%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  Previous IPDB was built with incompatible compiler, fall back to full compilation.
+  All 17 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   코드를 생성했습니다.
-  GameTeam.vcxproj -> C:\Users\user\Desktop\GameDataTeam\GameTeam\x64\Release\GameTeam.exe
+  GameTeam.vcxproj -> C:\HW\GameTeam\GameTeam\x64\Release\GameTeam.exe
