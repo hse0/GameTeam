@@ -1,4 +1,5 @@
 ﻿  main.c
+<<<<<<< HEAD
 C:\Users\user\Desktop\GameTeam\GameTeam\main.c(352,21): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
 C:\Users\user\Desktop\GameTeam\GameTeam\main.c(380,13): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
 C:\Users\user\Desktop\GameTeam\GameTeam\main.c(441,21): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
@@ -17,3 +18,22 @@ C:\Users\user\Desktop\GameTeam\GameTeam\main.c(835,36): warning C4244: '초기�
     0 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   GameTeam.vcxproj -> C:\Users\user\Desktop\GameTeam\GameTeam\x64\Release\GameTeam.exe
+=======
+C:\HW\GameTeam\GameTeam\main.c(352,13): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(380,5): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(441,13): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(469,5): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(527,13): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(556,5): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(613,13): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(642,5): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(703,13): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(734,5): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
+C:\HW\GameTeam\GameTeam\main.c(890,45): warning C4552: '+': 식의 결과가 사용되지 않습니다.
+C:\HW\GameTeam\GameTeam\main.c(836,40): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다.
+  Previous IPDB was built with incompatible compiler, fall back to full compilation.
+  All 17 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  코드를 생성했습니다.
+  GameTeam.vcxproj -> C:\HW\GameTeam\GameTeam\x64\Release\GameTeam.exe
+>>>>>>> f9fe0d1f90e56fe88e62e4a003477433d7eb707c

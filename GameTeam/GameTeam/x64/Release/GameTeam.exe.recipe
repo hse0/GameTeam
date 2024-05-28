@@ -2,7 +2,11 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
+<<<<<<< HEAD
       <FullPath>C:\Users\user\Desktop\GameTeam\GameTeam\x64\Release\GameTeam.exe</FullPath>
+=======
+      <FullPath>C:\HW\GameTeam\GameTeam\x64\Release\GameTeam.exe</FullPath>
+>>>>>>> f9fe0d1f90e56fe88e62e4a003477433d7eb707c
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
