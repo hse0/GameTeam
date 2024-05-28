@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
@@ -929,24 +928,24 @@ int main(void)
             printf("   면담하고 싶은 교수님의 번호를 입력하세요 : ");
             scanf_s("%d", &dungeonSelect);
             switch (dungeonSelect) {
-                case 1:
-                    Dungeon1();
-                    break;
-                case 2:
-                    Dungeon2();
-                    break;
-                case 3:
-                    Dungeon3();
-                    break;
-                case 4:
-                    Dungeon4();
-                    break;
-                case 5:
-                    Dungeon5();
-                    break;
-                default:
-                    printf("잘못된 입력입니다. 다시 선택하세요.\n");
-                    break;
+            case 1:
+                Dungeon1();
+                break;
+            case 2:
+                Dungeon2();
+                break;
+            case 3:
+                Dungeon3();
+                break;
+            case 4:
+                Dungeon4();
+                break;
+            case 5:
+                Dungeon5();
+                break;
+            default:
+                printf("잘못된 입력입니다. 다시 선택하세요.\n");
+                break;
             }
             break;
         case 4:
@@ -964,7 +963,7 @@ int main(void)
         Gopost();
     }
     return 0;
-=======
+}
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
@@ -1930,5 +1929,4 @@ int main(void)
         Gopost();
     }
     return 0;
->>>>>>> f9fe0d1f90e56fe88e62e4a003477433d7eb707c
 }
