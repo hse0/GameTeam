@@ -944,7 +944,7 @@ int main(void)
                 Dungeon5();
                 break;
             default:
-                printf("잘못된 입력입니. 다시 선택하세요.\n");
+                printf("잘못된 입력입니다. 다시 선택하세요.\n");
                 break;
             }
             break;
