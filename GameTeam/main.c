@@ -947,6 +947,7 @@ int main(void)
                 printf("잘못된 입력입니. 다시 선택하세요.\n");
                 break;
             }
+            break;
         case 4:
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
             printf("\n 이런! 이지호 학생이 자퇴 했습니다 이제 어쩌죠...?\n");
