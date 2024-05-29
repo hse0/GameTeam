@@ -213,7 +213,6 @@ void GoStore() {
             continue; // 다시 입력 받기
         }
         while (getchar() != '\n'); // 입력 버퍼 비우기
-
         switch (shopChoice) {
         case 1:
             if (level > 0) {
