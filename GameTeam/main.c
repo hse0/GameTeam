@@ -747,13 +747,6 @@ int main(void)
     printf("   早收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收早\n");
     printf("   早                                                                                                                 早\n");
     printf("   早                                                                                                                 早\n");
-    printf("   早                                                                                                                 早\n");
-    printf("   早                                                                                                                 早\n");
-    printf("   早                                                                                                                 早\n");
-    printf("   早                                                                                                                 早\n");
-    printf("   早                                                                                                                 早\n");
-    printf("   早                                                                                                                 早\n");
-    printf("   早                                                                                                                 早\n");
     printf("   早                  ______         _       _                 _                     ___  _  _                       早\n");
     printf("   早                  | ___ \\       (_)     (_)               | |                   |_  |(_)| |                      早\n");
     printf("   早                  | |_/ /  __ _  _  ___  _  _ __    __ _  | |      ___   ___      | | _ | |__    ___             早\n");
@@ -765,12 +758,7 @@ int main(void)
     printf("   早                                                                                                                 早\n");
     printf("   早                                                                                                                 早\n");
     printf("   早                                                                                                                 早\n");
-    printf("   早                                                                                                                 早\n");
-    printf("   早                                                                                                                 早\n");
-    printf("   早                                                                                                                 早\n");
-    printf("   早                                                                                                                 早\n");
-    printf("   早                                                                                                                 早\n");
-    printf("   早                                                                                                        Ver 1.0  早\n");
+    printf("   早                                                                                                        Ver 2.0  早\n");
     printf("   曲收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旭\n");
     printf("                                                                                                                      \n\n");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
