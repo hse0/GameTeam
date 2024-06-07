@@ -213,6 +213,7 @@ void GoStore() {
             continue; // 다시 입력 받기
         }
         while (getchar() != '\n'); // 입력 버퍼 비우기
+
         switch (shopChoice) {
         case 1:
             if (level > 0) {
@@ -787,7 +788,18 @@ int main(void)
         printf("\n");
         printf("  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
         printf("  ┃                                                                                    ┃                             ┃\n");
-        printf("  ┃                                                                                    ┃         information         ┃\n");
+        if (level == 4)
+        {
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+            printf("  ┃ tip: 혹시 강화에 실패하셨나요?? 상점에서 복습권을 구매하여 강화실패를 막아보세요!! ┃         information         ┃\n");
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+        }
+        else if (level == 5)
+        {
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+            printf("  ┃    tip: 강화만 하기 지겨우신가요?? '면담하기'를 통해 다양한 보상을 얻어보세요!!    ┃         information         ┃\n");
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+        }
         printf("  ┃                                                                                    ┃                             ┃\n");
         printf("  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
         printf("                                                                                       ┃ 학습 성공률 : %.2f%%\n", enhancementProbabilitiesStage1[level]);
@@ -943,7 +955,7 @@ int main(void)
                 Dungeon5();
                 break;
             default:
-                printf("잘못된 입력입니. 다시 선택하세요.\n");
+                printf("잘못된 입력입니다. 다시 선택하세요.\n");
                 break;
             }
             break;
