@@ -124,7 +124,7 @@ void Gopost()
 {
     char command[2048];
     sprintf_s(command, sizeof(command),
-        "curl -d \"{\\\"아이디\\\":\\\"%d\\\",\\\"접속시간\\\":\\\"%d\\\",\\\"종료시간\\\":\\\"%d\\\",\\\"강화단계\\\":\\\"%d\\\",\\\"단계별복습권구매갯수\\\":\\\"%d\\\",\\\"강화시도횟수\\\":\\\"%d\\\",\\\"판매횟수\\\":\\\"%d\\\",\\\"현재비용\\\":\\\"%d\\\"}\" https://script.google.com/macros/s/AKfycby2CBSun8_hCI4xYBzVQaLUKwMX5fUfFXL8sh6bS5CwxF8oyWIqyEl6jC31opBweO9m/exec",
+        "curl -d \"{\\\"아이디\\\":\\\"%d\\\",\\\"접속시간\\\":\\\"%d\\\",\\\"종료시간\\\":\\\"%d\\\",\\\"강화단계\\\":\\\"%d\\\",\\\"단계별복습권구매갯수\\\":\\\"%d\\\",\\\"강화시도횟수\\\":\\\"%d\\\",\\\"판매횟수\\\":\\\"%d\\\",\\\"현재비용\\\":\\\"%d\\\"}\" https://script.google.com/macros/s/AKfycbwfvBri2XsomIPOoUWrdF0Ilnvh00JenqW5Ewi9_UqvNCv2Wwvh1ey-n8Ixn2ld735A/exec",
         nickname_initial, currentDateTime, endDateTime, attemptlevel, tickets, attempt, selling_count, money);
     system(command);
     srand((unsigned int)time(NULL));         // 랜덤 시드값 설정 
@@ -747,13 +747,6 @@ int main(void)
     printf("   ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃\n");
     printf("   ┃                                                                                                                 ┃\n");
     printf("   ┃                                                                                                                 ┃\n");
-    printf("   ┃                                                                                                                 ┃\n");
-    printf("   ┃                                                                                                                 ┃\n");
-    printf("   ┃                                                                                                                 ┃\n");
-    printf("   ┃                                                                                                                 ┃\n");
-    printf("   ┃                                                                                                                 ┃\n");
-    printf("   ┃                                                                                                                 ┃\n");
-    printf("   ┃                                                                                                                 ┃\n");
     printf("   ┃                  ______         _       _                 _                     ___  _  _                       ┃\n");
     printf("   ┃                  | ___ \\       (_)     (_)               | |                   |_  |(_)| |                      ┃\n");
     printf("   ┃                  | |_/ /  __ _  _  ___  _  _ __    __ _  | |      ___   ___      | | _ | |__    ___             ┃\n");
@@ -765,12 +758,7 @@ int main(void)
     printf("   ┃                                                                                                                 ┃\n");
     printf("   ┃                                                                                                                 ┃\n");
     printf("   ┃                                                                                                                 ┃\n");
-    printf("   ┃                                                                                                                 ┃\n");
-    printf("   ┃                                                                                                                 ┃\n");
-    printf("   ┃                                                                                                                 ┃\n");
-    printf("   ┃                                                                                                                 ┃\n");
-    printf("   ┃                                                                                                                 ┃\n");
-    printf("   ┃                                                                                                        Ver 1.0  ┃\n");
+    printf("   ┃                                                                                                        Ver 2.0  ┃\n");
     printf("   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
     printf("                                                                                                                      \n\n");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
