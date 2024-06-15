@@ -1,4 +1,27 @@
 ﻿  main.c
+<<<<<<< HEAD
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(351,21): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(379,13): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(440,21): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(468,13): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(526,21): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(555,13): warning C4098: 'Dungeon3': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(612,21): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(641,13): warning C4098: 'Dungeon4': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(702,21): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(733,13): warning C4098: 'Dungeon5': 'void' 함수에서 값을 반환하고 있습니다.
+<<<<<<< HEAD
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(889,41): warning C4552: '+': 식의 결과가 사용되지 않습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(835,36): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다.
+  0 of 17 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+=======
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(900,41): warning C4552: '+': 식의 결과가 사용되지 않습니다.
+C:\Users\user\Desktop\GameTeam\GameTeam\main.c(846,36): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다.
+  1 of 17 functions ( 5.9%) were compiled, the rest were copied from previous compilation.
+>>>>>>> LJH
+=======
 C:\HW\GameTeam\GameTeam\main.c(351,13): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
 C:\HW\GameTeam\GameTeam\main.c(379,5): warning C4098: 'Dungeon1': 'void' 함수에서 값을 반환하고 있습니다.
 C:\HW\GameTeam\GameTeam\main.c(440,13): warning C4098: 'Dungeon2': 'void' 함수에서 값을 반환하고 있습니다.
@@ -13,6 +36,7 @@ C:\HW\GameTeam\GameTeam\main.c(888,41): warning C4552: '+': 식의 결과가 사
 C:\HW\GameTeam\GameTeam\main.c(834,36): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
   1 of 17 functions ( 5.9%) were compiled, the rest were copied from previous compilation.
+>>>>>>> 5cd1990fff317fef113909bd87746ab7d97e897e
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
