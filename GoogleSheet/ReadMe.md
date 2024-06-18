@@ -1,6 +1,7 @@
 ### 소스 코드
 
-```function doPost(e) {
+```
+function doPost(e) {
     try {
         // 데이터에서 각 필드 추출
         var postData = JSON.parse(e.postData.contents);
@@ -43,4 +44,5 @@
         console.error('Error:', error);
         return ContentService.createTextOutput('Error: ' + error.message).setStatusCode(500);
     }
-}```
+}
+```
